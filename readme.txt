@@ -3,8 +3,8 @@ Contributors: dineshinau
 Donate link: https://dineshinaublog.wordpress.com/donate-me
 Tags: plugin, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
 Requires at least: 4.7
-Tested up to: 4.9
-Stable tag: 1.2
+Tested up to: 5.0
+Stable tag: 1.3
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -69,7 +69,11 @@ screenshot-1.png
    
 == Upgrade Notice ==
 
-= 1.2 =
+= 1.3 =
+* Compatible with WordPress 5.0
+* Added: 
+
+=1.2 =
 * Compatible with WordPress 4.9
 
 = 1.0.1 =

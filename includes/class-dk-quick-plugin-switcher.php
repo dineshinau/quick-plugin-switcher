@@ -157,10 +157,12 @@ class Dk_Quick_Plugin_Switcher {
 		*/
 
 		if(isset($_GET['dk_act'])){
-			if(is_network_admin())
+			if(is_network_admin()){
 				$this->loader->add_action( 'network_admin_notices', $plugin_admin, 'switch_success_admin_notice', 10 );
-			else
+			}
+			else{
 				$this->loader->add_action( 'admin_notices', $plugin_admin, 'switch_success_admin_notice', 10 );
+			}
 		}
 	}
 	/**

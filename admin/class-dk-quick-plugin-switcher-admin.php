@@ -104,14 +104,16 @@ class Dk_Quick_Plugin_Switcher_Admin {
 			}
 		}
 		//Updating option back to database after switching
-		update_option('active_plugins', $active_plugins); 
-		
+		update_option('active_plugins', $active_plugins);
+
+		$qry_args = array('dk_act' => $act, 'dk_deact' => $deact);
+
+		if (count($post_ids)==1) {
+			$qry_args['name'] = $post_ids[0];
+		}
+
 		//Redirecting to same plguin page with query arguments
-		return add_query_arg(
-					array(
-						'dk_act'=> $act,
-						'dk_deact' => $deact),
-					$redirect_to);
+		return add_query_arg($qry_args, $redirect_to);		
 	}
 	
 	/**
@@ -143,6 +145,13 @@ class Dk_Quick_Plugin_Switcher_Admin {
 				$act++;
 			}
 		}
+		die('djklf409');
+		if (count($post_ids) ==1) {
+			echo "<pre>";
+			print_r($post_ids);
+			echo "</pre>";
+			die('here490');
+		}
 		//Updating option back after switching		
 		update_site_option('active_sitewide_plugins', $active_plugins);
 	 	return add_query_arg(
@@ -159,7 +168,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @param	string	$action		containing the switch action
 	* @param 	array	$post_ids	array of all selected plugins 
 	*/
-	public function switch_success_admin_notice(){?>
+	public function switch_success_admin_notice(){ ?>
     <div class="notice notice-success is-dismissible">
         <p><?php printf(__( 'All Selected %s activated '.(($_GET['dk_deact'] > 1) ? "plugins are" : "plugin is" ).' now deactivated and all selelcted %s deactivated '.(($_GET['dk_act'] > 1) ? "plugins are" : "plugin is" ).' now activated successfully!', $this->plugin_name ), $_GET['dk_deact'],$_GET['dk_act']); ?></p>
     </div>

@@ -1,7 +1,5 @@
 <?php
 /**
- * The plugin Main file
- *
  * @link              https://dineshinaublog.wordpress.com
  * @since             1.0.0
  * @package           Quick_Plugin_Switcher
@@ -9,7 +7,7 @@
  * Plugin Name:       Quick Plugin Switcher
  * Plugin URI:        https://dineshinaublog.wordpress.com/quick-plugin-switcher
  * Description:       This helps the admin(s)/super-admin(s) to activate and deactivate plugins faster by reducing the steps, which speeds up the process and minimize the efforts. This adds a new option “Switch” in the drop-down menu of plugin bulk actions on plugin listing page using which admin(s)/super-admin(s) can easily change the state of plugin between activating and deactivate simultaneously with all selected plugins.
- * Version:           1.2
+ * Version:           1.3
  * Author:            DINESH KUMAR YADAV
  * Author URI:        https://dineshinaublog.wordpress.com
  * License:           GPL-2.0+
