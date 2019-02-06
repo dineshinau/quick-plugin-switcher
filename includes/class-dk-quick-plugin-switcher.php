@@ -2,8 +2,6 @@
 /**
  * The file that defines the core plugin class
  *
- * A class definition that includes attributes and functions used across admin area.
- *
  * @link       https://dineshinaublog.wordpress.com
  * @since      1.0.0
  *
@@ -57,10 +55,6 @@ class Dk_Quick_Plugin_Switcher {
 
 	/**
 	 * Defines the core functionality of the plugin.
-	 *
-	 * Setting the plugin name and the plugin version that will be used throughout the plugin.
-	 * Loading the dependencies, defining the locale, and setting the hooks for the admin area and
-	 * the public-facing side of the site.
 	 *
 	 * @since    1.0.0
 	 */
@@ -155,7 +149,6 @@ class Dk_Quick_Plugin_Switcher {
 		/**
 		* Displyaing success notice after successful switching
 		*/
-
 		if(isset($_GET['dk_act'])){
 			if(is_network_admin()){
 				$this->loader->add_action( 'network_admin_notices', $plugin_admin, 'switch_success_admin_notice', 10 );
@@ -163,6 +156,11 @@ class Dk_Quick_Plugin_Switcher {
 			else{
 				$this->loader->add_action( 'admin_notices', $plugin_admin, 'switch_success_admin_notice', 10 );
 			}
+		}
+
+		if (isset($_GET['plug_name']) && !empty($_GET['plug_name'])) {
+			$this->loader->add_action('admin_init',$plugin_admin,'dkqps_again_switch_the_plugin',99);
+			$this->loader->add_action( 'admin_notices', $plugin_admin, 'dkpqs_again_switched_success_admin_notice', 10);
 		}
 	}
 	/**

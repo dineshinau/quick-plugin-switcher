@@ -97,7 +97,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 			if(is_array($active_plugins) && in_array($post_id, $active_plugins)){				
 				unset($active_plugins[array_search($post_id, $active_plugins)]);
 				$deact++;
-			}				
+			}	
 			else{ 
 				array_push($active_plugins, $post_id);
 				$act++;	
@@ -110,8 +110,9 @@ class Dk_Quick_Plugin_Switcher_Admin {
 
 		if (count($post_ids)==1) {
 			$qry_args['name'] = $post_ids[0];
+			remove_query_arg(['plug_name'],$redirect_to);
 		}
-
+		
 		//Redirecting to same plguin page with query arguments
 		return add_query_arg($qry_args, $redirect_to);		
 	}
@@ -127,11 +128,11 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	public function dk_handle_quick_bulk_network_actions($redirect_to, $action, $post_ids){
 		
 		//Returning to the plugin page when the "Switch" action is not triggered
-		if($action != 'dk_switch')	
+		if($action != 'dk_switch'){
 			return $redirect_to;
+		}
 			
-		//Fetching all site wide active plugins
-		
+		//Fetching all site wide active plugins		
 		$active_plugins = get_site_option('active_sitewide_plugins');
 		$act = $deact = 0;
 		
@@ -145,13 +146,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 				$act++;
 			}
 		}
-		die('djklf409');
-		if (count($post_ids) ==1) {
-			echo "<pre>";
-			print_r($post_ids);
-			echo "</pre>";
-			die('here490');
-		}
+
 		//Updating option back after switching		
 		update_site_option('active_sitewide_plugins', $active_plugins);
 	 	return add_query_arg(
@@ -168,10 +163,59 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @param	string	$action		containing the switch action
 	* @param 	array	$post_ids	array of all selected plugins 
 	*/
-	public function switch_success_admin_notice(){ ?>
-    <div class="notice notice-success is-dismissible">
-        <p><?php printf(__( 'All Selected %s activated '.(($_GET['dk_deact'] > 1) ? "plugins are" : "plugin is" ).' now deactivated and all selelcted %s deactivated '.(($_GET['dk_act'] > 1) ? "plugins are" : "plugin is" ).' now activated successfully!', $this->plugin_name ), $_GET['dk_deact'],$_GET['dk_act']); ?></p>
-    </div>
-    <?php
+	public function switch_success_admin_notice(){
+       if (isset($_GET['name'])&& is_admin()) {
+	   		if( !function_exists('get_plugin_data') ){
+			    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			}
+			$pfile = ABSPATH.'wp-content/plugins/'.$_GET['name'];
+	    	$pdata = get_plugin_data($pfile, true,true);
+	    	
+	    	$pname = $pdata['Name']; ?>
+	    	<div class="notice notice-success is-dismissible">
+		        <p><?php printf(__( '"<strong>%s</strong>" '.(($_GET['dk_deact'] == 1) ? "is deactivated" : "is activated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo admin_url('plugins.php?plug_name=').$_GET['name'] ?>"><?php echo ($_GET['dk_act'] == 1) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
+		    </div>	    	
+	    	<?php
+	    } else{ ?>
+	    	<div class="notice notice-success is-dismissible">
+		        <p><?php printf(__( 'All Selected %s activated '.(($_GET['dk_deact'] > 1) ? "plugins are" : "plugin is" ).' now deactivated and all selelcted %s deactivated '.(($_GET['dk_act'] > 1) ? "plugins are" : "plugin is" ).' now activated successfully!', $this->plugin_name ), $_GET['dk_deact'],$_GET['dk_act']); ?></p>
+		    </div>
+	    <?php }
+	}
+
+	/**
+	* Switching the plugin again
+	*/
+	public function dkqps_again_switch_the_plugin(){
+		$plug_name = $_GET['plug_name'];
+		$active_plugins =  apply_filters('active_plugins', get_option('active_plugins'));
+
+		if(is_array($active_plugins) && in_array($plug_name, $active_plugins)){				
+			unset($active_plugins[array_search($plug_name, $active_plugins)]);				
+		}else{
+			array_push($active_plugins, $plug_name);
+		}
+		update_option('active_plugins',$active_plugins);
+	}
+
+	/**
+	* Show notice for again switched plugin
+	*/
+	public function dkpqs_again_switched_success_admin_notice(){
+		$plug_name = $_GET['plug_name'];
+		$active_plugins =  apply_filters('active_plugins', get_option('active_plugins'));
+		$activated = in_array($plug_name, $active_plugins);
+
+		if( !function_exists('get_plugin_data') ){
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		}
+		$pfile = ABSPATH.'wp-content/plugins/'.$plug_name;
+    	$pdata = get_plugin_data($pfile, true,true);
+
+    	$pname = $pdata['Name']; ?>
+		<div class="notice notice-success is-dismissible">
+	        <p><?php printf(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo admin_url('plugins.php?plug_name=').$plug_name ?>"><?php echo ($activated) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
+	    </div>
+		<?php
 	}
 }
