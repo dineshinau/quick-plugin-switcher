@@ -59,4 +59,21 @@ function run_dk_quick_plugin_switcher() {
 	$plugin->run();
 
 }
+/*is_admin() && add_filter( 'gettext', 
+    function( $translated_text, $untranslated_text, $domain )
+    {
+        $old = array(
+            "Plugin <strong>activated</strong>.",
+            "Selected plugins <strong>activated</strong>." 
+        );
+
+        $new = "Captain: The Core is stable and the Plugin is <strong>activated</strong> at full Warp speed";
+
+        if ( in_array( $untranslated_text, $old, true ) )
+            $translated_text = $new;
+
+        return $translated_text;
+     }
+, 99, 3 );
+*/
 run_dk_quick_plugin_switcher();

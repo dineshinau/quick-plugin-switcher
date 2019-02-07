@@ -138,8 +138,9 @@ class Dk_Quick_Plugin_Switcher {
 		 *  Making sure the function " is_plugin_active_for_network" exist before 
 		 *	using plugin in multisite environment
 		 */ 
-		if ( ! function_exists( 'is_plugin_active_for_network' ) )
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ){
 		    require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
 
 		if( is_plugin_active_for_network( $this->plugin_name."/".$this->plugin_name.".php" ) ){
 			$this->loader->add_filter( 'bulk_actions-plugins-network', $plugin_admin, 'dk_quick_bulk_actions', 999,1 );
@@ -161,6 +162,10 @@ class Dk_Quick_Plugin_Switcher {
 		if (isset($_GET['plug_name']) && !empty($_GET['plug_name'])) {
 			$this->loader->add_action('admin_init',$plugin_admin,'dkqps_again_switch_the_plugin',99);
 			$this->loader->add_action( 'admin_notices', $plugin_admin, 'dkpqs_again_switched_success_admin_notice', 10);
+		}
+		$this->loader->add_action('activated_plugin',$plugin_admin,'dkqps_update_activated_plugin',10,2);
+		if (is_admin()) {
+			$this->loader->add_filter('gettext',$plugin_admin,'dkqps_add_switching_link',99,3);
 		}
 	}
 	/**

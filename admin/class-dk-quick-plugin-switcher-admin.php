@@ -91,8 +91,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 		// Fetching array of the all active plugins from database
 		$active_plugins =  apply_filters('active_plugins', get_option('active_plugins'));
 							
-		// Loop through all post ids of plugins
-		
+		// Loop through all post ids of plugins		
 		foreach((is_array($post_ids) || is_object($post_ids)) ? $post_ids : array() as $post_id){			
 			if(is_array($active_plugins) && in_array($post_id, $active_plugins)){				
 				unset($active_plugins[array_search($post_id, $active_plugins)]);
@@ -110,7 +109,6 @@ class Dk_Quick_Plugin_Switcher_Admin {
 
 		if (count($post_ids)==1) {
 			$qry_args['name'] = $post_ids[0];
-			remove_query_arg(['plug_name'],$redirect_to);
 		}
 		
 		//Redirecting to same plguin page with query arguments
@@ -185,6 +183,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 
 	/**
 	* Switching the plugin again
+	* @since	1.3
 	*/
 	public function dkqps_again_switch_the_plugin(){
 		$plug_name = $_GET['plug_name'];
@@ -200,6 +199,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 
 	/**
 	* Show notice for again switched plugin
+	* @since	1.3
 	*/
 	public function dkpqs_again_switched_success_admin_notice(){
 		$plug_name = $_GET['plug_name'];
@@ -217,5 +217,48 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	        <p><?php printf(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo admin_url('plugins.php?plug_name=').$plug_name ?>"><?php echo ($activated) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
 	    </div>
 		<?php
+	}
+
+	/**
+	* Updating activated plugin in option to add deactivation lik
+	*/
+	public function dkqps_update_activated_plugin($plugin, $network_wide){
+		if( !function_exists('get_plugin_data') ){
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		}
+		$pfile = ABSPATH.'wp-content/plugins/'.$plugin;
+    	$pdata = get_plugin_data($pfile, true,true);
+    	$pname = isset($pdata['Name']) ? $pdata['Name'] : '';
+    	$pname = empty($pname) ? array() : array('act'=> $pname,'plug_name'=> $plugin);
+
+		update_option('dkqps_activated_plugin',$pname);
+		//update_option('dkqps_network_wide',$network_wide);
+	}
+
+	/**
+	* Adding switch link to plugin notice
+	*/
+	public function dkqps_add_switching_link($translated_text, $untranslated_text, $domain){
+		$activated_notice = "Plugin <strong>activated</strong>.";
+
+		if ( $activated_notice !== $untranslated_text ){
+            return $translated_text;
+        }
+        
+        $translated = "Captain: The Core is stable and the Plugin is <strong>activated</strong> at full Warp speed";
+        $plug_name = get_option('dkqps_activated_plugin',true);
+
+        $activated = isset($plug_name['act']) ? true : false;
+        $pname = ($activated) ? $plug_name['act'] : $plug_name['deact'];
+        $translated = $pname;
+        $pbasename = $plug_name['plug_name'];
+
+        /*$new = "<p>".(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" )), $pname)."<a style='margin-left: 10px;' class='button-secondary' href='".admin_url('plugins.php?plug_name=')"'>". ($activated) ? 'Deactivate it Again' : 'Activate it Again'."</a></p>";*/
+
+        $link = "plugins.php?plug_name=".$pbasename;
+
+        $translated = "<strong>".$pname."</strong> is". (($activated) ? ' Activated' : 'Deactovated')."<a style='margin-left: 10px;' class='button-secondary' href='".admin_url($link)."'>". (($activated) ? 'Deactivate it Again' : 'Activate it Again')."</a>";
+
+        return $translated;
 	}
 }
