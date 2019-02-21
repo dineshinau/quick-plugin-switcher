@@ -1,7 +1,7 @@
 <?php
 /**
  * @link              https://dineshinaublog.wordpress.com
- * @since             1.0.0
+ * @since             1.0
  * @package           Quick_Plugin_Switcher
  *
  * Plugin Name:       Quick Plugin Switcher
@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * The code that runs during plugin activation.
+ * The code that runs during QPS activation.
  * This action is documented in includes/class-dk-quick-plugin-switcher-activator.php
  */
 function activate_dk_quick_plugin_switcher() {
@@ -31,7 +31,7 @@ function activate_dk_quick_plugin_switcher() {
 }
 
 /**
- * The code that runs during plugin deactivation.
+ * The code that runs during QPS deactivation.
  * This action is documented in includes/class-dk-quick-plugin-switcher-deactivator.php
  */
 function deactivate_dk_quick_plugin_switcher() {
@@ -44,14 +44,14 @@ register_activation_hook( __FILE__, 'activate_dk_quick_plugin_switcher' );
 register_deactivation_hook( __FILE__, 'deactivate_dk_quick_plugin_switcher' );
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * The core QPS class that is used to define internationalization,
+ * admin-specific hooks
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-dk-quick-plugin-switcher.php';
 
 /**
- * Begins execution of the plugin.
- * @since    1.0.0
+ * Begins execution of the QPS.
+ * @since    1.0
  */
 function run_dk_quick_plugin_switcher() {
 
@@ -59,21 +59,4 @@ function run_dk_quick_plugin_switcher() {
 	$plugin->run();
 
 }
-/*is_admin() && add_filter( 'gettext', 
-    function( $translated_text, $untranslated_text, $domain )
-    {
-        $old = array(
-            "Plugin <strong>activated</strong>.",
-            "Selected plugins <strong>activated</strong>." 
-        );
-
-        $new = "Captain: The Core is stable and the Plugin is <strong>activated</strong> at full Warp speed";
-
-        if ( in_array( $untranslated_text, $old, true ) )
-            $translated_text = $new;
-
-        return $translated_text;
-     }
-, 99, 3 );
-*/
 run_dk_quick_plugin_switcher();

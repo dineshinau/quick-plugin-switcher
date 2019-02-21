@@ -1,46 +1,46 @@
 <?php
 /**
- * The admin-specific functionality of the plugin.
+ * The core functionality of the QPS
  *
  * @link       https://dineshinaublog.wordpress.com
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    Quick_Plugin_Switcher
  * @subpackage Quick_Plugin_Switcher/admin
  */
 
 /**
- * Defines the plugin name, version, and hooks to enqueue the admin-specific stylesheet and JavaScript.
+ * Defines the QPS name, version, and hooks to enqueue the admin-specific JavaScript.
  *
  * @package    Quick_Plugin_Switcher
  * @subpackage Quick_Plugin_Switcher/admin
- * @author     DINESH KUMAR YADAV <dineshinau@gmail.com>
+ * @author     Dinesh Kumar Yadav <dineshinau@gmail.com>
  */
 class Dk_Quick_Plugin_Switcher_Admin {
 	/**
-	 * The ID of this plugin.
+	 * The ID of this QPS.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string    $plugin_name    The ID of this QPS.
 	 */
 	private $plugin_name;
 
 	/**
-	 * The version of this plugin.
+	 * The version of this QPS.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string    $version    The current version of this QPS.
 	 */
 	private $version;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
-	 * @param    string    $plugin_name       The name of this plugin.
-	 * @param    string    $version    The version of this plugin.
+	 * @since    1.0
+	 * @param    string    $plugin_name       The name of this QPS.
+	 * @param    string    $version    The version of this QPS.
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
@@ -50,7 +50,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	/**
 	 * Registering the JavaScript for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function enqueue_scripts() {
 		/**
@@ -66,18 +66,19 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	}
 	
 	/**
-	* Adding a new dropdown option "Switch" in plugins bulk action
+	* Adding a new dropdown option "Switch" in plugins bulk action in single site environment
 	* 
-	* @since	1.0.0
+	* @since	1.0
 	* @param	array	$actions	The array of all bulk actions
+	* @hooked 'bulk_actions-plugins'
 	*/
 	public function dk_quick_bulk_actions($actions){
 		return array_merge(array('dk_switch' => __('Switch',$this->plugin_name)),$actions);		
 	}
 	/**
-	* Hanndling the switch action when triggered
+	* Hanndling the switch action when triggered in single site environment
 	* 
-	* @since	1.0.0
+	* @since	1.0
 	* @param	string	$redirect_to	URL where to redirect after performing action
 	* @param	string	$action		containing the switch action
 	* @param 	array	$post_ids	array of all selected plugins 
@@ -104,7 +105,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 				$act++;	
 			}
 		}
-		//Updating option back to database after switching
+		//Updating option back to the database after switching
 		update_option('active_plugins', $active_plugins);
 
 		$qry_args = array('dk_act' => $act, 'dk_deact' => $deact);
@@ -114,13 +115,16 @@ class Dk_Quick_Plugin_Switcher_Admin {
 		}
 		
 		//Redirecting to same plguin page with query arguments
-		return add_query_arg($qry_args, $redirect_to);		
+		//$redirect_to = wp_nonce_url();
+		//$url = wp_nonce_url('plugins.php?action=delete-selected&verify-delete=1&' . implode('&', $checked), 'bulk-plugins');
+		//return wp_nonce_url(add_query_arg($qry_args, $redirect_to),'dk_switched','dk_switched_nonce');
+		return add_query_arg($qry_args, $redirect_to);
 	}
 	
 	/**
 	* Hanndling the switch action when triggered on network plugins page
 	* 
-	* @since	1.0.0
+	* @since	1.0
 	* @param	string	$redirect_to	URL where to redirect after performing action
 	* @param	string	$action		containing the switch action
 	* @param 	array	$post_ids	array of all selected plugins 
@@ -156,12 +160,13 @@ class Dk_Quick_Plugin_Switcher_Admin {
 					$redirect_to); 	//Redirecting to same plguin page with query arguments	 
 	}
 	/**
-	* Displaying admin success notice
+	* Displaying admin success notice using 'switch' bulk action
 	* 
-	* @since	1.0.0
+	* @since	1.0
 	* @param	string	$redirect_to	URL where to redirect after performing action
 	* @param	string	$action		containing the switch action
 	* @param 	array	$post_ids	array of all selected plugins 
+	* @hooked 	'network_admin_notices' and 'admin_notices'
 	*/
 	public function switch_success_admin_notice(){
        if (isset($_GET['dkqps_ssp'])&& is_admin()) {
@@ -184,8 +189,9 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	}
 
 	/**
-	* Switching the plugin again
+	* Switching the plugin again when clicking on switch link in modified success notices
 	* @since	1.3
+	* @hooked 'admin_init'
 	*/
 	public function dkqps_again_switch_the_plugin(){
 		$dkqps_ssp = $_GET['dkqps_ssp'];  
@@ -200,8 +206,9 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	}
 
 	/**
-	* Show notice for again switched plugin
-	* @since	1.3
+	* Shows notice for again switched plugin with switch link again
+	* @hooked admin_notices
+	* @since 1.3
 	*/
 	public function dkpqs_again_switched_success_admin_notice(){
 		$dkqps_ssp = $_GET['dkqps_ssp'];
@@ -223,6 +230,8 @@ class Dk_Quick_Plugin_Switcher_Admin {
 
 	/**
 	* Updating switched plugin in option table to add switched link to success notice
+	* @since 1.3 
+	* @hooked on action hook 'activated_plugin' and 'deactivated_plugin' 
 	*/
 	public function dkqps_update_switched_plugin($plugin, $network_wide){
 		if( !function_exists('get_plugin_data') ){
@@ -238,8 +247,9 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	}
 
 	/**
-	@hooked over filter hook 'gettext'
 	* Adding switch links to success notice
+	* @since 1.3
+	* @hooked on filter hook 'gettext'
 	*/
 	public function dkqps_add_switching_link($translated_text, $untranslated_text, $domain){
 		$activated_notice = "Plugin <strong>activated</strong>.";
@@ -254,9 +264,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 
 	        $link = "plugins.php?dkqps_ssp=".$pbasename;
 
-	        $translated = "<strong>".$pname."</strong> is Activated. <a style='margin-left: 10px;' class='button-secondary' href='".admin_url($link)."'> Deactivate it Again </a>";
-
-	        return $translated;
+	        $translated_text = "<strong>".$pname."</strong> is Activated. <a style='margin-left: 10px;' class='button-secondary' href='".admin_url($link)."'> Deactivate it Again </a>";
         }elseif ($deactivated_notice === $untranslated_text) {
         	$plug_name = get_option('dkqps_switched_plugin',true);
 
@@ -266,9 +274,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 
 	        $link = "plugins.php?dkqps_ssp=".$pbasename;
 
-	        $translated = "<strong>".$pname."</strong> is deactivated <a style='margin-left: 10px;' class='button-secondary' href='".admin_url($link)."'> Activate it Again </a>";
-
-	        return $translated;        	
+	        $translated_text = "<strong>".$pname."</strong> is deactivated <a style='margin-left: 10px;' class='button-secondary' href='".admin_url($link)."'> Activate it Again </a>";     	
         }
         return $translated_text;       
 	}
