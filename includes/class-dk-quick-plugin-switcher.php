@@ -113,11 +113,8 @@ class Dk_Quick_Plugin_Switcher {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Dk_Quick_Plugin_Switcher_i18n();
-
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -148,7 +145,7 @@ class Dk_Quick_Plugin_Switcher {
 		}
 
 		/**
-		* Displyaing success notice after successful switching
+		* Displaying success notice after successful switching
 		*/
 		if(isset($_GET['dk_act'])){
 			if(is_network_admin()){
@@ -159,11 +156,14 @@ class Dk_Quick_Plugin_Switcher {
 			}
 		}
 
-		if (isset($_GET['plug_name']) && !empty($_GET['plug_name'])) {
+		if (isset($_GET['dkqps_ssp']) && !empty($_GET['dkqps_ssp'])) {
 			$this->loader->add_action('admin_init',$plugin_admin,'dkqps_again_switch_the_plugin',99);
 			$this->loader->add_action( 'admin_notices', $plugin_admin, 'dkpqs_again_switched_success_admin_notice', 10);
 		}
-		$this->loader->add_action('activated_plugin',$plugin_admin,'dkqps_update_activated_plugin',10,2);
+
+		$this->loader->add_action('activated_plugin',$plugin_admin,'dkqps_update_switched_plugin',10,2);
+		$this->loader->add_action('deactivated_plugin',$plugin_admin,'dkqps_update_switched_plugin',10,2);
+
 		if (is_admin()) {
 			$this->loader->add_filter('gettext',$plugin_admin,'dkqps_add_switching_link',99,3);
 		}

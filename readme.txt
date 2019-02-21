@@ -69,10 +69,6 @@ screenshot-1.png
    
 == Upgrade Notice ==
 
-= 1.3 =
-* Compatible with WordPress 5.0
-* Added: 
-
 =1.2 =
 * Compatible with WordPress 4.9
 
@@ -84,15 +80,20 @@ screenshot-1.png
 
 == Changelog ==
 
-= 1.2 =
+= 1.3 (25/02/2019) =
+* Compatible with WordPress 5.0
+* Added: Switch again button on successful notice
+* Added: Delete button to single deactivated plugin
+
+= 1.2 (28/11/2017) =
 * Tested with WordPress 4.9
 * Updated "Tested up to" value to 4.9
 * Added Requires PHP version
 
-= 1.0.1 =
+= 1.0.1 (02/06/2017) =
 * Fixed the issue with multisite
 * Added sucessful notice on multisite
 * Fixed conflict with other plugins
 
-= 1.0.0 =
+= 1.0.0 (10/04/2017) =
 This is Initial Release of the plugin

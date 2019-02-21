@@ -84,12 +84,14 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	*/
 	public function dk_handle_quick_bulk_actions($redirect_to, $action, $post_ids){
 		
-		if($action != 'dk_switch') // Return if switch action is not triggered
+		if($action != 'dk_switch'){
+			// Return if switch action is not triggered
 			return $redirect_to;
+		}
 		$act = $deact = 0;	
 		
 		// Fetching array of the all active plugins from database
-		$active_plugins =  apply_filters('active_plugins', get_option('active_plugins'));
+		$active_plugins =  get_option('active_plugins');
 							
 		// Loop through all post ids of plugins		
 		foreach((is_array($post_ids) || is_object($post_ids)) ? $post_ids : array() as $post_id){			
@@ -108,7 +110,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 		$qry_args = array('dk_act' => $act, 'dk_deact' => $deact);
 
 		if (count($post_ids)==1) {
-			$qry_args['name'] = $post_ids[0];
+			$qry_args['dkqps_ssp'] = $post_ids[0];  //ssp-single switched plugin
 		}
 		
 		//Redirecting to same plguin page with query arguments
@@ -162,16 +164,16 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @param 	array	$post_ids	array of all selected plugins 
 	*/
 	public function switch_success_admin_notice(){
-       if (isset($_GET['name'])&& is_admin()) {
+       if (isset($_GET['dkqps_ssp'])&& is_admin()) {
 	   		if( !function_exists('get_plugin_data') ){
 			    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			}
-			$pfile = ABSPATH.'wp-content/plugins/'.$_GET['name'];
+			$pfile = ABSPATH.'wp-content/plugins/'.$_GET['dkqps_ssp'];
 	    	$pdata = get_plugin_data($pfile, true,true);
 	    	
 	    	$pname = $pdata['Name']; ?>
 	    	<div class="notice notice-success is-dismissible">
-		        <p><?php printf(__( '"<strong>%s</strong>" '.(($_GET['dk_deact'] == 1) ? "is deactivated" : "is activated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo admin_url('plugins.php?plug_name=').$_GET['name'] ?>"><?php echo ($_GET['dk_act'] == 1) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
+		        <p><?php printf(__( '"<strong>%s</strong>" '.(($_GET['dk_deact'] == 1) ? "is deactivated" : "is activated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo admin_url('plugins.php?dkqps_ssp=').$_GET['dkqps_ssp'] ?>"><?php echo ($_GET['dk_act'] == 1) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
 		    </div>	    	
 	    	<?php
 	    } else{ ?>
@@ -186,13 +188,13 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @since	1.3
 	*/
 	public function dkqps_again_switch_the_plugin(){
-		$plug_name = $_GET['plug_name'];
-		$active_plugins =  apply_filters('active_plugins', get_option('active_plugins'));
+		$dkqps_ssp = $_GET['dkqps_ssp'];  
+		$active_plugins =  get_option('active_plugins');
 
-		if(is_array($active_plugins) && in_array($plug_name, $active_plugins)){				
-			unset($active_plugins[array_search($plug_name, $active_plugins)]);				
+		if(is_array($active_plugins) && in_array($dkqps_ssp, $active_plugins)){				
+			unset($active_plugins[array_search($dkqps_ssp, $active_plugins)]);				
 		}else{
-			array_push($active_plugins, $plug_name);
+			array_push($active_plugins, $dkqps_ssp);
 		}
 		update_option('active_plugins',$active_plugins);
 	}
@@ -202,63 +204,72 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @since	1.3
 	*/
 	public function dkpqs_again_switched_success_admin_notice(){
-		$plug_name = $_GET['plug_name'];
-		$active_plugins =  apply_filters('active_plugins', get_option('active_plugins'));
-		$activated = in_array($plug_name, $active_plugins);
+		$dkqps_ssp = $_GET['dkqps_ssp'];
+		$active_plugins =  get_option('active_plugins');
+		$activated = in_array($dkqps_ssp, $active_plugins);
 
 		if( !function_exists('get_plugin_data') ){
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
-		$pfile = ABSPATH.'wp-content/plugins/'.$plug_name;
+		$pfile = ABSPATH.'wp-content/plugins/'.$dkqps_ssp;
     	$pdata = get_plugin_data($pfile, true,true);
 
     	$pname = $pdata['Name']; ?>
 		<div class="notice notice-success is-dismissible">
-	        <p><?php printf(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo admin_url('plugins.php?plug_name=').$plug_name ?>"><?php echo ($activated) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
+	        <p><?php printf(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo admin_url('plugins.php?dkqps_ssp=').$dkqps_ssp ?>"><?php echo ($activated) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
 	    </div>
 		<?php
 	}
 
 	/**
-	* Updating activated plugin in option to add deactivation lik
+	* Updating switched plugin in option table to add switched link to success notice
 	*/
-	public function dkqps_update_activated_plugin($plugin, $network_wide){
+	public function dkqps_update_switched_plugin($plugin, $network_wide){
 		if( !function_exists('get_plugin_data') ){
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 		$pfile = ABSPATH.'wp-content/plugins/'.$plugin;
     	$pdata = get_plugin_data($pfile, true,true);
     	$pname = isset($pdata['Name']) ? $pdata['Name'] : '';
-    	$pname = empty($pname) ? array() : array('act'=> $pname,'plug_name'=> $plugin);
+    	$pname = empty($pname) ? array() : array('switched'=> $pname,'dkqps_ssp'=> $plugin);
 
-		update_option('dkqps_activated_plugin',$pname);
+		update_option('dkqps_switched_plugin',$pname);
 		//update_option('dkqps_network_wide',$network_wide);
 	}
 
 	/**
-	* Adding switch link to plugin notice
+	@hooked over filter hook 'gettext'
+	* Adding switch links to success notice
 	*/
 	public function dkqps_add_switching_link($translated_text, $untranslated_text, $domain){
 		$activated_notice = "Plugin <strong>activated</strong>.";
+		$deactivated_notice = "Plugin <strong>deactivated</strong>.";
 
-		if ( $activated_notice !== $untranslated_text ){
-            return $translated_text;
+		if ( $activated_notice === $untranslated_text ){
+			$plug_name = get_option('dkqps_switched_plugin',true);
+
+	        $pname = $plug_name['switched'];
+	        $translated = $pname;
+	        $pbasename = $plug_name['dkqps_ssp'];
+
+	        $link = "plugins.php?dkqps_ssp=".$pbasename;
+
+	        $translated = "<strong>".$pname."</strong> is Activated. <a style='margin-left: 10px;' class='button-secondary' href='".admin_url($link)."'> Deactivate it Again </a>";
+
+	        return $translated;
+        }elseif ($deactivated_notice === $untranslated_text) {
+        	$plug_name = get_option('dkqps_switched_plugin',true);
+
+	        $pname = $plug_name['switched'];
+	        $translated = $pname;
+	        $pbasename = $plug_name['dkqps_ssp'];
+
+	        $link = "plugins.php?dkqps_ssp=".$pbasename;
+
+	        $translated = "<strong>".$pname."</strong> is deactivated <a style='margin-left: 10px;' class='button-secondary' href='".admin_url($link)."'> Activate it Again </a>";
+
+	        return $translated;        	
         }
-        
-        $translated = "Captain: The Core is stable and the Plugin is <strong>activated</strong> at full Warp speed";
-        $plug_name = get_option('dkqps_activated_plugin',true);
-
-        $activated = isset($plug_name['act']) ? true : false;
-        $pname = ($activated) ? $plug_name['act'] : $plug_name['deact'];
-        $translated = $pname;
-        $pbasename = $plug_name['plug_name'];
-
-        /*$new = "<p>".(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" )), $pname)."<a style='margin-left: 10px;' class='button-secondary' href='".admin_url('plugins.php?plug_name=')"'>". ($activated) ? 'Deactivate it Again' : 'Activate it Again'."</a></p>";*/
-
-        $link = "plugins.php?plug_name=".$pbasename;
-
-        $translated = "<strong>".$pname."</strong> is". (($activated) ? ' Activated' : 'Deactovated')."<a style='margin-left: 10px;' class='button-secondary' href='".admin_url($link)."'>". (($activated) ? 'Deactivate it Again' : 'Activate it Again')."</a>";
-
-        return $translated;
+        return $translated_text;       
 	}
 }
