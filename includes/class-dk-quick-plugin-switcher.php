@@ -168,7 +168,7 @@ class Dk_Quick_Plugin_Switcher {
 		}
 
 		/**
-		* Switch plugin again if a single plugin is switched using 'switch' bulk action
+		* Switching the plugin again when clicking on switch link in modified success notices
 		* @since 1.3
 		*/
 		if (isset($_GET['dkqps_ssp']) && !empty($_GET['dkqps_ssp'])) {
