@@ -172,15 +172,25 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	public function switch_success_admin_notice(){
 		//Adding switch link to success notice when there is only only plugin is switch using bulk switch action
         if (isset($_GET['dkqps_bulk_ssp'])&& is_admin()) {
+        	global $status, $page, $s, $totals;
+        	$context = $status;
+
 	   		if( !function_exists('get_plugin_data') ){
 			    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			}
 			$pfile = ABSPATH.'wp-content/plugins/'.$_GET['dkqps_bulk_ssp'];
 	    	$pdata = get_plugin_data($pfile, true,true);
-	    	
+
+	    	$plugin_file = $_GET[dkqps_bulk_ssp];
+	    	$activated = (isset($_GET['dk_act']) && 1== $_GET['dk_act']) ? true : false;
+
+	    	$act_link = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file );
+
+	    	$deact_link = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin_file );
+
 	    	$pname = $pdata['Name']; ?>
 	    	<div class="notice notice-success is-dismissible">
-		        <p><?php printf(__( '"<strong>%s</strong>" '.(($_GET['dk_deact'] == 1) ? "is deactivated" : "is activated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo admin_url('plugins.php?dkqps_ssp=').$_GET['dkqps_bulk_ssp'] ?>"><?php echo ($_GET['dk_act'] == 1) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
+		        <p><?php printf(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" )), $pname); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo $activated ? $deact_link : $act_link; ?>"><?php echo $activated ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
 		    </div>	    	
 	    	<?php
 	    } else{ ?>
@@ -195,7 +205,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @since	1.3
 	* @hooked 'admin_init'
 	*/
-	public function dkqps_again_switch_the_plugin(){
+	/*public function dkqps_again_switch_the_plugin(){
 		if (isset($_GET['dkqps_ssp']) && !empty($_GET['dkqps_ssp'])) {
 			//check_admin_referer('dk_switched_nonce');
 			$dkqps_ssp = $_GET['dkqps_ssp'];  
@@ -208,7 +218,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 			}
 			update_option('active_plugins',$active_plugins);
 		}		
-	}
+	}*/
 
 	/**
 	* Shows notice for again switched plugin with switch link on single switched plugin notice

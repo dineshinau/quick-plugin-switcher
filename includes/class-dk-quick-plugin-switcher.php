@@ -172,9 +172,6 @@ class Dk_Quick_Plugin_Switcher {
 		* @since 1.3
 		*/
 		if (isset($_GET['dkqps_ssp']) && !empty($_GET['dkqps_ssp'])) {
-			//Switched plugin again if a single plugin was switched before using switch bulk action
-			$this->loader->add_action('admin_init',$plugin_admin,'dkqps_again_switch_the_plugin',99);
-
 			//Adding switch link again to just switched plugin success notice
 			$this->loader->add_action( 'admin_notices', $plugin_admin, 'dkpqs_again_switched_success_admin_notice', 10);
 		}
