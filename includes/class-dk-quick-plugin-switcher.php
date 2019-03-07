@@ -158,7 +158,7 @@ class Dk_Quick_Plugin_Switcher {
 		* Displaying success notice after successful switching using 'switch' bulk actions
 		* @since 1.0
 		*/
-		if(isset($_GET['dk_act'])){
+		if(isset($_GET['dk_act']) && is_admin()){
 			if(is_network_admin()){
 				$this->loader->add_action( 'network_admin_notices', $plugin_admin, 'switch_success_admin_notice', 10 );
 			}
@@ -175,6 +175,7 @@ class Dk_Quick_Plugin_Switcher {
 			//Adding switch link again to just switched plugin success notice
 			$this->loader->add_action( 'admin_notices', $plugin_admin, 'dkpqs_again_switched_success_admin_notice', 10);
 		}
+
 		/**
 		* Updating just switched plugin to option table to get it back for changing native success notice * with the name of the plugin and switch links
 		* @since 1.3
@@ -186,7 +187,7 @@ class Dk_Quick_Plugin_Switcher {
 		* Modify native pluin activated/deactivated notice with name of the plugin and switch link ot it
 		* @since 1.3
 		*/
-		if (is_admin()) {
+		if (is_admin() && isset($_GET['plugin_status'])) {
 			$this->loader->add_filter('gettext',$plugin_admin,'dkqps_add_switching_link',99,3);
 		}
 	}
