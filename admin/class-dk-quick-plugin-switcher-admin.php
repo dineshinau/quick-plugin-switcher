@@ -43,8 +43,8 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	 * @param    string    $version    The version of this QPS.
 	 */
 	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->plugin_name 	= $plugin_name;
+		$this->version 		= $version;
 	}
 	
 	/**
@@ -111,11 +111,12 @@ class Dk_Quick_Plugin_Switcher_Admin {
 		$qry_args = array('dk_act' => $act, 'dk_deact' => $deact);
 
 		if (count($post_ids)==1) {
-			$plugin = $post_ids[0];
+			$plugin 			= $post_ids[0];
 			$plugin_file 		= ABSPATH.'wp-content/plugins/'.$plugin;
     		$plugin_data 		= get_plugin_data($plugin_file, true,true);
     		$plugin_name 		= isset($plugin_data['Name']) ? $plugin_data['Name'] : '';
     		$switched_plugin 	= empty($plugin_name) ? array() : array('name'=> $plugin_name,'plugin'=> $plugin);
+			
 			update_option('dkqps_ssp_plugin',$switched_plugin);
 		}
 		return add_query_arg($qry_args, $redirect_to);
@@ -174,11 +175,11 @@ class Dk_Quick_Plugin_Switcher_Admin {
         	global $status, $page, $s, $totals;
         	$context = $status;
 
-	   		$switched_plugin = get_option('dkqps_ssp_plugin',true);
-	        $plugin_name = $switched_plugin['name'];	        
-	        $plugin = $switched_plugin['plugin'];
+	   		$switched_plugin 	= get_option('dkqps_ssp_plugin',true);
+	        $plugin_name 		= $switched_plugin['name'];	        
+	        $plugin 			= $switched_plugin['plugin'];
 
-	    	$activated = (1== $_GET['dk_act']) ? true : false;
+	    	$activated 	= (1== $_GET['dk_act']) ? true : false;
 	    	$action_url = '';
 	    	
 	    	if ($activated) {
@@ -198,34 +199,6 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	}
 
 	/**
-	* Shows notice for again switched plugin with switch link on single switched plugin notice
-	* @hooked admin_notices
-	* @since 1.3
-	*/
-	public function dkpqs_again_switched_success_admin_notice(){
-		global $status, $page, $s, $totals;
-		$context = $status;
-
-		$active_plugins =  get_option('active_plugins');
-   		$switched_plugin = get_option('dkqps_ssp_plugin',true);
-        $plugin_name = $switched_plugin['name'];	        
-        $plugin = $switched_plugin['plugin'];
-
-    	$activated = in_array($plugin, $active_plugins);
-    	$action_url = '';
-    	
-    	if ($activated) {
-    		$action_url = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin );	    		
-    	}else{
-    		$action_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin );	    		
-    	} ?>
-		<div class="notice notice-success is-dismissible">
-	        <p><?php printf(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" )), $plugin_name); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo $action_url; ?>"><?php echo ($activated) ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
-	    </div>
-	    <?php
-	}
-
-	/**
 	* Updating natively activated/deactivated plugin in option table to add switched 
 	* link to native success notice
 	* @since 1.3 
@@ -234,12 +207,12 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	public function dkqps_update_switched_plugin($plugin, $network_wide){
 		if( !function_exists('get_plugin_data') ){
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-		}
-		
+		}		
 		$plugin_file 		= ABSPATH.'wp-content/plugins/'.$plugin;
 		$plugin_data 		= get_plugin_data($plugin_file, true,true);
 		$plugin_name 		= isset($plugin_data['Name']) ? $plugin_data['Name'] : '';
 		$switched_plugin 	= empty($plugin_name) ? array() : array('name'=> $plugin_name,'plugin'=> $plugin);
+		
 		update_option('dkqps_ssp_plugin',$switched_plugin);
 		//update_option('dkqps_network_wide',$network_wide);
 	}
@@ -255,23 +228,23 @@ class Dk_Quick_Plugin_Switcher_Admin {
 		$deactivated_notice = "Plugin <strong>deactivated</strong>.";
 
 		if ( $activated_notice === $untranslated_text ){
-			$switched_plugin = get_option('dkqps_ssp_plugin',true);
-        	$plugin_name = $switched_plugin['name'];	        
-        	$plugin = $switched_plugin['plugin'];
+			
+			$switched_plugin 	= get_option('dkqps_ssp_plugin',true);
+        	$plugin_name 		= $switched_plugin['name'];	        
+        	$plugin 			= $switched_plugin['plugin'];
+	        $qps 				= $this->plugin_name.'/'.$this->plugin_name.'.php';
 
-	        $qps = $this->plugin_name.'/'.$this->plugin_name.'.php';
-
-	        $action_url = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin );
+	        $action_url 	= wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin );
 	    	
-	        $translated_text = "<strong>".$plugin_name."</strong> is Activated.";
+	        $translated_text 	= "<strong>".$plugin_name."</strong> is Activated.";
 	        if ($qps !== $plugin) {
 	        	$translated_text.="<a style='margin-left: 10px;' class='button-secondary' href='".$action_url."'> Deactivate it Again</a>";
 	        }
 	        //return $translated_text;
         }elseif ($deactivated_notice === $untranslated_text) {
-        	$switched_plugin = get_option('dkqps_ssp_plugin',true);
-        	$plugin_name = $switched_plugin['name'];	        
-        	$plugin = $switched_plugin['plugin'];
+        	$switched_plugin 	= get_option('dkqps_ssp_plugin',true);
+        	$plugin_name 		= $switched_plugin['name'];	        
+        	$plugin 			= $switched_plugin['plugin'];
 
         	$action_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin );
 

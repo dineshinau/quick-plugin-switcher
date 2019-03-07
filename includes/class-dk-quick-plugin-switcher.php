@@ -168,15 +168,6 @@ class Dk_Quick_Plugin_Switcher {
 		}
 
 		/**
-		* Switching the plugin again when clicking on switch link in modified success notices
-		* @since 1.3
-		*/
-		if (isset($_GET['dkqps_ssp']) && !empty($_GET['dkqps_ssp'])) {
-			//Adding switch link again to just switched plugin success notice
-			$this->loader->add_action( 'admin_notices', $plugin_admin, 'dkpqs_again_switched_success_admin_notice', 10);
-		}
-
-		/**
 		* Updating just switched plugin to option table to get it back for changing native success notice * with the name of the plugin and switch links
 		* @since 1.3
 		*/

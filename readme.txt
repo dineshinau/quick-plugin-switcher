@@ -80,10 +80,9 @@ screenshot-1.png
 
 == Changelog ==
 
-= 1.3 (25/02/2019) =
-* Compatible with WordPress 5.0
-* Added: Switch again button on successful notice
-* Added: Delete button to single deactivated plugin
+= 1.3 (12/03/2019) =
+* Compatible with WordPress 5.1
+* Added: Switch again button on successful notice on single site
 
 = 1.2 (28/11/2017) =
 * Tested with WordPress 4.9
