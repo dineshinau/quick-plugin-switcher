@@ -110,6 +110,13 @@ class Dk_Quick_Plugin_Switcher_Admin {
 
 		$qry_args = array('dk_act' => $act, 'dk_deact' => $deact);
 
+		$pfile = ABSPATH.'wp-content/plugins/'.$plugin;
+    	$pdata = get_plugin_data($pfile, true,true);
+    	$pname = isset($pdata['Name']) ? $pdata['Name'] : '';
+    	$pname = empty($pname) ? array() : array('switched'=> $pname,'dkqps_ssp'=> $plugin);
+
+		update_option('dkqps_switched_plugin',$pname);
+
 		if (count($post_ids)==1) {
 			$qry_args['dkqps_bulk_ssp'] = $post_ids[0];  //ssp-single switched plugin
 			$qry_args['dkqps_ssp'] = ''; //ssp-single switched plugin
@@ -199,26 +206,6 @@ class Dk_Quick_Plugin_Switcher_Admin {
 		    </div>
 	    <?php }
 	}
-
-	/**
-	* Switching the plugin again when clicking on switch link in modified success notices
-	* @since	1.3
-	* @hooked 'admin_init'
-	*/
-	/*public function dkqps_again_switch_the_plugin(){
-		if (isset($_GET['dkqps_ssp']) && !empty($_GET['dkqps_ssp'])) {
-			//check_admin_referer('dk_switched_nonce');
-			$dkqps_ssp = $_GET['dkqps_ssp'];  
-			$active_plugins =  get_option('active_plugins');
-			
-			if(is_array($active_plugins) && in_array($dkqps_ssp, $active_plugins)){				
-				unset($active_plugins[array_search($dkqps_ssp, $active_plugins)]);				
-			}else{
-				array_push($active_plugins, $dkqps_ssp);
-			}
-			update_option('active_plugins',$active_plugins);
-		}		
-	}*/
 
 	/**
 	* Shows notice for again switched plugin with switch link on single switched plugin notice
