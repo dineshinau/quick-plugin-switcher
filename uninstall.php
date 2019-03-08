@@ -5,7 +5,7 @@
  * @link       https://dineshinaublog.wordpress.com
  * @since      1.0
  *
- * @package    Dk_Quick_Plugin_Switcher
+ * @package    Quick_Plugin_Switcher
  */
 
 // If uninstall not called from WordPress, then exit.

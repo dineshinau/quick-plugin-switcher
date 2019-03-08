@@ -23,14 +23,13 @@
  * @author     Dinesh Kumar Yadav <dineshinau@gmail.com>
  */
 class Dk_Quick_Plugin_Switcher {
-
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the QPS.
 	 *
 	 * @since    1.0
 	 * @access   protected
-	 * @var      Dk_Quick_Plugin_Switcher_Loader    $loader    Maintains and registers all hooks for the QPS.
+	 * @var      Dk_Quick_Plugin_Switcher_Loader $loader Maintains and registers all hooks for the QPS.
 	 */
 	protected $loader;
 
@@ -39,7 +38,7 @@ class Dk_Quick_Plugin_Switcher {
 	 *
 	 * @since    1.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify the QPS.
+	 * @var      string $plugin_name The string used to uniquely identify the QPS.
 	 */
 	protected $plugin_name;
 
