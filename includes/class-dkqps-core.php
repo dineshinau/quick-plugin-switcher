@@ -5,8 +5,8 @@
  * @link       https://dineshinaublog.wordpress.com
  * @since      1.0
  *
- * @package    Quick_Plugin_Switcher
- * @subpackage Quick_Plugin_Switcher/includes
+ * @package    quick-plugin-switcher
+ * @subpackage quick-plugin-switcher/includes
  */
 
 /**
@@ -18,18 +18,17 @@
  * version of the QPS.
  *
  * @since      1.0
- * @package    Quick_Plugin_Switcher
- * @subpackage Quick_Plugin_Switcher/includes
+ * @package    quick-plugin-switcher
+ * @subpackage quick-plugin-switcher/includes
  * @author     Dinesh Kumar Yadav <dineshinau@gmail.com>
  */
-class Dk_Quick_Plugin_Switcher {
+class DKQPS_Core {
 	/**
-	 * The loader that's responsible for maintaining and registering all hooks that power
-	 * the QPS.
+	 * The loader that's responsible for maintaining and registering all hooks that power the QPS.
 	 *
 	 * @since    1.0
 	 * @access   protected
-	 * @var      Dk_Quick_Plugin_Switcher_Loader $loader Maintains and registers all hooks for the QPS.
+	 * @var      DKQPS_Loader $loader Maintains and registers all hooks for the QPS.
 	 */
 	protected $loader;
 
@@ -71,58 +70,54 @@ class Dk_Quick_Plugin_Switcher {
 	 *
 	 * Including the following files that make up the QPS:
 	 *
-	 * - Dk_Quick_Plugin_Switcher_Loader. Orchestrates the hooks of the QPS.
-	 * - Dk_Quick_Plugin_Switcher_i18n. Defines internationalization functionality.
-	 * - Dk_Quick_Plugin_Switcher_Admin. Defines all hooks for the admin area.
+	 * - DKQPS_Loader. Orchestrates the hooks of the QPS.
+	 * - DKQPS_i18n. Defines internationalization functionality.
+	 * - DKQPS_Admin. Defines all hooks for the admin area.
 	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
+	 * Create an instance of the loader which will be used to register the hooks with WordPress.
 	 *
 	 * @since    1.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
 		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core QPS.
+		 * The class responsible for orchestrating the actions and filters of the core QPS.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dk-quick-plugin-switcher-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dkqps-loader.php';
 		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the QPS.
+		 * The class responsible for defining internationalization functionality of the QPS.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dk-quick-plugin-switcher-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dkqps-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-dk-quick-plugin-switcher-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-dkqps-admin.php';
 
-		$this->loader = new Dk_Quick_Plugin_Switcher_Loader();
+		$this->loader = new DKQPS_Loader();
 	}
 
 	/**
 	 * Define the locale for the QPS for internationalization.
 	 *
-	 * Uses the Dk_Quick_Plugin_Switcher_i18n class in order to set the domain and to register the hook with WordPress.
+	 * Uses the DKQPS_i18n class in order to set the domain and to register the hook with WordPress.
 	 *
 	 * @since    1.0
 	 * @access   private
 	 */
 	private function set_locale() {
-		$plugin_i18n = new Dk_Quick_Plugin_Switcher_i18n();
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$plugin_i18n = new DKQPSwitcher_i18n();
+		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_dkqps_textdomain' );
 	}
 
 	/**
-	 * Register all of the hooks related to the admin area functionality
-	 * of the QPS.
+	 * Register all of the hooks related to the admin area functionality of the QPS.
 	 *
 	 * @since    1.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-		$plugin_admin = new Dk_Quick_Plugin_Switcher_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new DKQPS_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		/**
 		* Adding admin js
@@ -133,8 +128,8 @@ class Dk_Quick_Plugin_Switcher {
 		* Adding 'Switch' option in plugin 'buck-actions' dropdown in single site environment
 		* @since 1.0
 		*/
-		$this->loader->add_filter( 'bulk_actions-plugins', $plugin_admin, 'dk_quick_bulk_actions', 999,1 );
-		$this->loader->add_filter( 'handle_bulk_actions-plugins', $plugin_admin, 'dk_handle_quick_bulk_actions', 10,3 );
+		$this->loader->add_filter( 'bulk_actions-plugins', $plugin_admin, 'dkqps_add_switch_bulk_action', 999,1 );
+		$this->loader->add_filter( 'handle_bulk_actions-plugins', $plugin_admin, 'dkqps_handle_switch_bulk_action', 10,3 );
 			
 		/**
 		 *  Making sure the function "is_plugin_active_for_network" exist before 
@@ -149,8 +144,8 @@ class Dk_Quick_Plugin_Switcher {
 		* @since 1.0
 		*/
 		if( is_plugin_active_for_network( $this->plugin_name."/".$this->plugin_name.".php" ) ){
-			$this->loader->add_filter( 'bulk_actions-plugins-network', $plugin_admin, 'dk_quick_bulk_actions', 999,1 );
-			$this->loader->add_filter( 'handle_bulk_actions-plugins-network', $plugin_admin, 'dk_handle_quick_bulk_network_actions', 10,3 );	
+			$this->loader->add_filter( 'bulk_actions-plugins-network', $plugin_admin, 'dkqps_add_switch_bulk_action', 999,1 );
+			$this->loader->add_filter( 'handle_bulk_actions-plugins-network', $plugin_admin, 'dkqps_handle_switch_bulk_network_action', 10,3 );	
 		}
 
 		/**
@@ -205,7 +200,7 @@ class Dk_Quick_Plugin_Switcher {
 	 * The reference to the class that orchestrates the hooks with the QPS.
 	 *
 	 * @since     1.0
-	 * @return    Dk_Quick_Plugin_Switcher_Loader    Orchestrates the hooks of the QPS.
+	 * @return    DKQPS_Loader    Orchestrates the hooks of the QPS.
 	 */
 	public function get_loader() {
 		return $this->loader;

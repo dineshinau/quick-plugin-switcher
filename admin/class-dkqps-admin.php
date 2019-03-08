@@ -5,18 +5,18 @@
  * @link       https://dineshinaublog.wordpress.com
  * @since      1.0
  *
- * @package    Quick_Plugin_Switcher
- * @subpackage Quick_Plugin_Switcher/admin
+ * @package    quick-plugin-switcher
+ * @subpackage quick-plugin-switcher/admin
  */
 
 /**
  * Defines the QPS name, version, and hooks to enqueue the admin-specific JavaScript.
  *
- * @package    Quick_Plugin_Switcher
- * @subpackage Quick_Plugin_Switcher/admin
+ * @package    quick-plugin-switcher
+ * @subpackage quick-plugin-switcher/admin
  * @author     Dinesh Kumar Yadav <dineshinau@gmail.com>
  */
-class Dk_Quick_Plugin_Switcher_Admin {
+class DKQPS_Admin {
 	/**
 	 * The ID of this QPS.
 	 *
@@ -55,14 +55,14 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	public function enqueue_scripts() {
 		/**
 		 * An instance of this class is passed to the run() function
-		 * defined in Dk_Quick_Plugin_Switcher_Loader as all of the hooks are defined
+		 * defined in DKQPS_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Dk_Quick_Plugin_Switcher_Loader is creating the relationship
+		 * The DKQPS_Loader is creating the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dk-quick-plugin-switcher-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dkqps-admin.js', array( 'jquery' ), $this->version, false );
 	}
 	
 	/**
@@ -72,7 +72,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @param	array $actions The array of all bulk actions
 	* @hooked 'bulk_actions-plugins'
 	*/
-	public function dk_quick_bulk_actions($actions){
+	public function dkqps_add_switch_bulk_action($actions){
 		return array_merge(array('dk_switch' => __('Switch',$this->plugin_name)),$actions);		
 	}
 	/**
@@ -83,7 +83,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @param	string	$action		containing the switch action
 	* @param 	array	$post_ids	array of all selected plugins 
 	*/
-	public function dk_handle_quick_bulk_actions($redirect_to, $action, $post_ids){
+	public function dkqps_handle_switch_bulk_action($redirect_to, $action, $post_ids){
 		
 		if($action != 'dk_switch'){
 			// Return if switch action is not triggered
@@ -127,7 +127,7 @@ class Dk_Quick_Plugin_Switcher_Admin {
 	* @param 	array	$post_ids	array of all selected plugins 
 	* @return 	redirect_to		redirect link with query strings
 	*/
-	public function dk_handle_quick_bulk_network_actions($redirect_to, $action, $post_ids){
+	public function dkqps_handle_switch_bulk_network_action($redirect_to, $action, $post_ids){
 		
 		//Returning to the plugin page when the "Switch" action is not triggered
 		if($action != 'dk_switch'){
@@ -169,10 +169,10 @@ class Dk_Quick_Plugin_Switcher_Admin {
 		}		
 		$plugin_file 		= ABSPATH.'wp-content/plugins/'.$plugin;
 		$plugin_data 		= get_plugin_data($plugin_file, true,true);
-		$plugin_name 		= isset($plugin_data['Name']) ? $plugin_data['Name'] : '';
+		$plugin_name 		= isset($plugin_data['Name']) ? $plugin_data['Name'] : 'Plugin';
 		$switched_plugin 	= empty($plugin_name) ? array() : array('name'=> $plugin_name,'plugin'=> $plugin);
 		
-		update_option('dkqps_ssp_plugin',$switched_plugin);
+		update_option('dkqps_ssp_plugin',$switched_plugin);  //ssp_plugin -> Single Switched Plugin
 		//update_option('dkqps_network_wide',$network_wide);
 	}
 

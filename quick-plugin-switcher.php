@@ -2,7 +2,7 @@
 /**
  * @link              https://dineshinaublog.wordpress.com
  * @since             1.0
- * @package           Quick_Plugin_Switcher
+ * @package           quick-plugin-switcher
  *
  * Plugin Name:       Quick Plugin Switcher
  * Plugin URI:        https://dineshinaublog.wordpress.com/quick-plugin-switcher
@@ -12,7 +12,7 @@
  * Author URI:        https://dineshinaublog.wordpress.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       dk-quick-plugin-switcher
+ * Text Domain:       quick-plugin-switcher
  * Domain Path:       /languages
  */
 
@@ -26,8 +26,8 @@ if ( ! defined( 'WPINC' ) ) {
  * This action is documented in includes/class-dk-quick-plugin-switcher-activator.php
  */
 function activate_dk_quick_plugin_switcher() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dk-quick-plugin-switcher-activator.php';
-	Dk_Quick_Plugin_Switcher_Activator::activate();
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dkqps-activator.php';
+	DKQPS_Activator::activate();
 }
 
 /**
@@ -35,8 +35,8 @@ function activate_dk_quick_plugin_switcher() {
  * This action is documented in includes/class-dk-quick-plugin-switcher-deactivator.php
  */
 function deactivate_dk_quick_plugin_switcher() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dk-quick-plugin-switcher-deactivator.php';
-	Dk_Quick_Plugin_Switcher_Deactivator::deactivate();
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dkqps-deactivator.php';
+	DKQPS_Deactivator::deactivate();
 }
 
 //Registering activation and deactivation hooks
@@ -44,19 +44,18 @@ register_activation_hook( __FILE__, 'activate_dk_quick_plugin_switcher' );
 register_deactivation_hook( __FILE__, 'deactivate_dk_quick_plugin_switcher' );
 
 /**
- * The core QPS class that is used to define internationalization,
- * admin-specific hooks
+ * The core QPS class that is used to define internationalization and admin-specific hooks
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-dk-quick-plugin-switcher.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-dkqps-core.php';
 
 /**
  * Begins execution of the QPS.
  * @since    1.0
  */
-function run_dk_quick_plugin_switcher() {
+function run_dkqps_core() {
 
-	$plugin = new Dk_Quick_Plugin_Switcher();
+	$plugin = new DKQPS_Core();
 	$plugin->run();
 
 }
-run_dk_quick_plugin_switcher();
+run_dkqps_core();

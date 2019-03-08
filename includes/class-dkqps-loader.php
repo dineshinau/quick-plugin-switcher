@@ -1,31 +1,31 @@
 <?php
 /**
- * Registering all actions and filters for the plugin
+ * Registering all actions and filters for the QPS
  *
  * @link       https://dineshinaublog.wordpress.com
  * @since      1.0.0
  *
- * @package    Quick_Plugin_Switcher
- * @subpackage Quick_Plugin_Switcher/includes
+ * @package    quick-plugin-switcher
+ * @subpackage quick-plugin-switcher/includes
  */
 
 /**
  *
  * Maintaining a list of all hooks that are registered throughout
- * the plugin, and register them with the WordPress API.
+ * the QPS, and register them with the WordPress API.
  * The run function is called to execute the list of actions and filters.
  *
- * @package    Quick_Plugin_Switcher
- * @subpackage Quick_Plugin_Switcher/includes
- * @author     DINESH KUMAR YADAV <dineshinau@gmail.com>
+ * @package    quick-plugin-switcher
+ * @subpackage quick-plugin-switcher/includes
+ * @author     Dinesh Kumar Yadav <dineshinau@gmail.com>
  */
-class Dk_Quick_Plugin_Switcher_Loader {
+class DKQPS_Loader {
 	/**
 	 * The array of actions registered with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
+	 * @var      array    $actions    The actions registered with WordPress to fire when the QPS loads.
 	 */
 	protected $actions;
 	/**
@@ -33,7 +33,7 @@ class Dk_Quick_Plugin_Switcher_Loader {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
+	 * @var      array    $filters    The filters registered with WordPress to fire when the QPS loads.
 	 */
 	protected $filters;
 

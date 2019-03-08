@@ -1,11 +1,11 @@
 <?php
 /**
- * Fired when the plugin is uninstalled.
+ * Fired when the QPS is uninstalled.
  *
  * @link       https://dineshinaublog.wordpress.com
  * @since      1.0
  *
- * @package    Quick_Plugin_Switcher
+ * @package    quick-plugin-switcher
  */
 
 // If uninstall not called from WordPress, then exit.

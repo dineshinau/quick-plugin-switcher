@@ -3,7 +3,7 @@
 	/**
 	 * @link              https://dineshinaublog.wordpress.com
 	 * @since             1.0.0
- 	 * @package           Dk_Quick_Plugin_Switcher
+ 	 * @package           quick-plugin-switcher
  	 * 
 	 * Disabling the plugin checkbox on plugins listing page so that 
 	 * this plugin "Quick Plugin Switcher" can be avoided from bulk actions.
