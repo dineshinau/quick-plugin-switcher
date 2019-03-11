@@ -203,6 +203,7 @@ class DKQPS_Admin {
 	    } else{ ?>
 	    	<div class="notice notice-success is-dismissible">
 		        <p><?php printf(__( 'All Selected %s activated '.(($_GET['dk_deact'] > 1) ? "plugins are" : "plugin is" ).' now deactivated and all selelcted %s deactivated '.(($_GET['dk_act'] > 1) ? "plugins are" : "plugin is" ).' now activated successfully!', 'quick-plugin-switcher' ), $_GET['dk_deact'],$_GET['dk_act']); ?></p>
+		        
 		    </div>
 	    <?php }
 	}

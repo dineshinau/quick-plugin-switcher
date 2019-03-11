@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quick Plugin Switcher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 23:16+0000\n"
+"POT-Creation-Date: 2019-03-08 23:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,14 +15,26 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.2.1; wp-5.1"
 
+#: admin/class-dkqps-admin.php:205
+msgid " now activated successfully!"
+msgstr ""
+
 #: admin/class-dkqps-admin.php:230
 #, php-format
 msgid "<strong>\"%s\"</strong> is Activated"
 msgstr ""
 
+#: admin/class-dkqps-admin.php:232
+msgid "Deactivate it Again"
+msgstr ""
+
 #: admin/class-dkqps-admin.php:242
 #, php-format
 msgid "<strong>\"%s\"</strong> is deactivated"
+msgstr ""
+
+#: admin/class-dkqps-admin.php:243
+msgid "Activate it Again"
 msgstr ""
 
 #. Name of the plugin
