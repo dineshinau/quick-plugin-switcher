@@ -203,9 +203,9 @@ class DKQPS_Admin {
 		        <p>
 		        	<?php 
 		        	if($activated){
-		        		printf(__( '"<strong>%s</strong>" is activated', 'quick-plugin-switcher' ), $plugin_name);
+		        		printf(__( '"<strong>%s</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name);
 		        	}else{
-		        		printf(__( '"<strong>%s</strong>" is deactivated', 'quick-plugin-switcher' ), $plugin_name); 
+		        		printf(__( '"<strong>%s</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name); 
 		        	}?>
 		        	<a style="margin-left: 10px;" class="button-secondary" href="<?php echo $action_url ?>">
 		        		<?php if($activated){
@@ -233,8 +233,7 @@ class DKQPS_Admin {
 		       	}else{
 		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>deactivated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act, $dk_deact);
 		       	} ?>
-		       </p>
-		        
+		       </p>		        
 		    </div>
 	    <?php }
 	}
@@ -259,7 +258,7 @@ class DKQPS_Admin {
 
 	        $action_url = $this->dkqps_get_action_url($plugin, true);
 	    	
-	        $translated_text = sprintf(__('<strong>"%s"</strong> is Activated','quick-plugin-switcher'),$plugin_name);
+	        $translated_text = sprintf(__('<strong>"%s"</strong> is Activated.','quick-plugin-switcher'),$plugin_name);
 	        if ($qps !== $plugin) {
 	        	$translated_text.="<a style='margin-left: 10px;' class='button-secondary' href='".$action_url."'>".__('Deactivate it Again','quick-plugin-switcher')."</a>";
 	        }
@@ -271,7 +270,7 @@ class DKQPS_Admin {
 
         	$action_url = $this->dkqps_get_action_url($plugin, false);
 
-        	$translated_text = sprintf(__('<strong>"%s"</strong> is deactivated','quick-plugin-switcher'),$plugin_name);
+        	$translated_text = sprintf(__('<strong>"%s"</strong> is deactivated.','quick-plugin-switcher'),$plugin_name);
         	$translated_text.= '<a style="margin-left: 10px;" class="button-secondary" href="'.$action_url.'"> '.__('Activate it Again','quick-plugin-switcher').'</a>';
         }
         return $translated_text;   
