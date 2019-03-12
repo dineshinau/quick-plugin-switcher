@@ -187,22 +187,53 @@ class DKQPS_Admin {
 	*/
 	public function switch_success_admin_notice(){
 		//Adding switch link to success notice when there is only only plugin is switch using bulk switch action
-        if (($_GET['dk_act'] == 1 && $_GET['dk_deact'] ==0) || ($_GET['dk_act'] == 0 && $_GET['dk_deact'] ==1)) {
+		$dk_act = $_GET['dk_act'];
+		$dk_deact = $_GET['dk_deact'];
+
+        if (($dk_act == 1 && $dk_deact ==0) || ($dk_act == 0 && $dk_deact ==1)) {
 
 	   		$switched_plugin 	= get_option('dkqps_ssp_plugin',true);
 	        $plugin_name 		= $switched_plugin['name'];	        
 	        $plugin 			= $switched_plugin['plugin'];
 
-	    	$activated 	= (1== $_GET['dk_act']) ? true : false;
+	    	$activated 	= (1== $dk_act) ? true : false;
 	    	$action_url = $this->dkqps_get_action_url($plugin, $activated); ?>
 
 	    	<div class="notice notice-success is-dismissible">
-		        <p><?php printf(__( '"<strong>%s</strong>" '.($activated ? "is activated" : "is deactivated" ), 'quick-plugin-switcher' ), $plugin_name); ?><a style="margin-left: 10px;" class="button-secondary" href="<?php echo $action_url ?>"><?php echo $activated ? "Deactivate it Again" : "Activate it Again"; ?></a></p>
+		        <p>
+		        	<?php 
+		        	if($activated){
+		        		printf(__( '"<strong>%s</strong>" is activated', 'quick-plugin-switcher' ), $plugin_name);
+		        	}else{
+		        		printf(__( '"<strong>%s</strong>" is deactivated', 'quick-plugin-switcher' ), $plugin_name); 
+		        	}?>
+		        	<a style="margin-left: 10px;" class="button-secondary" href="<?php echo $action_url ?>">
+		        		<?php if($activated){
+		        			esc_html_e( 'Deactivate it Again', 'quick-plugin-switcher' );
+		        		}else{
+		        			esc_html_e( 'Activate it Again', 'quick-plugin-switcher' );
+		        		} ?>
+		        	</a>
+		        </p>
 		    </div>	    	
 	    	<?php
 	    } else{ ?>
 	    	<div class="notice notice-success is-dismissible">
-		        <p><?php printf(__( 'All Selected %s activated '.(($_GET['dk_deact'] > 1) ? "plugins are" : "plugin is" ).' now deactivated and all selelcted %s deactivated '.(($_GET['dk_act'] > 1) ? "plugins are" : "plugin is" ).' now activated successfully!', 'quick-plugin-switcher' ), $_GET['dk_deact'],$_GET['dk_act']); ?></p>
+		       <p><?php 
+		       	if ($dk_act == 1 && $dk_deact == 1 ) {
+		       		printf(__( 'The <strong>active</strong> selected plugin is now <strong>deactivated</strong> and the <strong>inactive</strong> selected plugin is now <strong>activated</strong> successfully.', 'quick-plugin-switcher' ));
+		       	}elseif ($dk_act > 1 && $dk_deact == 0) {
+		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act);
+		       	}elseif ($dk_act == 0 && $dk_deact > 1) {
+		       		printf(__( 'All selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact);
+		       	}elseif ($dk_act == 1 && $dk_deact > 1) {
+		       		printf(__( 'The selected <strong>inactive</strong> plugin is <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact);
+		       	}elseif ($dk_act > 1 && $dk_deact == 1) {
+		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and the selected <strong>active</strong> plugin is <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act);
+		       	}else{
+		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>deactivated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act, $dk_deact);
+		       	} ?>
+		       </p>
 		        
 		    </div>
 	    <?php }
