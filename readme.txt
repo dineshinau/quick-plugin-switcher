@@ -58,7 +58,10 @@ The checkbox against this plugin is disabled after activation because this plugi
 screenshot-1.png
 
 2. Single site Plugin Actions - is the screen that shows "Switch" option created inside bulk actions drop-down menu in the single-site environment.
-   screenshot-2.png
+screenshot-2.png
+
+3. Switch link on natively activated/deactivated success notice.
+screenshot-3.png
 
 = connect with me =
 
@@ -81,8 +84,10 @@ screenshot-1.png
 == Changelog ==
 
 = 1.3 (12/03/2019) =
-* Compatible with WordPress 5.1
+* Added: Compatible with WordPress 5.1
 * Added: Switch again button on successful notice on single site
+* Added: Added switch links on native activate/deactivate success notice
+* Improved: Text domain strings and translations
 
 = 1.2 (28/11/2017) =
 * Tested with WordPress 4.9

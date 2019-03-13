@@ -73,7 +73,7 @@ class DKQPS_Admin {
 	* @hooked 'bulk_actions-plugins'
 	*/
 	public function dkqps_add_switch_bulk_action($actions){
-		return array_merge(array('dk_switch' => esc_html__('Switch','quick-plugin-switcher')),$actions);		
+		return array_merge(array('dk_switch' => __('Switch','quick-plugin-switcher')),$actions);		
 	}
 	/**
 	* Hanndling the switch action when triggered in single site environment
