@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quick Plugin Switcher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-13 17:18+0000\n"
+"POT-Creation-Date: 2019-03-12 21:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,22 +15,22 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.2.1; wp-5.1"
 
-#: admin/class-dkqps-admin.php:206 admin/class-dkqps-admin.php:261
+#: admin/class-dkqps-admin.php:206
 #, php-format
 msgid "\"<strong>%s</strong>\" is activated."
 msgstr ""
 
-#: admin/class-dkqps-admin.php:208 admin/class-dkqps-admin.php:273
+#: admin/class-dkqps-admin.php:208
 #, php-format
 msgid "\"<strong>%s</strong>\" is deactivated."
 msgstr ""
 
 #: admin/class-dkqps-admin.php:212 admin/class-dkqps-admin.php:263
-msgid "Deactivate it again!"
+msgid "Deactivate it Again"
 msgstr ""
 
 #: admin/class-dkqps-admin.php:214 admin/class-dkqps-admin.php:274
-msgid "Activate it again!"
+msgid "Activate it Again"
 msgstr ""
 
 #: admin/class-dkqps-admin.php:224
@@ -76,6 +76,16 @@ msgid ""
 "All selected <strong>%d inactive</strong> plugins are <strong>"
 "deactivated</strong> and all selected <strong>%d active</strong> plugins are "
 "<strong>deactivated</strong> now successfully."
+msgstr ""
+
+#: admin/class-dkqps-admin.php:261
+#, php-format
+msgid "<strong>\"%s\"</strong> is Activated."
+msgstr ""
+
+#: admin/class-dkqps-admin.php:273
+#, php-format
+msgid "<strong>\"%s\"</strong> is deactivated."
 msgstr ""
 
 #. Name of the plugin

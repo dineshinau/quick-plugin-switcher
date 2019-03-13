@@ -123,9 +123,9 @@ class DKQPS_Admin {
 	* 
 	* @since	1.0
 	* @param	string	$redirect_to	URL where to redirect after performing action
-	* @param	string	$action		containing the switch action
-	* @param 	array	$post_ids	array of all selected plugins 
-	* @return 	redirect_to		redirect link with query strings
+	* @param	string	$action			containing the switch action
+	* @param 	array	$post_ids		array of all selected plugins 
+	* @return 	string 	redirect_to		redirect link with query strings
 	*/
 	public function dkqps_handle_switch_bulk_network_action($redirect_to, $action, $post_ids){
 		
@@ -181,8 +181,8 @@ class DKQPS_Admin {
 	* 
 	* @since	1.0
 	* @param	string	$redirect_to	URL where to redirect after performing action
-	* @param	string	$action		containing the switch action
-	* @param 	array	$post_ids	array of all selected plugins 
+	* @param	string	$action			containing the switch action
+	* @param 	array	$post_ids		array of all selected plugins 
 	* @hooked 	'network_admin_notices' and 'admin_notices'
 	*/
 	public function switch_success_admin_notice(){
@@ -209,13 +209,13 @@ class DKQPS_Admin {
 		        	}?>
 		        	<a style="margin-left: 10px;" class="button-secondary" href="<?php echo $action_url ?>">
 		        		<?php if($activated){
-		        			esc_html_e( 'Deactivate it Again', 'quick-plugin-switcher' );
+		        			esc_html_e( 'Deactivate it again!', 'quick-plugin-switcher' );
 		        		}else{
-		        			esc_html_e( 'Activate it Again', 'quick-plugin-switcher' );
+		        			esc_html_e( 'Activate it again!', 'quick-plugin-switcher' );
 		        		} ?>
 		        	</a>
 		        </p>
-		    </div>	    	
+		    </div>
 	    	<?php
 	    } else{ ?>
 	    	<div class="notice notice-success is-dismissible">
@@ -258,9 +258,9 @@ class DKQPS_Admin {
 
 	        $action_url = $this->dkqps_get_action_url($plugin, true);
 	    	
-	        $translated_text = sprintf(__('<strong>"%s"</strong> is Activated.','quick-plugin-switcher'),$plugin_name);
+	        $translated_text = sprintf(__('"<strong>%s</strong>" is activated.','quick-plugin-switcher'),$plugin_name);
 	        if ($qps !== $plugin) {
-	        	$translated_text.="<a style='margin-left: 10px;' class='button-secondary' href='".$action_url."'>".__('Deactivate it Again','quick-plugin-switcher')."</a>";
+	        	$translated_text.="<a style='margin-left: 10px;' class='button-secondary' href='".$action_url."'>".__('Deactivate it again!','quick-plugin-switcher')."</a>";
 	        }
 	        //return $translated_text;
         }elseif ($deactivated_notice === $untranslated_text) {
@@ -270,8 +270,8 @@ class DKQPS_Admin {
 
         	$action_url = $this->dkqps_get_action_url($plugin, false);
 
-        	$translated_text = sprintf(__('<strong>"%s"</strong> is deactivated.','quick-plugin-switcher'),$plugin_name);
-        	$translated_text.= '<a style="margin-left: 10px;" class="button-secondary" href="'.$action_url.'"> '.__('Activate it Again','quick-plugin-switcher').'</a>';
+        	$translated_text = sprintf(__('"<strong>%s</strong>" is deactivated.','quick-plugin-switcher'),$plugin_name);
+        	$translated_text.= '<a style="margin-left: 10px;" class="button-secondary" href="'.$action_url.'"> '.__('Activate it again!','quick-plugin-switcher').'</a>';
         }
         return $translated_text;   
 	}
