@@ -85,8 +85,8 @@ screenshot-3.png
 
 = 1.3 (12/03/2019) =
 * Added: Compatible with WordPress 5.1
-* Added: Switch again button on successful notice on single site
-* Added: Added switch links on native activate/deactivate success notice
+* Added: Switch again button on successful notices if a single plugin is switched
+* Added: Added switch links on native activate/deactivate success notices
 * Improved: Text domain strings and translations
 
 = 1.2 (28/11/2017) =

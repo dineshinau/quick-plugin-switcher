@@ -148,6 +148,12 @@ class DKQPS_Admin {
 			}
 		}
 
+		if (count($post_ids)==1) {
+			$plugin 			= $post_ids[0];
+			$network_wide = '';
+			$this->dkqps_update_switched_plugin($plugin, $network_wide);
+		}
+
 		//Updating option back after switching		
 		update_site_option('active_sitewide_plugins', $active_plugins);
 	 	return add_query_arg(
@@ -172,8 +178,13 @@ class DKQPS_Admin {
 		$plugin_name 		= isset($plugin_data['Name']) ? $plugin_data['Name'] : 'Plugin';
 		$switched_plugin 	= empty($plugin_name) ? array() : array('name'=> $plugin_name,'plugin'=> $plugin);
 		
-		update_option('dkqps_ssp_plugin',$switched_plugin);  //ssp_plugin -> Single Switched Plugin
-		//update_option('dkqps_network_wide',$network_wide);
+		 //ssp_plugin -> Single Switched Plugin
+		if (is_network_admin()) {
+			update_site_option('dkqps_ssp_plugin',$switched_plugin);
+		}else{
+			update_option('dkqps_ssp_plugin',$switched_plugin);	
+		}
+		
 	}
 
 	/**
@@ -193,6 +204,9 @@ class DKQPS_Admin {
         if (($dk_act == 1 && $dk_deact ==0) || ($dk_act == 0 && $dk_deact ==1)) {
 
 	   		$switched_plugin 	= get_option('dkqps_ssp_plugin',true);
+	   		if (is_network_admin()) {
+	   			$switched_plugin 	= get_site_option('dkqps_ssp_plugin',true);
+	   		}
 	        $plugin_name 		= $switched_plugin['name'];	        
 	        $plugin 			= $switched_plugin['plugin'];
 
@@ -252,6 +266,9 @@ class DKQPS_Admin {
 		if ( $activated_notice === $untranslated_text ){
 			
 			$switched_plugin 	= get_option('dkqps_ssp_plugin',array());
+			if (is_network_admin()) {
+	   			$switched_plugin 	= get_site_option('dkqps_ssp_plugin',true);
+	   		}
         	$plugin_name 		= $switched_plugin['name'];	        
         	$plugin 			= $switched_plugin['plugin'];
 	        $qps 				= $this->plugin_name.'/'.$this->plugin_name.'.php';
