@@ -3,7 +3,7 @@
  * The core functionality of the QPS
  *
  * @link       https://dineshinaublog.wordpress.com
- * @since      1.0
+ * @since      1.0.0
  *
  * @package    quick-plugin-switcher
  * @subpackage quick-plugin-switcher/admin
@@ -20,7 +20,7 @@ class DKQPS_Admin {
 	/**
 	 * The ID of this QPS.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this QPS.
 	 */
@@ -29,7 +29,7 @@ class DKQPS_Admin {
 	/**
 	 * The version of this QPS.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @var      string    $version    The current version of this QPS.
 	 */
@@ -38,7 +38,7 @@ class DKQPS_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @param    string    $plugin_name       The name of this QPS.
 	 * @param    string    $version    The version of this QPS.
 	 */
@@ -50,7 +50,7 @@ class DKQPS_Admin {
 	/**
 	 * Registering the JavaScript for the admin area.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
 		/**
@@ -68,7 +68,7 @@ class DKQPS_Admin {
 	/**
 	* Adding a new dropdown option "Switch" in plugins bulk action in single site environment
 	* 
-	* @since	1.0
+	* @since	1.0.0
 	* @param	array $actions The array of all bulk actions
 	* @hooked 'bulk_actions-plugins'
 	*/
@@ -78,7 +78,7 @@ class DKQPS_Admin {
 	/**
 	* Hanndling the switch action when triggered in single site environment
 	* 
-	* @since	1.0
+	* @since	1.0.0
 	* @param	string	$redirect_to	URL where to redirect after performing action
 	* @param	string	$action		containing the switch action
 	* @param 	array	$post_ids	array of all selected plugins 
@@ -121,7 +121,7 @@ class DKQPS_Admin {
 	/**
 	* Hanndling the switch action when triggered on network plugins page
 	* 
-	* @since	1.0
+	* @since	1.0.0
 	* @param	string	$redirect_to	URL where to redirect after performing action
 	* @param	string	$action			containing the switch action
 	* @param 	array	$post_ids		array of all selected plugins 
@@ -190,7 +190,7 @@ class DKQPS_Admin {
 	/**
 	* Displaying switched plugin success notice when switched using 'switch' bulk action
 	* 
-	* @since	1.0
+	* @since	1.0.0
 	* @param	string	$redirect_to	URL where to redirect after performing action
 	* @param	string	$action			containing the switch action
 	* @param 	array	$post_ids		array of all selected plugins 

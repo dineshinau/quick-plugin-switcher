@@ -1,7 +1,7 @@
 <?php
 /**
  * @link              https://dineshinaublog.wordpress.com
- * @since             1.0
+ * @since             1.0.0
  * @package           quick-plugin-switcher
  *
  * Plugin Name:       Quick Plugin Switcher
@@ -50,7 +50,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-dkqps-core.php';
 
 /**
  * Begins execution of the QPS.
- * @since    1.0
+ * @since    1.0.0
  */
 function run_dkqps_core() {
 

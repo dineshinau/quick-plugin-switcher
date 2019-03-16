@@ -72,18 +72,12 @@ screenshot-3.png
    
 == Upgrade Notice ==
 
-=1.2 =
-* Compatible with WordPress 4.9
-
 = 1.0.1 =
 * Now compatible with multisite
 
-= 1.0 =
-* Initial Version
-
 == Changelog ==
 
-= 1.3 (12/03/2019) =
+= 1.3 (17/03/2019) =
 * Added: Compatible with WordPress 5.1
 * Added: Switch again button on successful notices if a single plugin is switched
 * Added: Added switch links on native activate/deactivate success notices
@@ -99,5 +93,5 @@ screenshot-3.png
 * Added sucessful notice on multisite
 * Fixed conflict with other plugins
 
-= 1.0 (10/04/2017) =
+= 1.0.0 (10/04/2017) =
 This is Initial Release of the plugin

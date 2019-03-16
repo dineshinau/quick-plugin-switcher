@@ -3,7 +3,7 @@
  * The file that defines the core QPS class
  *
  * @link       https://dineshinaublog.wordpress.com
- * @since      1.0
+ * @since      1.0.0
  *
  * @package    quick-plugin-switcher
  * @subpackage quick-plugin-switcher/includes
@@ -17,7 +17,7 @@
  * Also maintains the unique identifier of this QPS as well as the current
  * version of the QPS.
  *
- * @since      1.0
+ * @since      1.0.0
  * @package    quick-plugin-switcher
  * @subpackage quick-plugin-switcher/includes
  * @author     Dinesh Kumar Yadav <dineshinau@gmail.com>
@@ -26,7 +26,7 @@ class DKQPS_Core {
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power the QPS.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @var      DKQPS_Loader $loader Maintains and registers all hooks for the QPS.
 	 */
@@ -35,7 +35,7 @@ class DKQPS_Core {
 	/**
 	 * The unique identifier of the QPS.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @var      string $plugin_name The string used to uniquely identify the QPS.
 	 */
@@ -44,7 +44,7 @@ class DKQPS_Core {
 	/**
 	 * The current version of the QPS.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @var      string    $version    The current version of the QPS.
 	 */
@@ -53,7 +53,7 @@ class DKQPS_Core {
 	/**
 	 * Defines the core functionality of the QPS.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 */
 	public function __construct() {
 
@@ -76,7 +76,7 @@ class DKQPS_Core {
 	 *
 	 * Create an instance of the loader which will be used to register the hooks with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -102,7 +102,7 @@ class DKQPS_Core {
 	 *
 	 * Uses the DKQPS_i18n class in order to set the domain and to register the hook with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -113,7 +113,7 @@ class DKQPS_Core {
 	/**
 	 * Register all of the hooks related to the admin area functionality of the QPS.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
@@ -126,7 +126,7 @@ class DKQPS_Core {
 		
 		/**
 		* Adding 'Switch' option in plugin 'buck-actions' dropdown in single site environment
-		* @since 1.0
+		* @since 1.0.0
 		*/
 		$this->loader->add_filter( 'bulk_actions-plugins', $plugin_admin, 'dkqps_add_switch_bulk_action', 999,1 );
 		$this->loader->add_filter( 'handle_bulk_actions-plugins', $plugin_admin, 'dkqps_handle_switch_bulk_action', 10,3 );
@@ -141,7 +141,7 @@ class DKQPS_Core {
 
 		/**
 		* Adding 'Switch' option in plugin 'buck-actions' dropdown in multi-site environment
-		* @since 1.0
+		* @since 1.0.0
 		*/
 		if( is_plugin_active_for_network( $this->plugin_name."/".$this->plugin_name.".php" ) ){
 			$this->loader->add_filter( 'bulk_actions-plugins-network', $plugin_admin, 'dkqps_add_switch_bulk_action', 999,1 );
@@ -150,7 +150,7 @@ class DKQPS_Core {
 
 		/**
 		* Displaying success notice after successful switching using 'switch' bulk actions
-		* @since 1.0
+		* @since 1.0.0
 		*/
 		if(isset($_GET['dk_act']) && is_admin()){
 			if(is_network_admin()){
@@ -179,7 +179,7 @@ class DKQPS_Core {
 	/**
 	 * Runs the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    1.0
+	 * @since    1.0.0
 	 */
 	public function run() {
 		$this->loader->run();
@@ -189,7 +189,7 @@ class DKQPS_Core {
 	 * The name of the QPS used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0
+	 * @since     1.0.0
 	 * @return    string    The name of the QPS.
 	 */
 	public function get_plugin_name() {
@@ -199,7 +199,7 @@ class DKQPS_Core {
 	/**
 	 * The reference to the class that orchestrates the hooks with the QPS.
 	 *
-	 * @since     1.0
+	 * @since     1.0.0
 	 * @return    DKQPS_Loader    Orchestrates the hooks of the QPS.
 	 */
 	public function get_loader() {
@@ -209,7 +209,7 @@ class DKQPS_Core {
 	/**
 	 * Retrieve the version number of the QPS.
 	 *
-	 * @since     1.0
+	 * @since     1.0.0
 	 * @return    string    The version number of the QPS.
 	 */
 	public function get_version() {
