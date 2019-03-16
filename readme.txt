@@ -93,5 +93,5 @@ screenshot-3.png
 * Added sucessful notice on multisite
 * Fixed conflict with other plugins
 
-= 1.0.0 (10/04/2017) =
+= 1.0 (10/04/2017) =
 This is Initial Release of the plugin

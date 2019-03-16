@@ -2,7 +2,7 @@
 	'use strict';
 	/**
 	 * @link              https://dineshinaublog.wordpress.com
-	 * @since             1.0.0
+	 * @since             1.0
  	 * @package           quick-plugin-switcher
  	 * 
 	 * Disabling the plugin checkbox on plugins listing page so that 
