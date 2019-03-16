@@ -245,7 +245,7 @@ class DKQPS_Admin {
 		       	}elseif ($dk_act > 1 && $dk_deact == 1) {
 		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and the selected <strong>active</strong> plugin is <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act);
 		       	}else{
-		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>deactivated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act, $dk_deact);
+		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act, $dk_deact);
 		       	} ?>
 		       </p>		        
 		    </div>
