@@ -85,7 +85,7 @@ class DKQPS_Admin {
 	*/
 	public function dkqps_handle_switch_bulk_action($redirect_to, $action, $post_ids){
 		
-		if($action != 'dk_switch'){
+		if( 'dk_switch' !== $action ){
 			// Return if switch action is not triggered
 			return $redirect_to;
 		}
@@ -110,9 +110,9 @@ class DKQPS_Admin {
 
 		$qry_args = array('dk_act' => $act, 'dk_deact' => $deact);
 
-		if (count($post_ids)==1) {
-			$plugin 			= $post_ids[0];
-			$network_wide = '';
+		if ( '1' === count($post_ids)) {
+			$plugin 		= $post_ids[0];
+			$network_wide 	= '';
 			$this->dkqps_update_switched_plugin($plugin, $network_wide);
 		}
 		return add_query_arg($qry_args, $redirect_to);
@@ -130,7 +130,7 @@ class DKQPS_Admin {
 	public function dkqps_handle_switch_bulk_network_action($redirect_to, $action, $post_ids){
 		
 		//Returning to the plugin page when the "Switch" action is not triggered
-		if($action != 'dk_switch'){
+		if( 'dk_switch'!== $action ){
 			return $redirect_to;
 		}			
 		//Fetching all site wide active plugins		
@@ -148,7 +148,7 @@ class DKQPS_Admin {
 			}
 		}
 
-		if (count($post_ids)==1) {
+		if ('1' === count($post_ids)) {
 			$plugin 			= $post_ids[0];
 			$network_wide = '';
 			$this->dkqps_update_switched_plugin($plugin, $network_wide);
@@ -201,7 +201,7 @@ class DKQPS_Admin {
 		$dk_act = $_GET['dk_act'];
 		$dk_deact = $_GET['dk_deact'];
 
-        if (($dk_act == 1 && $dk_deact ==0) || ($dk_act == 0 && $dk_deact ==1)) {
+        if (( '1' === $dk_act && '0' === $dk_deact ) || ( '0' === $dk_act && '1' === $dk_deact )) {
 
 	   		$switched_plugin 	= get_option('dkqps_ssp_plugin',true);
 	   		if (is_network_admin()) {
@@ -210,7 +210,7 @@ class DKQPS_Admin {
 	        $plugin_name 		= $switched_plugin['name'];	        
 	        $plugin 			= $switched_plugin['plugin'];
 
-	    	$activated 	= (1== $dk_act) ? true : false;
+	    	$activated 	= ('1' === $dk_act) ? true : false;
 	    	$action_url = $this->dkqps_get_action_url($plugin, $activated); ?>
 
 	    	<div class="notice notice-success is-dismissible">
@@ -234,15 +234,15 @@ class DKQPS_Admin {
 	    } else{ ?>
 	    	<div class="notice notice-success is-dismissible">
 		       <p><?php 
-		       	if ($dk_act == 1 && $dk_deact == 1 ) {
+		       	if ( '1' === $dk_act && '1' === $dk_deact ) {
 		       		printf(__( 'The <strong>active</strong> selected plugin is now <strong>deactivated</strong> and the <strong>inactive</strong> selected plugin is now <strong>activated</strong> successfully.', 'quick-plugin-switcher' ));
-		       	}elseif ($dk_act > 1 && $dk_deact == 0) {
+		       	}elseif ($dk_act > 1 && '0' === $dk_deact ) {
 		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act);
-		       	}elseif ($dk_act == 0 && $dk_deact > 1) {
+		       	}elseif ('0' === $dk_act && 1 < $dk_deact) {
 		       		printf(__( 'All selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact);
-		       	}elseif ($dk_act == 1 && $dk_deact > 1) {
+		       	}elseif ( '1' === $dk_act && 1 < $dk_deact ) {
 		       		printf(__( 'The selected <strong>inactive</strong> plugin is <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact);
-		       	}elseif ($dk_act > 1 && $dk_deact == 1) {
+		       	}elseif ($dk_act > 1 && '1' === $dk_deact ) {
 		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and the selected <strong>active</strong> plugin is <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act);
 		       	}else{
 		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act, $dk_deact);
@@ -260,7 +260,7 @@ class DKQPS_Admin {
 	* @return $translated_text modified plugin success notice with switch links
 	*/
 	public function dkqps_add_switching_link($translated_text, $untranslated_text, $domain){
-		$activated_notice = "Plugin <strong>activated</strong>.";
+		$activated_notice 	= "Plugin <strong>activated</strong>.";
 		$deactivated_notice = "Plugin <strong>deactivated</strong>.";
 
 		if ( $activated_notice === $untranslated_text ){
