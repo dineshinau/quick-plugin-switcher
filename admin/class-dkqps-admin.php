@@ -160,7 +160,7 @@ class DKQPS_Admin {
 					array(
 						'dk_act'=> $act,
 						'dk_deact' => $deact),
-					$redirect_to); 	//Redirecting to same plguin page with query arguments	 
+					$redirect_to); 	//Redirecting to same plugin page with query arguments	 
 	}
 
 	/**
@@ -279,7 +279,7 @@ class DKQPS_Admin {
 	        if ($qps !== $plugin) {
 	        	$translated_text.="<a style='margin-left: 10px;' class='button-secondary' href='".$action_url."'>".__('Deactivate it again!','quick-plugin-switcher')."</a>";
 	        }
-	        //return $translated_text;
+	        
         }elseif ($deactivated_notice === $untranslated_text) {
         	$switched_plugin 	= get_option('dkqps_ssp_plugin',true);
         	$plugin_name 		= isset($switched_plugin['name']) ? $switched_plugin['name'] : 'Plugin';
@@ -287,8 +287,12 @@ class DKQPS_Admin {
 
         	$action_url = $this->dkqps_get_action_url($plugin, false);
 
-        	$translated_text = sprintf(__('"<strong>%s</strong>" is deactivated.','quick-plugin-switcher'),$plugin_name);
+        	$translated_text = '<span data-plugin="'.$plugin.'">';
+        	$translated_text.= sprintf(__('"<strong>%s</strong>" is deactivated.','quick-plugin-switcher'),$plugin_name);
         	$translated_text.= '<a style="margin-left: 10px;" class="button-secondary" href="'.$action_url.'"> '.__('Activate it again!','quick-plugin-switcher').'</a>';
+
+        	$translated_text.=$this->dkqps_get_delete_link($plugin);
+        	$translated_text.='</span>';
         }
         return $translated_text;   
 	}
@@ -299,7 +303,6 @@ class DKQPS_Admin {
 	* @since	1.3
 	* @param	string	$plugins	plugin basename
 	* @param	string	$activated	current plugin action (activated/deactivated)
-	* @param 	array	$post_ids	array of all selected plugins 
 	* 
 	* @return 	plugin action url for adding to modified notice
 	*/
@@ -316,5 +319,18 @@ class DKQPS_Admin {
     		$action_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin );	    		
     	}
     	return $action_url;
+	}
+
+	/**
+	* Creating delete action link for successful notice
+	* 
+	* @since	1.3.1
+	* @param	string	$plugins	plugin basename
+	* 
+	* @return 	plugin delete link
+	*/
+	public function dkqps_get_delete_link($plugin_file){
+		$delete_link = '<a href="javascript:void(0);" class="dkqps-delete">' . __( 'Delete' ) . '</a>';
+		return $delete_link;
 	}
 }

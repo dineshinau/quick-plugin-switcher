@@ -4,7 +4,7 @@ Donate link: https://dineshinaublog.wordpress.com/donate-me
 Tags: plugin, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
 Requires at least: 4.7
 Tested up to: 5.1
-Stable tag: 1.3
+Stable tag: 1.3.1
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -77,6 +77,8 @@ screenshot-3.png
 
 == Changelog ==
 
+= 1.4 (10-04-2019) = 
+* Added: Delete link on successfully deactivated notice
 = 1.3 (17/03/2019) =
 * Added: Compatible with WordPress 5.1
 * Added: Switch again button on successful notices if a single plugin is switched
