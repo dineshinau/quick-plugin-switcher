@@ -1,4 +1,9 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die('Direct access is not allowed');
+}
+
 /**
  * Registering all actions and filters for the QPS
  *

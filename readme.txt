@@ -65,7 +65,7 @@ screenshot-3.png
 
 = connect with me =
 
-* **My  Website** - https://dineshinaublog.wordpress.com/
+* **My Website** - https://dineshinaublog.wordpress.com/
 * **My Facebook Page** - https://www.facebook.com/dineshinau
 * **My Twitter Account** - https://twitter.com/dineshinau
 * **My LinkedIn Account** - https://www.linkedin.com/in/dineshinau
@@ -77,8 +77,9 @@ screenshot-3.png
 
 == Changelog ==
 
-= 1.4 (10-04-2019) = 
+= 1.3.1 (10-04-2019) = 
 * Added: Delete link on successfully deactivated notice
+
 = 1.3 (17/03/2019) =
 * Added: Compatible with WordPress 5.1
 * Added: Switch again button on successful notices if a single plugin is switched

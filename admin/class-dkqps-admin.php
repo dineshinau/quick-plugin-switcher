@@ -1,4 +1,9 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die('Direct access is not allowed');
+}
+
 /**
  * The core functionality of the QPS
  *
@@ -214,20 +219,24 @@ class DKQPS_Admin {
 	    	$action_url = $this->dkqps_get_action_url($plugin, $activated); ?>
 
 	    	<div class="notice notice-success is-dismissible">
-		        <p>
+		        <p><span data-plugin="<?php echo $plugin ?>">
 		        	<?php 
 		        	if($activated){
 		        		printf(__( '"<strong>%s</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name);
 		        	}else{
 		        		printf(__( '"<strong>%s</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name); 
 		        	}?>
-		        	<a style="margin-left: 10px;" class="button-secondary" href="<?php echo $action_url ?>">
+		        	<a style="position: relative; left: 5px;" class="button-primary" href="<?php echo $action_url ?>">
 		        		<?php if($activated){
 		        			esc_html_e( 'Deactivate it again!', 'quick-plugin-switcher' );
 		        		}else{
 		        			esc_html_e( 'Activate it again!', 'quick-plugin-switcher' );
 		        		} ?>
 		        	</a>
+		        	<?php if (!$activated) { ?>
+		        		<a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete"><?php esc_html_e( 'Delete','quick-plugin-switcher' ) ?></a>
+		        	<?php } ?>
+		        	</span>
 		        </p>
 		    </div>
 	    	<?php
@@ -277,7 +286,7 @@ class DKQPS_Admin {
 	    	
 	        $translated_text = sprintf(__('"<strong>%s</strong>" is activated.','quick-plugin-switcher'),$plugin_name);
 	        if ($qps !== $plugin) {
-	        	$translated_text.="<a style='margin-left: 10px;' class='button-secondary' href='".$action_url."'>".__('Deactivate it again!','quick-plugin-switcher')."</a>";
+	        	$translated_text.="<a style='position: relative; left: 5px;' class='button-primary' href='".$action_url."'>".__('Deactivate it again!','quick-plugin-switcher')."</a>";
 	        }
 	        
         }elseif ($deactivated_notice === $untranslated_text) {
@@ -289,9 +298,9 @@ class DKQPS_Admin {
 
         	$translated_text = '<span data-plugin="'.$plugin.'">';
         	$translated_text.= sprintf(__('"<strong>%s</strong>" is deactivated.','quick-plugin-switcher'),$plugin_name);
-        	$translated_text.= '<a style="margin-left: 10px;" class="button-secondary" href="'.$action_url.'"> '.__('Activate it again!','quick-plugin-switcher').'</a>';
+        	$translated_text.= '<a style="position: relative; left: 5px;" class="button-primary" href="'.$action_url.'"> '.__('Activate it again!','quick-plugin-switcher').'</a>';
 
-        	$translated_text.=$this->dkqps_get_delete_link($plugin);
+        	$translated_text.='<a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete">' . __( 'Delete','quick-plugin-switcher' ) . '</a>';
         	$translated_text.='</span>';
         }
         return $translated_text;   
@@ -319,18 +328,5 @@ class DKQPS_Admin {
     		$action_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin );	    		
     	}
     	return $action_url;
-	}
-
-	/**
-	* Creating delete action link for successful notice
-	* 
-	* @since	1.3.1
-	* @param	string	$plugins	plugin basename
-	* 
-	* @return 	plugin delete link
-	*/
-	public function dkqps_get_delete_link($plugin_file){
-		$delete_link = '<a href="javascript:void(0);" class="dkqps-delete">' . __( 'Delete' ) . '</a>';
-		return $delete_link;
 	}
 }
