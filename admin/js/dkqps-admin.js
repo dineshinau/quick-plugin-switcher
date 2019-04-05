@@ -15,7 +15,14 @@
 	$(document).ready(function(){
 		$("tr[data-slug='quick-plugin-switcher'] th input").prop('disabled',true);
 		$('.dkqps-delete').on('click',function(){
-			var data_plugin = $(this).parents('span').attr('data-plugin');
+			var this_btn = this;
+			var data_plugin = $(this_btn).parents('span').attr('data-plugin');
+			var btn_txt = $(this_btn).text();
+			btn_txt = btn_txt.replace('...', '');
+			$(this_btn).text(btn_txt+'...');
+			setTimeout(function(){
+				$(this_btn).text(btn_txt);
+			}, 10000);
 			$('tr[data-plugin="'+data_plugin+'"]').find('a.delete').trigger('click');
 		});
 	});

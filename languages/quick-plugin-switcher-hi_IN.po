@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quick Plugin Switcher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-16 18:51+0000\n"
-"PO-Revision-Date: 2019-03-16 18:55+0000\n"
+"POT-Creation-Date: 2019-04-05 17:57+0000\n"
+"PO-Revision-Date: 2019-04-05 17:58+0000\n"
 "Last-Translator: admin <dineshinau@gmail.com>\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
@@ -12,31 +12,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.2.1; wp-5.1.1"
+"X-Loco-Version: 2.2.2; wp-5.1.1"
 
-#: admin/class-dkqps-admin.php:76
+#: admin/class-dkqps-admin.php:81
 msgid "Switch"
 msgstr "परिवर्तित करें"
 
-#: admin/class-dkqps-admin.php:220 admin/class-dkqps-admin.php:278
+#: admin/class-dkqps-admin.php:225 admin/class-dkqps-admin.php:287
 #, php-format
 msgid "\"<strong>%s</strong>\" is activated."
 msgstr "\"<strong>%s</strong>\" को सक्रिय किया गया।"
 
-#: admin/class-dkqps-admin.php:222 admin/class-dkqps-admin.php:290
+#: admin/class-dkqps-admin.php:227 admin/class-dkqps-admin.php:300
 #, php-format
 msgid "\"<strong>%s</strong>\" is deactivated."
 msgstr "\"<strong>%s</strong>\" को निष्क्रिय किया गया।"
 
-#: admin/class-dkqps-admin.php:226 admin/class-dkqps-admin.php:280
+#: admin/class-dkqps-admin.php:231 admin/class-dkqps-admin.php:289
 msgid "Deactivate it again!"
 msgstr "पुन: निष्क्रिय करे!"
 
-#: admin/class-dkqps-admin.php:228 admin/class-dkqps-admin.php:291
+#: admin/class-dkqps-admin.php:233 admin/class-dkqps-admin.php:301
 msgid "Activate it again!"
 msgstr "पुन: सक्रिय करें!"
 
-#: admin/class-dkqps-admin.php:238
+#: admin/class-dkqps-admin.php:237 admin/class-dkqps-admin.php:303
+msgid "Delete"
+msgstr "हटाएँ"
+
+#: admin/class-dkqps-admin.php:247
 msgid ""
 "The <strong>active</strong> selected plugin is now <strong>"
 "deactivated</strong> and the <strong>inactive</strong> selected plugin is "
@@ -46,7 +50,7 @@ msgstr ""
 "गया है और <strong>निष्क्रिय</strong> प्लगिन को अब सफलतापूर्वक <strong>"
 "सक्रिय</strong> किया गया है।"
 
-#: admin/class-dkqps-admin.php:240
+#: admin/class-dkqps-admin.php:249
 #, php-format
 msgid ""
 "All selected <strong>%d inactive</strong> plugins are <strong>"
@@ -55,7 +59,7 @@ msgstr ""
 "सभी चुनी गई <strong>%d निष्क्रिय</strong> प्लगइन्स को अब सफलतापूर्वक <strong>"
 "सक्रिय</strong> किया गया है।"
 
-#: admin/class-dkqps-admin.php:242
+#: admin/class-dkqps-admin.php:251
 #, php-format
 msgid ""
 "All selected <strong>%d active</strong> plugins are <strong>"
@@ -64,7 +68,7 @@ msgstr ""
 "सभी चुनी गई <strong>%d सक्रिय</strong> प्लगइन्स को अब सफलतापूर्वक <strong>"
 "निष्क्रिय</strong> किया गया है।"
 
-#: admin/class-dkqps-admin.php:244
+#: admin/class-dkqps-admin.php:253
 #, php-format
 msgid ""
 "The selected <strong>inactive</strong> plugin is <strong>activated</strong> "
@@ -75,7 +79,7 @@ msgstr ""
 "गया है और सभी चुनी गई<strong>%d सक्रिय</strong> प्लगिन को अब सफलतापूर्वक "
 "<strong>निष्क्रिय</strong> किया गया है।"
 
-#: admin/class-dkqps-admin.php:246
+#: admin/class-dkqps-admin.php:255
 #, php-format
 msgid ""
 "All selected <strong>%d inactive</strong> plugins are <strong>"
@@ -86,7 +90,7 @@ msgstr ""
 "सक्रिय</strong> किया गया है और चुनी गई <strong>सक्रिय</strong> प्लगिन को अब "
 "सफलतापूर्वक <strong>निष्क्रिय</strong> किया गया है।\n"
 
-#: admin/class-dkqps-admin.php:248
+#: admin/class-dkqps-admin.php:257
 #, php-format
 msgid ""
 "All selected <strong>%d inactive</strong> plugins are <strong>"
