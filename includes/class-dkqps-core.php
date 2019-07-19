@@ -180,6 +180,12 @@ class DKQPS_Core {
 		if (is_admin() && isset($_GET['plugin_status'])) {
 			$this->loader->add_filter('gettext',$plugin_admin,'dkqps_add_switching_link',99,3);
 		}
+
+		/**
+		* Adding a hidden input in footer to check dkqps is active on site or not
+		* @since 1.3.1
+		*/
+		$this->loader->add_action('wp_footer', $plugin_admin,'dkqps_add_footer_hidden_field');
 	}
 	/**
 	 * Runs the loader to execute all of the hooks with WordPress.

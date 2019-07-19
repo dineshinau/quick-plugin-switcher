@@ -59,13 +59,8 @@ class DKQPS_Admin {
 	 */
 	public function enqueue_scripts() {
 		/**
-		 * An instance of this class is passed to the run() function
-		 * defined in DKQPS_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
 		 * The DKQPS_Loader is creating the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
+		 * between the defined hooks and the functions defined in this class.
 		 */
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dkqps-admin.js', array( 'jquery' ), $this->version, false );
 	}
@@ -94,7 +89,7 @@ class DKQPS_Admin {
 			// Return if switch action is not triggered
 			return $redirect_to;
 		}
-		$act = $deact = 0;	
+		$act = $deact = 0;
 		
 		// Fetching array of the all active plugins from database
 		$active_plugins =  get_option('active_plugins');
@@ -169,8 +164,7 @@ class DKQPS_Admin {
 	}
 
 	/**
-	* Updating natively activated/deactivated plugin in option table to add switch
-	* link to native success notice
+	* Updating natively activated/deactivated plugin in option table to add switch link to native success notice
 	* @since 1.3 
 	* @hooked on action hook 'activated_plugin' and 'deactivated_plugin' 
 	*/
@@ -227,7 +221,7 @@ class DKQPS_Admin {
 		        		printf(__( '"<strong>%1s (v%2s)</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version);
 		        	}else{
 		        		printf(__( '"<strong>%s (v%2s)</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version); 
-		        	}?>
+		        	} ?>
 		        	<a style="position: relative; left: 5px;" class="button-primary" href="<?php echo $action_url ?>">
 		        		<?php if($activated){
 		        			esc_html_e( 'Deactivate it again!', 'quick-plugin-switcher' );
@@ -330,5 +324,15 @@ class DKQPS_Admin {
     		$action_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin );	    		
     	}
     	return $action_url;
+	}
+
+	/**
+	* @since	1.3.1
+	* Function to check wheather dkqps is active on site.
+	*/
+	public function dkqps_add_footer_hidden_field(){
+		if (is_home()) {
+			echo '<input type="hidden" value="dkqps-active">';
+		}
 	}
 }

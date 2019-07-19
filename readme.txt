@@ -3,7 +3,7 @@ Contributors: dineshinau
 Donate link: https://dineshinaublog.wordpress.com/donate-me
 Tags: plugin, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher, qps
 Requires at least: 4.7
-Tested up to: 5.1
+Tested up to: 5.2
 Stable tag: 1.3.1
 Requires PHP: 5.0
 License: GPLv2 or later
@@ -74,6 +74,7 @@ screenshot-3.png
 
 = 1.0.1 =
 * Now compatible with multisite
+* Updated "Tested up to" value to 5.2
 
 == Changelog ==
 
