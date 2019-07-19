@@ -1,7 +1,7 @@
 === Quick Plugin Switcher ===
 Contributors: dineshinau
 Donate link: https://dineshinaublog.wordpress.com/donate-me
-Tags: plugin, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
+Tags: plugin, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher, qps
 Requires at least: 4.7
 Tested up to: 5.1
 Stable tag: 1.3.1

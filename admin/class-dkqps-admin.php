@@ -117,8 +117,8 @@ class DKQPS_Admin {
 
 		if ( '1' === count($post_ids)) {
 			$plugin 		= $post_ids[0];
-			$network_wide 	= '';
-			$this->dkqps_update_switched_plugin($plugin, $network_wide);
+			$network_wide	= false;
+			$this->dkqps_update_switched_plugin($plugin, network_wide);
 		}
 		return add_query_arg($qry_args, $redirect_to);
 	}
@@ -154,8 +154,8 @@ class DKQPS_Admin {
 		}
 
 		if ('1' === count($post_ids)) {
-			$plugin 			= $post_ids[0];
-			$network_wide = '';
+			$plugin 		=	$post_ids[0];
+			$network_wide 	= 	true;
 			$this->dkqps_update_switched_plugin($plugin, $network_wide);
 		}
 
@@ -181,10 +181,11 @@ class DKQPS_Admin {
 		$plugin_file 		= ABSPATH.'wp-content/plugins/'.$plugin;
 		$plugin_data 		= get_plugin_data($plugin_file, true,true);
 		$plugin_name 		= isset($plugin_data['Name']) ? $plugin_data['Name'] : 'Plugin';
-		$switched_plugin 	= empty($plugin_name) ? array() : array('name'=> $plugin_name,'plugin'=> $plugin);
+		$plugin_version		= isset($plugin_data['Version']) ? $plugin_data['Version'] : '0.0.0';
+		$switched_plugin 	= empty($plugin_name) ? array() : array('name'=> $plugin_name, 'version' => $plugin_version, 'plugin'=> $plugin);
 		
 		 //ssp_plugin -> Single Switched Plugin
-		if (is_network_admin()) {
+		if (is_network_admin() || $network_wide) {
 			update_site_option('dkqps_ssp_plugin',$switched_plugin);
 		}else{
 			update_option('dkqps_ssp_plugin',$switched_plugin);	
@@ -212,7 +213,8 @@ class DKQPS_Admin {
 	   		if (is_network_admin()) {
 	   			$switched_plugin 	= get_site_option('dkqps_ssp_plugin',true);
 	   		}
-	        $plugin_name 		= $switched_plugin['name'];	        
+	        $plugin_name 		= $switched_plugin['name'];
+	        $plugin_version		= $switched_plugin['version'];
 	        $plugin 			= $switched_plugin['plugin'];
 
 	    	$activated 	= ('1' === $dk_act) ? true : false;
@@ -222,9 +224,9 @@ class DKQPS_Admin {
 		        <p><span data-plugin="<?php echo $plugin ?>">
 		        	<?php 
 		        	if($activated){
-		        		printf(__( '"<strong>%s</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name);
+		        		printf(__( '"<strong>%1s (v%2s)</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version);
 		        	}else{
-		        		printf(__( '"<strong>%s</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name); 
+		        		printf(__( '"<strong>%s (v%2s)</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version); 
 		        	}?>
 		        	<a style="position: relative; left: 5px;" class="button-primary" href="<?php echo $action_url ?>">
 		        		<?php if($activated){
@@ -244,15 +246,15 @@ class DKQPS_Admin {
 	    	<div class="notice notice-success is-dismissible">
 		       <p><?php 
 		       	if ( '1' === $dk_act && '1' === $dk_deact ) {
-		       		printf(__( 'The <strong>active</strong> selected plugin is now <strong>deactivated</strong> and the <strong>inactive</strong> selected plugin is now <strong>activated</strong> successfully.', 'quick-plugin-switcher' ));
+		       		printf(__( 'The <strong>only</strong> selected <strong>active</strong> plugin is now <strong>deactivated</strong> and the <strong>only</strong> selected <strong>inactive</strong> plugin is now <strong>activated</strong> successfully.', 'quick-plugin-switcher' ));
 		       	}elseif ($dk_act > 1 && '0' === $dk_deact ) {
 		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act);
 		       	}elseif ('0' === $dk_act && 1 < $dk_deact) {
 		       		printf(__( 'All selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact);
 		       	}elseif ( '1' === $dk_act && 1 < $dk_deact ) {
-		       		printf(__( 'The selected <strong>inactive</strong> plugin is <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact);
+		       		printf(__( 'The <strong>only</strong> selected <strong>inactive</strong> plugin is <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact);
 		       	}elseif ($dk_act > 1 && '1' === $dk_deact ) {
-		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and the selected <strong>active</strong> plugin is <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act);
+		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and the <strong>only</strong> selected <strong>active</strong> plugin is <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act);
 		       	}else{
 		       		printf(__( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act, $dk_deact);
 		       	} ?>
