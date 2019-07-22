@@ -22,6 +22,28 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
+ * The code that runs during QPS activation.
+ * This action is documented in includes/class-dkqps-activator.php
+ */
+function activate_dk_quick_plugin_switcher() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dkqps-activator.php';
+	DKQPS_Activator::activate();
+}
+
+/**
+ * The code that runs during QPS deactivation.
+ * This action is documented in includes/class-dkqps-deactivator.php
+ */
+function deactivate_dk_quick_plugin_switcher() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dkqps-deactivator.php';
+	DKQPS_Deactivator::deactivate();
+}
+
+//Registering activation and deactivation hooks
+register_activation_hook( __FILE__, 'activate_dk_quick_plugin_switcher' );
+register_deactivation_hook( __FILE__, 'deactivate_dk_quick_plugin_switcher' );
+
+/**
  * The core QPS class that is used to define internationalization and admin-specific hooks
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-dkqps-core.php';
