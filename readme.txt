@@ -78,7 +78,7 @@ screenshot-3.png
 
 == Changelog ==
 
-= 1.3.1 (10-04-2019) = 
+= 1.3.1 (31-07-2019) = 
 * Added: Delete link on successfully deactivated notice
 
 = 1.3 (17/03/2019) =
