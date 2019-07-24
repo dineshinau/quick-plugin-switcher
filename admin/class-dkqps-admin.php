@@ -334,7 +334,8 @@ class DKQPS_Admin {
 	* @hooked wp_footer
 	*/
 	public function dkqps_add_footer_hidden_field(){
-		if (is_home()) {
+		$dkqps_test = filter_input(INPUT_GET, 'dkqps_test', FILTER_SANITIZE_STRING);
+		if ('yes' === $dkqps_test) {
 			echo '<input type="hidden" value="dkqps-active">';
 		}
 	}
