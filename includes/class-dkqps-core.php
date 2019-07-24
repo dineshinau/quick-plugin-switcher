@@ -1,8 +1,5 @@
 <?php
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die('Direct access is not allowed');
-}
+defined( 'ABSPATH' ) || exit; //Exit if accessed directly
 
 /**
  * The file that defines the core QPS class
@@ -185,7 +182,10 @@ class DKQPS_Core {
 		* Adding a hidden input in footer to check dkqps is active on site or not
 		* @since 1.3.1
 		*/
-		$this->loader->add_action('wp_footer', $plugin_admin,'dkqps_add_footer_hidden_field');
+		$dkqps_test = filter_input(INPUT_GET, 'dkqps_test', FILTER_SANITIZE_STRING);
+		if ('yes' === $dkqps_test) {
+			$this->loader->add_action('wp_footer', $plugin_admin,'dkqps_add_footer_hidden_field');
+		}
 	}
 	/**
 	 * Runs the loader to execute all of the hooks with WordPress.

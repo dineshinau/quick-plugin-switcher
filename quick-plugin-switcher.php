@@ -15,11 +15,7 @@
  * Text Domain:       quick-plugin-switcher
  * Domain Path:       /languages
  */
-
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die('Direct access is not allowed');
-}
+defined( 'ABSPATH' ) || exit; //Exit if accessed directly
 
 /**
  * The code that runs during QPS activation.

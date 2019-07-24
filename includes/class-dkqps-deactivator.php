@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit; //Exit if accessed directly
 /**
  * Fired during plugin deactivation
  *
@@ -29,10 +30,15 @@ class DKQPS_Deactivator {
 		$message = '<p>QPS is Deactivated on home url: '.home_url().'</p><br/>';
 		$message.= '<p>Site url: '.site_url().'</p><br/>';
 		DKQPS_Deactivator::dkqps_send_email($to, $subject, $message);
+
+		/**
+		* Delete the option key dkqps_ssp_plugin on plugin deactivation
+		*/
+		DKQPS_Deactivator::dkqps_delete_option_key();
 	}
 
 	/**
-	* 
+	* Send notificaiton email on deactivation
 	*/
 	public static function dkqps_send_email($to, $subject, $message){
 		$admin_email = get_option("admin_email");
@@ -51,7 +57,17 @@ class DKQPS_Deactivator {
 		remove_filter( 'wp_mail_content_type', array(__CLASS__, 'dkqps_set_html_content_type') );
 	}
 
+	/**
+	* Set email content type as html
+	*/
 	public static function dkqps_set_html_content_type(){
-		return 'text/html';
+		return 'text/html;';
+	}
+
+	/**
+	* Delete the option key dkqps_ssp_plugin on plugin deactivation
+	*/
+	public static function dkqps_delete_option_key(){
+		delete_option('dkqps_ssp_plugin');
 	}
 }

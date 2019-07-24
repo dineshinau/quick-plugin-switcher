@@ -1,8 +1,5 @@
 <?php
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die('Direct access is not allowed');
-}
+defined( 'ABSPATH' ) || exit; //Exit if accessed directly
 
 /**
  * Registering all actions and filters for the QPS

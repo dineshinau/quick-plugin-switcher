@@ -1,8 +1,5 @@
 <?php
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die('Direct access is not allowed');
-}
+defined( 'ABSPATH' ) || exit; //Exit if accessed directly
 
 /**
  * The core functionality of the QPS
@@ -41,6 +38,15 @@ class DKQPS_Admin {
 	private $version;
 
 	/**
+	 * The basename of this QPS.
+	 *
+	 * @since    1.3.1
+	 * @access   private
+	 * @var      string    $dkqps    The basename of this QPS.
+	 */
+	private $dkqps;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0
@@ -50,6 +56,7 @@ class DKQPS_Admin {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name 	= $plugin_name;
 		$this->version 		= $version;
+		$this->dkqps 		= $this->plugin_name.'/'.$this->plugin_name.'.php';
 	}
 	
 	/**
@@ -148,7 +155,7 @@ class DKQPS_Admin {
 			}
 		}
 
-		if (1 === count($post_ids)) {
+		if (1 === count($post_ids) ) {
 			$plugin 		=	$post_ids[0];
 			$network_wide 	= 	true;
 			$this->dkqps_update_switched_plugin($plugin, $network_wide);
@@ -169,6 +176,10 @@ class DKQPS_Admin {
 	* @hooked on action hook 'activated_plugin' and 'deactivated_plugin' 
 	*/
 	public function dkqps_update_switched_plugin($plugin, $network_wide){
+		if ($plugin === $this->dkqps && did_action('deactivated_plugin') ) {
+			return;
+		}
+
 		if( !function_exists('get_plugin_data') ){
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}		
@@ -177,14 +188,14 @@ class DKQPS_Admin {
 		$plugin_name 		= isset($plugin_data['Name']) ? $plugin_data['Name'] : 'Plugin';
 		$plugin_version		= isset($plugin_data['Version']) ? $plugin_data['Version'] : '0.0.0';
 		$switched_plugin 	= empty($plugin_name) ? array() : array('name'=> $plugin_name, 'version' => $plugin_version, 'plugin'=> $plugin);
-		
+
 		 //ssp_plugin -> Single Switched Plugin
 		if (is_network_admin() || $network_wide) {
 			update_site_option('dkqps_ssp_plugin',$switched_plugin);
 		}else{
 			update_option('dkqps_ssp_plugin',$switched_plugin);	
 		}
-		
+				
 	}
 
 	/**
@@ -273,7 +284,7 @@ class DKQPS_Admin {
    			$switched_plugin 	= get_site_option('dkqps_ssp_plugin',true);
    		}
 
-   		if (!is_array($switched_plugin) || (is_array($switched_plugin) && 1 === count($switched_plugin))) {
+   		if (!is_array($switched_plugin) || (is_array($switched_plugin) && 3 !== count($switched_plugin))) {
    			return $translated_text;				
    		}
 
@@ -285,9 +296,8 @@ class DKQPS_Admin {
 	        $action_url = $this->dkqps_get_action_url($plugin, true);
 	    	
 	        $translated_text = sprintf(__('"<strong>%s (v%s)</strong>" is activated.','quick-plugin-switcher'),$plugin_name, $plugin_version);
-	        $qps 			= $this->plugin_name.'/'.$this->plugin_name.'.php';
-
-	        if ($qps !== $plugin) {
+	        
+	        if ($this->dkqps !== $plugin) {
 	        	$translated_text.="<a style='position: relative; left: 5px;' class='button-primary' href='".$action_url."'>".__('Deactivate it again!','quick-plugin-switcher')."</a>";
 	        }
 	        
@@ -334,9 +344,6 @@ class DKQPS_Admin {
 	* @hooked wp_footer
 	*/
 	public function dkqps_add_footer_hidden_field(){
-		$dkqps_test = filter_input(INPUT_GET, 'dkqps_test', FILTER_SANITIZE_STRING);
-		if ('yes' === $dkqps_test) {
-			echo '<input type="hidden" value="dkqps-active">';
-		}
+		echo '<input type="hidden" value="dkqps-active">';
 	}
 }
