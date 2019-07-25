@@ -194,8 +194,7 @@ class DKQPS_Admin {
 			update_site_option('dkqps_ssp_plugin',$switched_plugin);
 		}else{
 			update_option('dkqps_ssp_plugin',$switched_plugin);	
-		}
-				
+		}				
 	}
 
 	/**
