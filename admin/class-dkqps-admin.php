@@ -346,7 +346,6 @@ class DKQPS_Admin {
 	* @hooked wp_footer
 	*/
 	public function dkqps_add_footer_hidden_field(){
-		echo '<input type="hidden" value="dkqps-active">';
-		echo get_current_blog_id();
+		echo '<input data-dkqps-blog_id="'.get_current_blog_id().'" type="hidden" value="dkqps-active">';
 	}
 }
