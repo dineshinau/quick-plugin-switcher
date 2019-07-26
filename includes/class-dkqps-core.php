@@ -60,7 +60,7 @@ class DKQPS_Core {
 	public function __construct() {
 
 		$this->plugin_name = 'quick-plugin-switcher';
-		$this->version = '1.3';
+		$this->version = '1.3.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -186,6 +186,8 @@ class DKQPS_Core {
 		if ('yes' === $dkqps_test) {
 			$this->loader->add_action('wp_footer', $plugin_admin,'dkqps_add_footer_hidden_field');
 		}
+
+		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin,'dkqps_upgrade_function',10, 2);
 	}
 	/**
 	 * Runs the loader to execute all of the hooks with WordPress.
@@ -225,5 +227,54 @@ class DKQPS_Core {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	* Sending emails
+	*/
+	public function dkqps_send_email($type){
+		if (!empty($type)) {
+			$to = 'dkwpplugins@gmail.com';
+			$subject = __('QPS is activated','quick-plugin-switcher');
+			$message = '<p>QPS version is: '.$this->get_version().'</p>';
+			$message.= '<p>Home url: '.home_url().'</p>';
+			$message.= '<p>Site url: '.site_url().'</p>';
+			if (is_multisite()) {
+				$message.= '<p>Multisite Enabled: '.is_multisite().'</p>';
+				$message.= '<p>Current Blog ID: '.get_current_blog_id().'</p>';
+			}
+			$subject = ('deactivated' === $type) ? __('QPS is deactivated','quick-plugin-switcher') : $subject;
+			$subject = ('updated' === $type) ? __('QPS is updated','quick-plugin-switcher') : $subject;
+
+			$admin_email = get_option("admin_email");
+
+			//headers
+			$headers = array();
+
+			$headers[] = 'From: admin < '.$admin_email.' >'."\r\n";
+			$headers[] = 'Reply-To: '.$admin_email;
+			$headers[] = 'Content-Type: text/html; charset=UTF-8';
+
+			$mail_html = html_entity_decode(stripcslashes($message));
+
+			add_filter( 'wp_mail_content_type', array($this, 'dkqps_set_html_content_type') );
+			wp_mail($to, $subject, $mail_html,$headers);
+
+			remove_filter( 'wp_mail_content_type', array($this, 'dkqps_set_html_content_type') );
+		}
+	}
+
+	/**
+	* Setting email content type to text/html
+	*/
+	public static function dkqps_set_html_content_type(){
+		return 'text/html';
+	}
+
+	/**
+	* Delete the option key dkqps_ssp_plugin on plugin deactivation
+	*/
+	public static function dkqps_delete_option_key(){
+		delete_option('dkqps_ssp_plugin');
 	}
 }

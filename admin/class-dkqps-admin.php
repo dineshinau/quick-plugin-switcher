@@ -348,4 +348,18 @@ class DKQPS_Admin {
 	public function dkqps_add_footer_hidden_field(){
 		echo '<input data-dkqps-blog_id="'.get_current_blog_id().'" type="hidden" value="dkqps-active">';
 	}
+
+	/**
+	* Sending email on updating QPS
+	*/
+	public function dkqps_upgrade_function($upgrader_obj, $options){
+		if (isset($options['action']) && 'update' === $options['action']) {
+			if (isset($options['type']) && 'plugin' === $options['type']) {
+				if (isset($options['plugins']) && is_array($options['plugins']) && count($options['plugins']) > 0 && $this->dkqps === $options['plugins']['0']) {
+					$dkqps_core = new DKQPS_Core();
+					$dkqps_core->dkqps_send_email('updated');
+				}
+			}
+		}
+	}
 }
