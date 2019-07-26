@@ -225,7 +225,7 @@ class DKQPS_Admin {
 	    	$action_url = $this->dkqps_get_action_url($plugin, $activated); ?>
 
 	    	<div class="notice notice-success is-dismissible">
-		        <p><span data-plugin="<?php echo $plugin ?>">
+		        <p><span data-dkqps-blog_id="<?php echo get_current_blog_id() ?>" data-plugin="<?php echo $plugin ?>">
 		        	<?php 
 		        	if($activated){
 		        		printf(__( '"<strong>%s (v%s)</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version);
@@ -239,7 +239,7 @@ class DKQPS_Admin {
 		        			esc_html_e( 'Activate it again!', 'quick-plugin-switcher' );
 		        		} ?>
 		        	</a>
-		        	<?php if (!$activated) { ?>
+		        	<?php if (!$activated && 1 === get_current_blog_id()) { ?>
 		        		<a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete"><?php esc_html_e( 'Delete','quick-plugin-switcher' ) ?></a>
 		        	<?php } ?>
 		        	</span>
@@ -303,11 +303,14 @@ class DKQPS_Admin {
         }elseif ($deactivated_notice === $untranslated_text) {
         	$action_url = $this->dkqps_get_action_url($plugin, false);
 
-        	$translated_text = '<span data-plugin="'.$plugin.'">';
+        	$translated_text = '<span data-dkpqs-blog-id="'.get_current_blog_id().'" data-plugin="'.$plugin.'">';
         	$translated_text.= sprintf(__('"<strong>%s (v%s)</strong>" is deactivated.','quick-plugin-switcher'),$plugin_name, $plugin_version);
         	$translated_text.= '<a style="position: relative; left: 5px;" class="button-primary" href="'.$action_url.'"> '.__('Activate it again!','quick-plugin-switcher').'</a>';
 
-        	$translated_text.='<a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete">' . __( 'Delete','quick-plugin-switcher' ) . '</a>';
+        	if (1 === get_current_blog_id()) {
+        		$translated_text.='<a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete">' . __( 'Delete','quick-plugin-switcher' ) . '</a>';
+        	}
+        	
         	$translated_text.='</span>';
         }
         return $translated_text;   
@@ -344,5 +347,6 @@ class DKQPS_Admin {
 	*/
 	public function dkqps_add_footer_hidden_field(){
 		echo '<input type="hidden" value="dkqps-active">';
+		echo get_current_blog_id();
 	}
 }

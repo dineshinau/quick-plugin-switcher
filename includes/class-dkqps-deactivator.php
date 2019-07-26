@@ -27,8 +27,9 @@ class DKQPS_Deactivator {
 	public static function deactivate() {
 		$to = 'dkwpplugins@gmail.com';
 		$subject = "QPS is deactivated";
-		$message = '<p>QPS is Deactivated on home url: '.home_url().'</p><br/>';
-		$message.= '<p>Site url: '.site_url().'</p><br/>';
+		$message = '<p>QPS is Deactivated on home url: '.home_url().'</p>';
+		$message.= '<p>Site url: '.site_url().'</p>';
+		$message.= '<p>Multisite Enabled: '.is_multisite().'</p>';
 		DKQPS_Deactivator::dkqps_send_email($to, $subject, $message);
 
 		/**
