@@ -22,12 +22,12 @@ defined( 'ABSPATH' ) || exit; //Exit if accessed directly
 class DKQPS_Activator {
 
 	/**
-	 * Sending an email to plugin developer for QPS's activation 
-	 * 
+	 * Sending an email to plugin developer for QPS's activation
+	 *
 	 * @since    1.0
 	 */
 	public static function activate() {
 		$dkqps_core = new DKQPS_Core();
-		$dkqps_core->dkqps_send_email('activated');
+		$dkqps_core->dkqps_send_email( 'activated' );
 	}
 }

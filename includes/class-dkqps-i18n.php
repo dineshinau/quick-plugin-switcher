@@ -26,10 +26,6 @@ class DKQPSwitcher_i18n {
 	 * @since    1.0
 	 */
 	public function load_dkqps_textdomain() {
-		load_plugin_textdomain(
-			'quick-plugin-switcher',
-			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-		);
+		load_plugin_textdomain( 'quick-plugin-switcher', false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
 	}
 }

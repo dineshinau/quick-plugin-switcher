@@ -54,4 +54,5 @@ function run_dkqps_core() {
 	$plugin->run();
 
 }
+
 run_dkqps_core();
