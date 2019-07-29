@@ -120,7 +120,7 @@ class DKQPS_Admin {
 		if ( 1 === count($post_ids)) {
 			$plugin 		= $post_ids[0];
 			$network_wide	= false;
-			$this->dkqps_update_switched_plugin($plugin, network_wide);
+			$this->dkqps_update_switched_plugin($plugin, $network_wide);
 		}
 		return add_query_arg($qry_args, $redirect_to);
 	}
