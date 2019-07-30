@@ -86,7 +86,7 @@ class DKQPS_Core {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-dkqps-admin.php';
 
 		$this->loader = new DKQPS_Loader();
-		p
+		
 	}
 
 	/**

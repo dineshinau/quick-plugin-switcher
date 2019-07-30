@@ -244,7 +244,7 @@ class DKQPS_Admin {
 					        esc_html_e( 'Activate it again!', 'quick-plugin-switcher' );
 				        } ?>
 		        	</a>
-		        	<?php if ( ! $activated && 1 === get_current_blog_id() ) { ?>
+		        	<?php if ( ! $activated && ( ! is_multisite() || ( is_multisite() && is_network_admin()))) { ?>
                         <a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete"><?php esc_html_e( 'Delete', 'quick-plugin-switcher' ) ?></a>
 			        <?php } ?>
 		        	</span>
@@ -312,7 +312,7 @@ class DKQPS_Admin {
 			$translated_text .= sprintf( __( '"<strong>%s (v%s)</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version );
 			$translated_text .= '<a style="position: relative; left: 5px;" class="button-primary" href="' . $action_url . '"> ' . __( 'Activate it again!', 'quick-plugin-switcher' ) . '</a>';
 
-			if ( 1 === get_current_blog_id() ) {
+			if ( !is_multisite() || ( is_multisite() && is_network_admin()) ) {
 				$translated_text .= '<a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete">' . __( 'Delete', 'quick-plugin-switcher' ) . '</a>';
 			}
 
