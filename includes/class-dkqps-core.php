@@ -1,16 +1,5 @@
 <?php
 defined( 'ABSPATH' ) || exit; //Exit if accessed directly
-
-/**
- * The file that defines the core QPS class
- *
- * @link       https://dineshinaublog.wordpress.com
- * @since      1.0
- *
- * @package    quick-plugin-switcher
- * @subpackage quick-plugin-switcher/includes
- */
-
 /**
  * The core QPS class.
  *
@@ -97,6 +86,7 @@ class DKQPS_Core {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-dkqps-admin.php';
 
 		$this->loader = new DKQPS_Loader();
+		p
 	}
 
 	/**

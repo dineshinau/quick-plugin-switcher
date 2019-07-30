@@ -233,9 +233,9 @@ class DKQPS_Admin {
                 <p><span data-dkqps-blog_id="<?php echo get_current_blog_id() ?>" data-plugin="<?php echo $plugin ?>">
 		        	<?php
 			        if ( $activated ) {
-				        sprintf( __( '"<strong>%s (v%s)</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version );
+				        printf( __( '"<strong>%s (v%s)</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version );
 			        } else {
-				        sprintf( __( '"<strong>%s (v%s)</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version );
+				        printf( __( '"<strong>%s (v%s)</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version );
 			        } ?>
 		        	<a style="position: relative; left: 5px;" class="button-primary" href="<?php echo esc_url($action_url) ?>">
 		        		<?php if ( $activated ) {
@@ -255,17 +255,17 @@ class DKQPS_Admin {
             <div class="notice notice-success is-dismissible">
                 <p><?php
 					if ( 1 === $dk_act && 1 === $dk_deact ) {
-						sprintf( __( 'The <strong>only</strong> selected <strong>active</strong> plugin is now <strong>deactivated</strong> and the <strong>only</strong> selected <strong>inactive</strong> plugin is now <strong>activated</strong> successfully.', 'quick-plugin-switcher' ) );
+						printf( __( 'The <strong>only</strong> selected <strong>active</strong> plugin is now <strong>deactivated</strong> and the <strong>only</strong> selected <strong>inactive</strong> plugin is now <strong>activated</strong> successfully.', 'quick-plugin-switcher' ) );
 					} elseif ( $dk_act > 1 && 0 === $dk_deact ) {
-						sprintf( __( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act );
+						printf( __( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act );
 					} elseif ( 0 === $dk_act && 1 < $dk_deact ) {
-						sprintf( __( 'All selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact );
+						printf( __( 'All selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact );
 					} elseif ( 1 === $dk_act && 1 < $dk_deact ) {
-						sprintf( __( 'The <strong>only</strong> selected <strong>inactive</strong> plugin is <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact );
+						printf( __( 'The <strong>only</strong> selected <strong>inactive</strong> plugin is <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_deact );
 					} elseif ( $dk_act > 1 && 1 === $dk_deact ) {
-						sprintf( __( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and the <strong>only</strong> selected <strong>active</strong> plugin is <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act );
+						printf( __( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and the <strong>only</strong> selected <strong>active</strong> plugin is <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act );
 					} else {
-						sprintf( __( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act, $dk_deact );
+						printf( __( 'All selected <strong>%d inactive</strong> plugins are <strong>activated</strong> and all selected <strong>%d active</strong> plugins are <strong>deactivated</strong> now successfully.', 'quick-plugin-switcher' ), $dk_act, $dk_deact );
 					} ?>
                 </p>
             </div>
@@ -357,6 +357,7 @@ class DKQPS_Admin {
 	}
 
 	/**
+	 * @since    1.3.1
 	 * Sending email on updating QPS
 	 */
 	public function dkqps_upgrade_function( $upgrader_obj, $options ) {
