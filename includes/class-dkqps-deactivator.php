@@ -26,9 +26,13 @@ class DKQPS_Deactivator {
 	 */
 	public static function deactivate() {
 		$dkqps_core = new DKQPS_Core();
+		/**
+		 * @since 1.4
+		 */
 		$dkqps_core->dkqps_send_email( 'deactivated' );
 
 		/**
+		 * @since 1.4
 		 * Delete the option key dkqps_ssp_plugin on plugin deactivation
 		 */
 		$dkqps_core->dkqps_delete_option_key();

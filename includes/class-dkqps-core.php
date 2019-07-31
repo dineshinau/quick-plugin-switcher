@@ -49,7 +49,7 @@ class DKQPS_Core {
 	public function __construct() {
 
 		$this->plugin_name = 'quick-plugin-switcher';
-		$this->version     = '1.3.1';
+		$this->version     = '1.4';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -169,7 +169,7 @@ class DKQPS_Core {
 
 		/**
 		 * Adding a hidden input in footer to check dkqps is active on site or not
-		 * @since 1.3.1
+		 * @since 1.4
 		 */
 		$dkqps_test = filter_input( INPUT_GET, 'dkqps_test', FILTER_SANITIZE_STRING );
 		if ( 'yes' === $dkqps_test ) {
@@ -220,6 +220,7 @@ class DKQPS_Core {
 	}
 
 	/**
+	 * @since 1.4
 	 * Sending emails
 	 */
 	public function dkqps_send_email( $type ) {
@@ -255,6 +256,7 @@ class DKQPS_Core {
 	}
 
 	/**
+	 * @since 1.4
 	 * Setting email content type to text/html
 	 */
 	public static function dkqps_set_html_content_type() {
@@ -262,6 +264,7 @@ class DKQPS_Core {
 	}
 
 	/**
+	 * @since 1.4
 	 * Delete the option key dkqps_ssp_plugin on plugin deactivation
 	 */
 	public static function dkqps_delete_option_key() {

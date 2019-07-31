@@ -28,6 +28,9 @@ class DKQPS_Activator {
 	 */
 	public static function activate() {
 		$dkqps_core = new DKQPS_Core();
+		/**
+		* @since 1.4
+		*/
 		$dkqps_core->dkqps_send_email( 'activated' );
 	}
 }

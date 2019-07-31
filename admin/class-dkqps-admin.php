@@ -40,7 +40,7 @@ class DKQPS_Admin {
 	/**
 	 * The basename of this QPS.
 	 *
-	 * @since    1.3.1
+	 * @since    1.4
 	 * @access   private
 	 * @var      string $dkqps The basename of this QPS.
 	 */
@@ -348,7 +348,7 @@ class DKQPS_Admin {
 	}
 
 	/**
-	 * @since    1.3.1
+	 * @since    1.4
 	 * Function to check wheather dkqps is active on site.
 	 * @hooked wp_footer
 	 */
@@ -357,7 +357,7 @@ class DKQPS_Admin {
 	}
 
 	/**
-	 * @since    1.3.1
+	 * @since    1.4
 	 * Sending email on updating QPS
 	 */
 	public function dkqps_upgrade_function( $upgrader_obj, $options ) {
