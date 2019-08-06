@@ -9,7 +9,7 @@ Requires PHP: 5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Quick Plugin Switcher(QPS) is the ONLY WordPress plugin that provides smooth and time efficent plugin handling operations.
+Quick Plugin Switcher(QPS) is the ONLY WordPress plugin that provides smooth and time-efficient plugin handling operations.
 
 == Description ==
 
@@ -20,23 +20,23 @@ If you have any suggestion regarding the improvement of its feature, please leav
 == QPS Features ==
 
 1. **New "Switch" bulk action**
-QPS supplies a new bulk action "Switch" on admin plugin listing page that can be used to activate and deactivate differnt plugins simultaneously in one go rather than native activate and then deactivate in two page reload.(Screenshot-1)
+QPS supplies a new bulk action "Switch" on admin plugin listing page that can be used to activate and deactivate different plugins simultaneously in one go rather than native activate and then deactivate in two pages reload. (Screenshot-1,3)
 
 2. **More useful Notices with links**
-QPS modifies native plugin activated/deactivated notice to provide name and version of the switched plugin alongwith a useful links like "Activate it again!!" if deactivated mistakenly. (Screenshot 2, 3)
+QPS modifies native plugin activated/deactivated notice to provide name and version of the switched plugin along with useful links like "Activate it again!!" if deactivated mistakenly. (Screenshot 1, 3)
 
 3. **Delete link on deactivated notice**
-If you want to delete an active plugin then you can delete it directly from deactivated notice without scrolling down again and searching for the plugin.(Screenshot 4)
+If you want to delete an active plugin then you can delete it directly from deactivated notice without scrolling down again and searching for the plugin. (Screenshot 1,3)
 
 4. **Multisite support**
-QPS is fully compatible in multisite environment (Screenshot 5)
+QPS is fully compatible in the multisite environment (Screenshot 3)
 
 = Connect with me =
 
 * **Website** - https://dineshinaublog.wordpress.com/
-* **Facebook** - https://www.facebook.com/dineshinau
-* **Twitter** - https://twitter.com/dineshinau
-* **LinkedIn** - https://www.linkedin.com/in/dineshinau
+* **Facebook** - https://www.facebook.com/dineshinau/
+* **Twitter** - https://twitter.com/dineshinau/
+* **LinkedIn** - https://www.linkedin.com/in/dineshinau/
 
 
 == Installation ==
@@ -45,9 +45,9 @@ QPS is fully compatible in multisite environment (Screenshot 5)
 
 2. Activate the plugin through the \'Plugins\' screen in WordPress
 
-3. Select one or more plugin(s) and choose option "Switch" from bulk actions dropdown to change state of selected plugin(s).
+3. Select one or more plugin(s) and choose the option "Switch" from bulk actions dropdown to change the state of the selected plugin(s).
 
-4. Easily activate or delete the a deactivated plugin from the plugin deactivated admin notice. Remove need for scrolling upto the plugin and searching the plugin on page.
+4. Easily activate or delete the deactivated plugin from the plugin deactivated admin notice. Remove the need for scrolling up to the plugin and searching the plugin on-page.
 
 
 == Frequently Asked Questions ==
@@ -62,46 +62,62 @@ Switching a plugin means that changing it's state e.g. if a plugin is deactivate
 = Why this plugin itself can not be switched through "Switch" bulk action? =
 The checkbox against this plugin is disabled after activation because this plugin switched itself to deactivate mode then the "Switch" option will be disappeared.
 
-= Why I created this plugin =
+= Why I created this plugin? =
+Its need arose when I was troubleshooting a site for finding the culprit plugin in case of plugin conflict.
+
+= When Links appear on notices? =
+Activate, Deactivate and Delete links are shown on plugin page notices when a single plugin is activated/deactivated.
+
+
+== Use Cases of QPS ==
+
+Here are just a few use cases of QPS
+
+* **Troubleshooting** It helps in troubleshooting to activate and deactivate multiple plugins simultaneously. (Screenshot-2)
+
+* **Avoid Scrolling** Its allows activate/deactivate just deactivated/activated plugin without scrolling down and going up to that plugin. (Screenshot-1,3)
+
+* **No Searching** Now you don't need of search a plugin which you have just deactivated to delete it. You can directly delete the plugin from deactivated notice. (Screenshot-1,3)
 
 
 == Screenshots ==
 
-1. Multisite Plugin Actions - is the screen that shows the plugin name displayed in plugin listing page and "Switch" option created inside bulk actions drop-down menu in the multisite environment. 
+1. **Single Site Plugin Actions** - It shows the "Switch" option created inside bulk actions drop-down menu, 'Activate it Again' link and 'Delete' link in the single-site environment. Also shows plugin name and version.
 screenshot-1.png
 
-2. Single site Plugin Actions - is the screen that shows "Switch" option created inside bulk actions drop-down menu in the single-site environment.
+2. **More Useful Notices** - It shows the number of plugins activated and deactivated on applying the 'Switch' action.
 screenshot-2.png
 
-3. Switch link on natively activated/deactivated success notice.
+3. **Multi-Site Plugin Actions** - It shows the "Switch" option created inside bulk actions drop-down menu, 'Activate it Again' link and 'Delete' link in the Multi-Site environment. Also shows plugin name and version.
 screenshot-3.png
    
 == Upgrade Notice ==
 
-= 1.0.1 =
-* Now compatible with multisite
+= 1.4 =
+* Added 'Delete' link on deactivated notice.
 * Updated "Tested up to" value to 5.2
 
 == Changelog ==
 
-= 1.4 (31-07-2019) = 
+= 1.4 (10-08-2019) = 
 * Added: Delete link on successfully deactivated notice
 
-= 1.3 (17/03/2019) =
+= 1.3 (17-03-2019) =
 * Added: Compatible with WordPress 5.1
-* Added: Switch again button on successful notices if a single plugin is switched
+* Added: Switch again button on successful notices if a single plugin is switched.
+
 * Added: Added switch links on native activate/deactivate success notices
 * Improved: Text domain strings and translations
 
-= 1.2 (28/11/2017) =
+= 1.2 (28-11-2017) =
 * Tested with WordPress 4.9
 * Updated "Tested up to" value to 4.9
 * Added Requires PHP version
 
-= 1.0.1 (02/06/2017) =
+= 1.0.1 (02-06-2017) =
 * Fixed the issue with multisite
-* Added sucessful notice on multisite
+* Added successful notice on multisite
 * Fixed conflict with other plugins
 
-= 1.0 (10/04/2017) =
+= 1.0 (10-04-2017) =
 This is Initial Release of the plugin
