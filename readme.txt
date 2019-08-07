@@ -95,7 +95,6 @@ screenshot-3.png
 
 = 1.4 =
 * Added 'Delete' link on deactivated notice.
-* Updated "Tested up to" value to 5.2
 
 == Changelog ==
 
