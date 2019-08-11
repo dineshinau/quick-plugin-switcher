@@ -1,18 +1,11 @@
 <?php
 defined( 'ABSPATH' ) || exit; //Exit if accessed directly
-
 /**
+ * Defines the QPS name, version, and hooks to enqueue the admin-specific JavaScript.
  * The core functionality of the QPS
  *
  * @link       https://dineshinaublog.wordpress.com
  * @since      1.0
- *
- * @package    quick-plugin-switcher
- * @subpackage quick-plugin-switcher/admin
- */
-
-/**
- * Defines the QPS name, version, and hooks to enqueue the admin-specific JavaScript.
  *
  * @package    quick-plugin-switcher
  * @subpackage quick-plugin-switcher/admin

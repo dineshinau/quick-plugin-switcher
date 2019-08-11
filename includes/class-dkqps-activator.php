@@ -1,16 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit; //Exit if accessed directly
 /**
- * Fired during plugin activation
- *
- * @link       https://dineshinaublog.wordpress.com
- * @since      1.0
- *
- * @package    quick-plugin-switcher
- * @subpackage quick-plugin-switcher/includes
- */
-
-/**
  *
  * This class defines all code necessary to run during the QPS's activation.
  *

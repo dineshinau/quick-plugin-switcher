@@ -59,7 +59,7 @@ class DKQPS_Core {
 	/**
 	 * Loading the required dependencies for the QPS.
 	 *
-	 * Including the following files that make up the QPS:
+	 * Including the following three files that make up the QPS:
 	 *
 	 * - DKQPS_Loader. Orchestrates the hooks of the QPS.
 	 * - DKQPS_i18n. Defines internationalization functionality.
@@ -117,7 +117,7 @@ class DKQPS_Core {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		/**
-		 * Adding 'Switch' option in plugin 'buck-actions' dropdown in single site environment
+		 * Adding 'Switch' option in plugin 'bulk-actions' dropdown in single site environment
 		 * @since 1.0
 		 */
 		$this->loader->add_filter( 'bulk_actions-plugins', $plugin_admin, 'dkqps_add_switch_bulk_action', 999, 1 );
@@ -132,7 +132,7 @@ class DKQPS_Core {
 		}
 
 		/**
-		 * Adding 'Switch' option in plugin 'buck-actions' dropdown in multi-site environment
+		 * Adding 'Switch' option in plugin 'bulk-actions' dropdown in multi-site environment
 		 * @since 1.0
 		 */
 		if ( is_plugin_active_for_network( $this->plugin_name . "/" . $this->plugin_name . ".php" ) ) {
@@ -176,6 +176,9 @@ class DKQPS_Core {
 			$this->loader->add_action( 'wp_footer', $plugin_admin, 'dkqps_add_footer_hidden_field' );
 		}
 
+		/**
+		* Shooting an email to plugin developer on QPS update to new version
+		*/
 		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin, 'dkqps_upgrade_function', 10, 2 );
 	}
 

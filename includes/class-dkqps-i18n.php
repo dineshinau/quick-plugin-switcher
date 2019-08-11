@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit; //Exit if accessed directly
  */
 class DKQPSwitcher_i18n {
 	/**
-	 * Loading the plugin text domain for translation.
+	 * Loading the QPS for translation.
 	 * @since    1.0
 	 */
 	public function load_dkqps_textdomain() {
