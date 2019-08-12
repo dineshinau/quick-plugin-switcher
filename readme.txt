@@ -15,7 +15,7 @@ Quick Plugin Switcher(QPS) is the ONLY WordPress plugin that provides smooth and
 
 It adds a new plugin bulk action "Switch" and easy links on admin notices on plugins page to simplify plugin operations.
 
-Do not miss to add this awesome featured plugin to your site. Once, you will use, you will never deactivate this and will like its working very much. It has really useful and time-effect tools built in to provide you a loving experience on admin plugins listing page.
+Do not miss to add this awesome featured plugin to your site. Once, you will use, you will never deactivate this and will like its working very much. It has really useful and time-efficient tools built in to provide you a loving experience on admin plugins listing page.
 
 == QPS Features ==
 
@@ -101,7 +101,7 @@ screenshot-3.png
 
 == Changelog ==
 
-= 1.4 (10-08-2019) = 
+= 1.4 (13-08-2019) = 
 * Added: Delete link on successfully deactivated notice
 
 = 1.3 (17-03-2019) =
