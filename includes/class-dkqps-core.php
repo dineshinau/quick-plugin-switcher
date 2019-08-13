@@ -166,20 +166,6 @@ class DKQPS_Core {
 		if ( is_admin() && isset( $_GET['plugin_status'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
 			$this->loader->add_filter( 'gettext', $plugin_admin, 'dkqps_add_switching_link', 99, 3 );
 		}
-
-		/**
-		 * Adding a hidden input in footer to check dkqps is active on site or not
-		 * @since 1.4
-		 */
-		$dkqps_test = filter_input( INPUT_GET, 'dkqps_test', FILTER_SANITIZE_STRING );
-		if ( 'yes' === $dkqps_test ) {
-			$this->loader->add_action( 'wp_footer', $plugin_admin, 'dkqps_add_footer_hidden_field' );
-		}
-
-		/**
-		* Shooting an email to plugin developer on QPS update to new version
-		*/
-		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin, 'dkqps_upgrade_function', 10, 2 );
 	}
 
 	/**
@@ -220,50 +206,6 @@ class DKQPS_Core {
 	 */
 	public function get_version() {
 		return $this->version;
-	}
-
-	/**
-	 * @since 1.4
-	 * Sending emails
-	 */
-	public function dkqps_send_email( $type ) {
-		if ( ! empty( $type ) ) {
-			$to      = 'dkwpplugins@gmail.com';
-			$subject = __( 'QPS is activated', 'quick-plugin-switcher' );
-			$message = '<p>QPS version is: ' . $this->get_version() . '</p>';
-			$message .= '<p>Home url: ' . home_url() . '</p>';
-			$message .= '<p>Site url: ' . site_url() . '</p>';
-			if ( is_multisite() ) {
-				$message .= '<p>Multisite Enabled: ' . is_multisite() . '</p>';
-				$message .= '<p>Current Blog ID: ' . get_current_blog_id() . '</p>';
-			}
-			$subject = ( 'deactivated' === $type ) ? __( 'QPS is deactivated', 'quick-plugin-switcher' ) : $subject;
-			$subject = ( 'updated' === $type ) ? __( 'QPS is updated', 'quick-plugin-switcher' ) : $subject;
-
-			$admin_email = get_option( "admin_email" );
-
-			//headers
-			$headers = array();
-
-			$headers[] = 'From: admin < ' . $admin_email . ' >' . "\r\n";
-			$headers[] = 'Reply-To: ' . $admin_email;
-			$headers[] = 'Content-Type: text/html; charset=UTF-8';
-
-			$mail_html = html_entity_decode( stripcslashes( $message ) );
-
-			add_filter( 'wp_mail_content_type', array( $this, 'dkqps_set_html_content_type' ) );
-			wp_mail( $to, $subject, $mail_html, $headers ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.wp_mail_wp_mail
-
-			remove_filter( 'wp_mail_content_type', array( $this, 'dkqps_set_html_content_type' ) );
-		}
-	}
-
-	/**
-	 * @since 1.4
-	 * Setting email content type to text/html
-	 */
-	public static function dkqps_set_html_content_type() {
-		return 'text/html';
 	}
 
 	/**

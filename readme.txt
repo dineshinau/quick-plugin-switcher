@@ -4,7 +4,7 @@ Donate link: https://dineshinaublog.wordpress.com/donate-me
 Tags: qps, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
 Requires at least: 4.7
 Tested up to: 5.2
-Stable tag: 1.4
+Stable tag: 1.4.1
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -94,12 +94,11 @@ screenshot-2.png
 3. **Multi-Site Plugin Actions** - It shows the "Switch" option created inside bulk actions drop-down menu, 'Activate it Again' link and 'Delete' link in the Multi-Site environment. Also shows plugin name and version.
 screenshot-3.png
    
-== Upgrade Notice ==
-
-= 1.4 =
-* Added 'Delete' link on deactivated notice.
 
 == Changelog ==
+
+= 1.4.1 (14-08-2019) = 
+* Fixed: Removed tracking code without opt-in message.
 
 = 1.4 (13-08-2019) = 
 * Added: Delete link on successfully deactivated notice
