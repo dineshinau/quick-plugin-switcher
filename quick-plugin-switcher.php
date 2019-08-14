@@ -22,8 +22,12 @@ defined( 'ABSPATH' ) || exit; //Exit if accessed directly
  * This action is documented in includes/class-dkqps-deactivator.php
  */
 function deactivate_dk_quick_plugin_switcher() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dkqps-deactivator.php';
-	DKQPS_Deactivator::deactivate();
+	$dkqps_core = new DKQPS_Core();
+	/**
+	 * @since 1.4
+	 * Delete the option key dkqps_ssp_plugin on plugin deactivation
+	 */
+	$dkqps_core->dkqps_delete_option_key();
 }
 
 register_deactivation_hook( __FILE__, 'deactivate_dk_quick_plugin_switcher' );
