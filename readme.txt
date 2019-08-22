@@ -1,35 +1,43 @@
 === Quick Plugin Switcher ===
 Contributors: dineshinau
 Donate link: https://dineshinaublog.wordpress.com/donate-me
-Tags: plugin, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
+Tags: qps, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
 Requires at least: 4.7
-Tested up to: 4.9
-Stable tag: 1.2
+Tested up to: 5.2
+Stable tag: 1.4.1
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This helps the admin(s)/super-admin(s) to activate and deactivate plugins faster by reducing the steps, which speeds up the process and minimize the efforts.
+Quick Plugin Switcher(QPS) is the ONLY WordPress plugin that provides smooth and time-efficient plugin handling operations.
 
 == Description ==
 
-This adds a new option “Switch” in the drop-down menu of plugin bulk actions on plugin listing page using which admin(s)/super-admin(s) can easily change the state of plugin between activating and deactivate simultaneously with all selected plugins.
+It adds a new plugin bulk action "Switch" and easy links on admin notices on plugins page to simplify plugin operations.
 
-If you have any suggestion regarding the improvement of its feature, please leave a [Review](https://dineshinaublog.wordpress.com/quick-plugin-switcher/).
+Do not miss to add this awesome featured plugin to your site. Once, you will use, you will never deactivate this and will like its working very much. It has really useful and time-efficient tools built in to provide you a loving experience on admin plugins listing page.
 
-== Key Benifit of "Quick Plugin Switcher" ==
+== QPS Features ==
 
-This plugin is useful in this way: – suppose at a time you(admin/super-admin) need to activate 5 plugins and deactivate other 8 plugins then normally it can be done in two steps as follows:-
+1. **New "Switch" bulk action**
+QPS supplies a new bulk action "Switch" on admin plugin listing page that can be used to activate and deactivate different plugins simultaneously in one go rather than native activate and then deactivate in two pages reload. (Screenshot-1,3)
 
-1. In the first step, you need to select the 5 plugins you wish to activate and then you will need to select “Activate” bulk action from the dropdown and apply. 
+2. **More useful Notices with links**
+QPS modifies native plugin activated/deactivated notice to provide name and version of the switched plugin along with useful links like "Activate it again!!" if deactivated mistakenly. (Screenshot 1, 3)
 
-2. In the second step, you again need to select the other 8 plugins you wish to deactivate and then you will need to select “Deactivate” bulk action from the dropdown and apply.
+3. **Delete link on deactivated notice**
+If you want to delete an active plugin then you can delete it directly from deactivated notice without scrolling down again and searching for the plugin. (Screenshot 1,3)
 
-Now using “Quick Plugin Switcher” you can select all those 13 plugins (5 plugins, which you wish to activate + 8 plugins, which you wish to deactivate) and from bulk actions dropdown you can choose “Switch” bulk action and then "Apply". Now all the 5 active selected plugins will be deactivated and all 8 inactive selected plugins will be activated. So overall in this process, the page will be reloaded only once to activate and deactivate multiple plugins, while in the earlier process it will be reloaded two times that results in more time consumption.
+4. **Multisite support**
+QPS is fully compatible in the multisite environment (Screenshot 3)
 
-Also in the case of more than 50 plugins installed on the site, it is not easy to remember which plugins were deactivated/activated in the first step and which plugins you were going to deactivate/activate.
+= Connect with me =
 
-This plugin can be found most useful in case of finding culprit plugin during plugin conflict issue. To find a conflicting plugin, it is required to deactivate some plugins and check whether the issue is resolved if not then we activate the deactivated plugins in the earlier step and deactivate some other plugins. Now it is possible to do these two steps in one-page load.
+* **Website** - https://dineshinaublog.wordpress.com/
+* **Facebook** - https://www.facebook.com/dineshinau/
+* **Twitter** - https://twitter.com/dineshinau/
+* **LinkedIn** - https://www.linkedin.com/in/dineshinau/
+
 
 == Installation ==
 
@@ -37,7 +45,9 @@ This plugin can be found most useful in case of finding culprit plugin during pl
 
 2. Activate the plugin through the \'Plugins\' screen in WordPress
 
-3. Select one or more plugin(s) and choose option "Switch" from bulk actions dropdown to change state of selected plugin(s).
+3. Select one or more plugin(s) and choose the option "Switch" from bulk actions dropdown to change the state of the selected plugin(s).
+
+4. Easily activate or delete the deactivated plugin from the plugin deactivated admin notice. Remove the need for scrolling up to the plugin and searching the plugin on-page.
 
 
 == Frequently Asked Questions ==
@@ -52,43 +62,63 @@ Switching a plugin means that changing it's state e.g. if a plugin is deactivate
 = Why this plugin itself can not be switched through "Switch" bulk action? =
 The checkbox against this plugin is disabled after activation because this plugin switched itself to deactivate mode then the "Switch" option will be disappeared.
 
+= Why I created this plugin? =
+Its need arose when I was troubleshooting a site for finding the culprit plugin in case of plugin conflict.
+
+= When Links appear on notices? =
+Activate, Deactivate and Delete links are shown on plugin page notices when a single plugin is activated/deactivated.
+
+= Where can give feedback =
+If you have any suggestion regarding the improvement of its feature, please leave a [Review](https://dineshinaublog.wordpress.com/quick-plugin-switcher/).
+
+
+== Use Cases of QPS ==
+
+Here are just a few use cases of QPS
+
+* **Troubleshooting** It helps in troubleshooting to activate and deactivate multiple plugins simultaneously. (Screenshot-2)
+
+* **Avoid Scrolling** Its allows activate/deactivate just deactivated/activated plugin without scrolling down and going up to that plugin. (Screenshot-1,3)
+
+* **No Searching** Now you don't need of search a plugin which you have just deactivated to delete it. You can directly delete the plugin from deactivated notice. (Screenshot-1,3)
+
+
 == Screenshots ==
 
-1. Multisite Plugin Actions - is the screen that shows the plugin name displayed in plugin listing page and "Switch" option created inside bulk actions drop-down menu in the multisite environment. 
+1. **Single Site Plugin Actions** - It shows the "Switch" option created inside bulk actions drop-down menu, 'Activate it Again' link and 'Delete' link in the single-site environment. Also shows plugin name and version.
 screenshot-1.png
 
-2. Single site Plugin Actions - is the screen that shows "Switch" option created inside bulk actions drop-down menu in the single-site environment.
-   screenshot-2.png
+2. **More Useful Notices** - It shows the number of plugins activated and deactivated on applying the 'Switch' action.
+screenshot-2.png
 
-= connect with me =
-
-* **My  Website** - https://dineshinaublog.wordpress.com/
-* **My Facebook Page** - https://www.facebook.com/dineshinau
-* **My Twitter Account** - https://twitter.com/dineshinau
-* **My LinkedIn Account** - https://www.linkedin.com/in/dineshinau
+3. **Multi-Site Plugin Actions** - It shows the "Switch" option created inside bulk actions drop-down menu, 'Activate it Again' link and 'Delete' link in the Multi-Site environment. Also shows plugin name and version.
+screenshot-3.png
    
-== Upgrade Notice ==
-
-= 1.2 =
-* Compatible with WordPress 4.9
-
-= 1.0.1 =
-* Now compatible with multisite
-
-= 1.0.0 =
-* Initial Version
 
 == Changelog ==
 
-= 1.2 =
+= 1.4.1 (14-08-2019) = 
+* Fixed: Removed tracking code without opt-in message.
+
+= 1.4 (13-08-2019) = 
+* Added: Delete link on successfully deactivated notice
+
+= 1.3 (17-03-2019) =
+* Added: Compatible with WordPress 5.1
+* Added: Switch again button on successful notices if a single plugin is switched.
+
+* Added: Added switch links on native activate/deactivate success notices
+* Improved: Text domain strings and translations
+
+= 1.2 (28-11-2017) =
 * Tested with WordPress 4.9
 * Updated "Tested up to" value to 4.9
 * Added Requires PHP version
 
-= 1.0.1 =
+= 1.0.1 (02-06-2017) =
 * Fixed the issue with multisite
-* Added sucessful notice on multisite
+* Added successful notice on multisite
 * Fixed conflict with other plugins
 
-= 1.0.0 =
+= 1.0 (10-04-2017) =
 This is Initial Release of the plugin
