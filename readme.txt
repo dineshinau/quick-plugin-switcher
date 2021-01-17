@@ -2,12 +2,12 @@
 Contributors: dineshinau
 Donate link: https://dineshinaublog.wordpress.com/donate-me
 Tags: qps, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
-Requires at least: 4.7
-Tested up to: 5.2
-Stable tag: 1.4.1
+Requires at least: 4.9
+Tested up to: 5.6.0
+Stable tag: 1.5.0
 Requires PHP: 5.0
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Quick Plugin Switcher(QPS) is the ONLY WordPress plugin that provides smooth and time-efficient plugin handling operations.
 
@@ -96,6 +96,15 @@ screenshot-3.png
    
 
 == Changelog ==
+
+= 1.5.0 (13-12-2020) =
+* Improved: Plugin code structure
+* Added: Tested upto WP version 5.6
+
+= 1.4.2 (20-11-2019) =
+* Fixed: Compatibility with WP 5.3
+* Fixed: Removed the 'Delete' link on deactivate notice when on 'active' plugin status page as the plugin can not be deleted from this page.
+* Fixed: js code optimization, now available only on plugins page.
 
 = 1.4.1 (14-08-2019) = 
 * Fixed: Removed tracking code without opt-in message.

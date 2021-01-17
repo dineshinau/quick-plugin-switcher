@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Quick Plugin Switcher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-12 22:38+0000\n"
+"POT-Creation-Date: 2019-11-15 21:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,28 +15,28 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.1; wp-5.2.4"
 
-#: admin/class-dkqps-admin.php:283 admin/class-dkqps-admin.php:364
+#: admin/class-dkqps-admin.php:242 admin/class-dkqps-admin.php:316
 #, php-format
 msgid "\"<strong>%s (v%s)</strong>\" is activated."
 msgstr ""
 
-#: admin/class-dkqps-admin.php:285 admin/class-dkqps-admin.php:374
+#: admin/class-dkqps-admin.php:244 admin/class-dkqps-admin.php:326
 #, php-format
 msgid "\"<strong>%s (v%s)</strong>\" is deactivated."
 msgstr ""
 
-#: admin/class-dkqps-admin.php:291 admin/class-dkqps-admin.php:375
+#: admin/class-dkqps-admin.php:250 admin/class-dkqps-admin.php:327
 msgid "Activate it again!"
 msgstr ""
 
-#: admin/class-dkqps-admin.php:309
+#: admin/class-dkqps-admin.php:268
 #, php-format
 msgid ""
 "All selected <strong>%d active</strong> plugins are <strong>"
 "deactivated</strong> now successfully."
 msgstr ""
 
-#: admin/class-dkqps-admin.php:315
+#: admin/class-dkqps-admin.php:274
 #, php-format
 msgid ""
 "All selected <strong>%d inactive</strong> plugins are <strong>"
@@ -44,7 +44,7 @@ msgid ""
 "<strong>deactivated</strong> now successfully."
 msgstr ""
 
-#: admin/class-dkqps-admin.php:313
+#: admin/class-dkqps-admin.php:272
 #, php-format
 msgid ""
 "All selected <strong>%d inactive</strong> plugins are <strong>"
@@ -52,23 +52,23 @@ msgid ""
 "active</strong> plugin is <strong>deactivated</strong> now successfully."
 msgstr ""
 
-#: admin/class-dkqps-admin.php:307
+#: admin/class-dkqps-admin.php:266
 #, php-format
 msgid ""
 "All selected <strong>%d inactive</strong> plugins are <strong>"
 "activated</strong> now successfully."
 msgstr ""
 
-#: admin/class-dkqps-admin.php:289 admin/class-dkqps-admin.php:367
+#: admin/class-dkqps-admin.php:248 admin/class-dkqps-admin.php:319
 msgid "Deactivate it again!"
 msgstr ""
 
-#: admin/class-dkqps-admin.php:295 admin/class-dkqps-admin.php:378
+#: admin/class-dkqps-admin.php:254 admin/class-dkqps-admin.php:330
 msgid "Delete"
 msgstr ""
 
 #. Author of the plugin
-msgid "Dinesh Yadav"
+msgid "Dinesh Kumar Yadav"
 msgstr ""
 
 #. Author URI of the plugin
@@ -83,18 +83,18 @@ msgstr ""
 msgid "Quick Plugin Switcher"
 msgstr ""
 
-#: admin/class-dkqps-admin.php:134
+#: admin/class-dkqps-admin.php:89
 msgid "Switch"
 msgstr ""
 
-#: admin/class-dkqps-admin.php:305
+#: admin/class-dkqps-admin.php:264
 msgid ""
 "The <strong>only</strong> selected <strong>active</strong> plugin is now "
 "<strong>deactivated</strong> and the <strong>only</strong> selected <strong>"
 "inactive</strong> plugin is now <strong>activated</strong> successfully."
 msgstr ""
 
-#: admin/class-dkqps-admin.php:311
+#: admin/class-dkqps-admin.php:270
 #, php-format
 msgid ""
 "The <strong>only</strong> selected <strong>inactive</strong> plugin is "

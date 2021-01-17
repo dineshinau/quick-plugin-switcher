@@ -1,43 +1,27 @@
 <?php
 defined( 'ABSPATH' ) || exit; //Exit if accessed directly
+
 /**
- * Defines the QPS name, version, and hooks to enqueue the admin-specific JavaScript.
- * The core functionality of the QPS
+ * The admin functionality of the QPS
  *
  * @link       https://dineshinaublog.wordpress.com
  * @since      1.0
  *
  * @package    quick-plugin-switcher
  * @subpackage quick-plugin-switcher/admin
- * @author     Dinesh Kumar Yadav <dineshinau@gmail.com>
+ * @author     Dinesh Yadav <dineshinau@gmail.com>
  */
 class DKQPS_Admin {
+	private static $ins = null;
 	/**
-	 * The ID of this QPS.
-	 *
-	 * @since    1.0
-	 * @access   private
-	 * @var      string $plugin_name The ID of this QPS.
-	 */
-	private $plugin_name;
-
-	/**
-	 * The version of this QPS.
-	 *
-	 * @since    1.0
-	 * @access   private
-	 * @var      string $version The current version of this QPS.
-	 */
-	private $version;
-
-	/**
-	 * The basename of this QPS.
+	 * The new version of wp having new plugin activation/deactivation notice text
+	 * To provide backward compatibility
 	 *
 	 * @since    1.4
 	 * @access   private
-	 * @var      string $dkqps The basename of this QPS.
+	 * @var      string $dkqps_new_wp the new WP version 5.3
 	 */
-	private $dkqps;
+	private $dkqps_new_wp;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -47,10 +31,86 @@ class DKQPS_Admin {
 	 *
 	 * @since    1.0
 	 */
-	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
-		$this->dkqps       = $this->plugin_name . '/' . $this->plugin_name . '.php';
+	public function __construct() {
+		$this->dkqps_new_wp = '5.3';
+
+		global $pagenow;
+		$is_plugins_page = false;
+
+		if ( empty( $pagenow ) ) {
+			$current_url     = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '';
+			$is_plugins_page = ( strpos( $current_url, '/wp-admin/plugins.php' ) > 0 ) ? true : $is_plugins_page;
+			$is_plugins_page = ( $is_plugins_page ) ? $is_plugins_page : ( strpos( $current_url, '/wp-admin/network/plugins.php' ) > 0 );
+		}
+
+		/**
+		 * Adding admin js if on plugins.php page
+		 */
+		if ( 'plugins.php' === $pagenow || $is_plugins_page ) {
+			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		}
+
+		/**
+		 * Adding 'Switch' option in plugin 'bulk-actions' dropdown in single site environment
+		 * @since 1.0
+		 */
+		add_filter( 'bulk_actions-plugins', [ $this, 'dkqps_add_switch_bulk_action' ], 999, 1 );
+		add_filter( 'handle_bulk_actions-plugins', [ $this, 'dkqps_handle_switch_bulk_action' ], 10, 3 );
+
+		/**
+		 *  Making sure the function "is_plugin_active_for_network" exist before using plugin in multi-site environment
+		 */
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
+
+		/**
+		 * Adding 'Switch' option in plugin 'bulk-actions' dropdown in multi-site environment
+		 * @since 1.0
+		 */
+		if ( is_plugin_active_for_network( DKQPS_PLUGIN_BASENAME ) ) {
+			add_filter( 'bulk_actions-plugins-network', [ $this, 'dkqps_add_switch_bulk_action' ], 999, 1 );
+			add_filter( 'handle_bulk_actions-plugins-network', [ $this, 'dkqps_handle_switch_bulk_network_action' ], 10, 3 );
+		}
+
+		/**
+		 * Displaying success notice after successful switching using 'switch' bulk actions
+		 * @since 1.0
+		 */
+		if ( isset( $_GET['dk_act'] ) && is_admin() ) { //phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+			if ( is_network_admin() ) {
+				add_action( 'network_admin_notices', [ $this, 'switch_success_admin_notice' ], 10 );
+			} else {
+				add_action( 'admin_notices', [ $this, 'switch_success_admin_notice' ], 10 );
+			}
+		}
+
+		/**
+		 * Updating just switched plugin to option table to get it back for changing native success notice with the name of the plugin and switch links
+		 * @since 1.3
+		 */
+		add_action( 'activated_plugin', [ $this, 'dkqps_update_switched_plugin' ], 10, 2 );
+		add_action( 'deactivated_plugin', [ $this, 'dkqps_update_switched_plugin' ], 10, 2 );
+
+		/**
+		 * Modify native plugin activated/deactivated notice with name of the plugin and switch link ot it
+		 * @since 1.3
+		 */
+		if ( is_admin() && isset( $_GET['plugin_status'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+			add_filter( 'gettext', [ $this, 'dkqps_add_switching_link' ], 99, 3 );
+		}
+
+	}
+
+	/**
+	 * @return DKQPS_Admin|null
+	 */
+	public static function get_instance() {
+		if ( null === self::$ins ) {
+			self::$ins = new self;
+		}
+
+		return self::$ins;
 	}
 
 	/**
@@ -59,19 +119,15 @@ class DKQPS_Admin {
 	 * @since    1.0
 	 */
 	public function enqueue_scripts() {
-		/**
-		 * The DKQPS_Loader is creating the relationship
-		 * between the defined hooks and the functions defined in this class.
-		 */
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dkqps-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/admin/js/dkqps-admin.js', array( 'jquery' ), DKQPS_VERSION . rand( 1, 1000 ), false );
 	}
 
 	/**
 	 * Adding a new dropdown option "Switch" in plugins bulk action in single site environment
 	 *
-	 * @param array $actions The array of all bulk actions
+	 * @param $actions
 	 *
-	 * @hooked 'bulk_actions-plugins'
+	 * @return array
 	 * @since    1.0
 	 */
 	public function dkqps_add_switch_bulk_action( $actions ) {
@@ -79,13 +135,13 @@ class DKQPS_Admin {
 	}
 
 	/**
-	 * Hanndling the switch action when triggered in single site environment
+	 * Handling the switch action when triggered in single site environment
 	 *
-	 * @param string $redirect_to URL where to redirect after performing action
-	 * @param string $action containing the switch action
-	 * @param array $post_ids array of all selected plugins
+	 * @param $redirect_to
+	 * @param $action
+	 * @param $post_ids
 	 *
-	 * @since    1.0
+	 * @return string
 	 */
 	public function dkqps_handle_switch_bulk_action( $redirect_to, $action, $post_ids ) {
 
@@ -123,7 +179,7 @@ class DKQPS_Admin {
 	}
 
 	/**
-	 * Hanndling the switch action when triggered on network plugins page
+	 * Handling the switch action when triggered on network plugins page
 	 *
 	 * @param string $redirect_to URL where to redirect after performing action
 	 * @param string $action containing the switch action
@@ -173,7 +229,7 @@ class DKQPS_Admin {
 	 * @hooked on action hook 'activated_plugin' and 'deactivated_plugin'
 	 */
 	public function dkqps_update_switched_plugin( $plugin, $network_wide ) {
-		if ( $plugin === $this->dkqps && did_action( 'deactivated_plugin' ) ) {
+		if ( $plugin === DKQPS_PLUGIN_BASENAME && did_action( 'deactivated_plugin' ) ) {
 			return;
 		}
 
@@ -197,10 +253,6 @@ class DKQPS_Admin {
 	/**
 	 * Displaying switched plugin success notice when switched using 'switch' bulk action
 	 *
-	 * @param string $redirect_to URL where to redirect after performing action
-	 * @param string $action containing the switch action
-	 * @param array $post_ids array of all selected plugins
-	 *
 	 * @hooked    'network_admin_notices' and 'admin_notices'
 	 * @since    1.0
 	 */
@@ -219,6 +271,8 @@ class DKQPS_Admin {
 			$plugin_version = $switched_plugin['version'];
 			$plugin         = $switched_plugin['plugin'];
 
+			$plugin_section = filter_input( INPUT_GET, 'plugin_status', FILTER_SANITIZE_STRING );
+
 			$activated  = ( 1 === $dk_act ) ? true : false;
 			$action_url = $this->dkqps_get_action_url( $plugin, $activated ); ?>
 
@@ -230,14 +284,14 @@ class DKQPS_Admin {
 			        } else {
 				        printf( __( '"<strong>%s (v%s)</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version );
 			        } ?>
-		        	<a style="position: relative; left: 5px;" class="button-primary" href="<?php echo esc_url($action_url) ?>">
+		        	<a style="position: relative; left: 5px;" class="button-primary" href="<?php echo esc_url( $action_url ) ?>">
 		        		<?php if ( $activated ) {
 					        esc_html_e( 'Deactivate it again!', 'quick-plugin-switcher' );
 				        } else {
 					        esc_html_e( 'Activate it again!', 'quick-plugin-switcher' );
 				        } ?>
 		        	</a>
-		        	<?php if ( ! $activated && ( ! is_multisite() || ( is_multisite() && is_network_admin()))) { ?>
+		        	<?php if ( ( 'active' !== $plugin_section ) && ! $activated && ( ! is_multisite() || ( is_multisite() && is_network_admin() ) ) ) { ?>
                         <a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete"><?php esc_html_e( 'Delete', 'quick-plugin-switcher' ) ?></a>
 			        <?php } ?>
 		        	</span>
@@ -266,15 +320,28 @@ class DKQPS_Admin {
 	}
 
 	/**
-	 * Adding switch links to native success notice when activated/deactivate
-	 * using native 'activate/deactivate' link
-	 * @return $translated_text modified plugin success notice with switch links
+	 * Adding switch links to native success notice when activated/deactivate using native 'activate/deactivate' link
+	 *
+	 * @param $translated_text
+	 * @param $untranslated_text
+	 * @param $domain
+	 *
+	 * @return string
+	 *
 	 * @since 1.3
 	 * @hooked on filter hook 'gettext'
+	 *
 	 */
+
 	public function dkqps_add_switching_link( $translated_text, $untranslated_text, $domain ) {
-		$activated_notice   = "Plugin <strong>activated</strong>.";
-		$deactivated_notice = "Plugin <strong>deactivated</strong>.";
+		global $wp_version;
+		$wp_pre_53 = false;
+		if ( version_compare( $wp_version, $this->dkqps_new_wp, '<' ) ) {
+			$wp_pre_53 = true;
+		}
+
+		$activated_notice   = $wp_pre_53 ? "Plugin <strong>activated</strong>." : "Plugin activated.";
+		$deactivated_notice = $wp_pre_53 ? "Plugin <strong>deactivated</strong>." : "Plugin deactivated.";
 
 		$switched_plugin = get_option( 'dkqps_ssp_plugin', array() );
 		if ( is_network_admin() ) {
@@ -289,23 +356,25 @@ class DKQPS_Admin {
 		$plugin         = $switched_plugin['plugin'];
 		$plugin_version = $switched_plugin['version'];
 
+		$plugin_section = filter_input( INPUT_GET, 'plugin_status', FILTER_SANITIZE_STRING );
+
 		if ( $activated_notice === $untranslated_text ) {
 			$action_url = $this->dkqps_get_action_url( $plugin, true );
 
 			$translated_text = sprintf( __( '"<strong>%s (v%s)</strong>" is activated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version );
 
-			if ( $this->dkqps !== $plugin ) {
+			if ( DKQPS_PLUGIN_BASENAME !== $plugin ) {
 				$translated_text .= "<a style='position: relative; left: 5px;' class='button-primary' href='" . $action_url . "'>" . __( 'Deactivate it again!', 'quick-plugin-switcher' ) . "</a>";
 			}
 
 		} elseif ( $deactivated_notice === $untranslated_text ) {
 			$action_url = $this->dkqps_get_action_url( $plugin, false );
 
-			$translated_text = '<span data-dkpqs-blog-id="' . get_current_blog_id() . '" data-plugin="' . $plugin . '">';
+			$translated_text = '<span class="dkqps-plugin-data" data-dkpqs-blog-id="' . get_current_blog_id() . '" data-plugin="' . $plugin . '">';
 			$translated_text .= sprintf( __( '"<strong>%s (v%s)</strong>" is deactivated.', 'quick-plugin-switcher' ), $plugin_name, $plugin_version );
 			$translated_text .= '<a style="position: relative; left: 5px;" class="button-primary" href="' . $action_url . '"> ' . __( 'Activate it again!', 'quick-plugin-switcher' ) . '</a>';
 
-			if ( !is_multisite() || ( is_multisite() && is_network_admin()) ) {
+			if ( 'active' !== $plugin_section && ! is_multisite() || ( is_multisite() && is_network_admin() ) ) {
 				$translated_text .= '<a style="position: relative; left: 1%; color: #a00; text-decoration: none;" href="javascript:void(0);" class="dkqps-delete">' . __( 'Delete', 'quick-plugin-switcher' ) . '</a>';
 			}
 
@@ -318,10 +387,10 @@ class DKQPS_Admin {
 	/**
 	 * Creating activate/deactivate action links
 	 *
-	 * @param string $plugins plugin basename
-	 * @param string $activated current plugin action (activated/deactivated)
+	 * @param $plugin
+	 * @param $activated
 	 *
-	 * @return    plugin action url for adding to modified notice
+	 * @return string
 	 * @since    1.3
 	 */
 	public function dkqps_get_action_url( $plugin, $activated ) {
@@ -338,5 +407,13 @@ class DKQPS_Admin {
 		}
 
 		return $action_url;
+	}
+
+	/**
+	 * @since 1.4
+	 * Delete the option key dkqps_ssp_plugin on plugin deactivation
+	 */
+	public function dkqps_delete_option_key() {
+		delete_option( 'dkqps_ssp_plugin' );
 	}
 }
