@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ruleset name="QPS">
+    <description>Quick Plugin Switcher</description>
+    <rule ref="WordPressVIPMinimum" />
+
+    <!-- Configs -->
+    <config name="minimum_supported_wp_version" value="4.7" />
+    <config name="testVersion" value="5.7-" />
+    <config name="text_domain" value="quick-plugin-switcher"/>
+
+    <rule ref="WordPress.Files.FileName.InvalidClassFileName">
+    </rule>
+    <rule ref="WordPress.Security.ValidatedSanitizedInput">
+        <properties>
+            <property name="customSanitizingFunctions" type="array">
+                <element value="dk_pc_debug"/>
+            </property>
+        </properties>
+    </rule>
+    <rule ref="WordPressVIPMinimum.Functions.RestrictedFunctions">
+        <properties>
+            <property name="exclude" type="array">
+                <element value="dbDelta"/>
+            </property>
+        </properties>
+    </rule>
+    <rule ref="WordPress.DB">
+        <exclude name="WordPress.DB.DirectDatabaseQuery"/>
+        <exclude name="WordPress.DB.SlowDBQuery"/>
+    </rule>
+
+</ruleset>

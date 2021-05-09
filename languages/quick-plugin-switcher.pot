@@ -1,70 +1,29 @@
-#, fuzzy
+# Copyright (C) 2021 Dinesh Yadav
+# This file is distributed under the same license as the Quick Plugin Switcher plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Quick Plugin Switcher\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-12 22:38+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: Quick Plugin Switcher 1.5.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quick-plugin-switcher\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1; wp-5.2.4"
+"POT-Creation-Date: 2021-05-09T10:12:52+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: quick-plugin-switcher\n"
 
-#: admin/class-dkqps-admin.php:283 admin/class-dkqps-admin.php:364
-#, php-format
-msgid "\"<strong>%s (v%s)</strong>\" is activated."
+#. Plugin Name of the plugin
+msgid "Quick Plugin Switcher"
 msgstr ""
 
-#: admin/class-dkqps-admin.php:285 admin/class-dkqps-admin.php:374
-#, php-format
-msgid "\"<strong>%s (v%s)</strong>\" is deactivated."
+#. Plugin URI of the plugin
+msgid "https://dineshinaublog.wordpress.com/quick-plugin-switcher"
 msgstr ""
 
-#: admin/class-dkqps-admin.php:291 admin/class-dkqps-admin.php:375
-msgid "Activate it again!"
-msgstr ""
-
-#: admin/class-dkqps-admin.php:309
-#, php-format
-msgid ""
-"All selected <strong>%d active</strong> plugins are <strong>"
-"deactivated</strong> now successfully."
-msgstr ""
-
-#: admin/class-dkqps-admin.php:315
-#, php-format
-msgid ""
-"All selected <strong>%d inactive</strong> plugins are <strong>"
-"activated</strong> and all selected <strong>%d active</strong> plugins are "
-"<strong>deactivated</strong> now successfully."
-msgstr ""
-
-#: admin/class-dkqps-admin.php:313
-#, php-format
-msgid ""
-"All selected <strong>%d inactive</strong> plugins are <strong>"
-"activated</strong> and the <strong>only</strong> selected <strong>"
-"active</strong> plugin is <strong>deactivated</strong> now successfully."
-msgstr ""
-
-#: admin/class-dkqps-admin.php:307
-#, php-format
-msgid ""
-"All selected <strong>%d inactive</strong> plugins are <strong>"
-"activated</strong> now successfully."
-msgstr ""
-
-#: admin/class-dkqps-admin.php:289 admin/class-dkqps-admin.php:367
-msgid "Deactivate it again!"
-msgstr ""
-
-#: admin/class-dkqps-admin.php:295 admin/class-dkqps-admin.php:378
-msgid "Delete"
+#. Description of the plugin
+msgid "This simplifies plugin handling operations by adding a new bulk action \"Switch\" on this page and also adds easy \"Activate Again\" & \"Deactivate Again\" links on plugin notices. You can delete a plugin directly from deactivated notice too."
 msgstr ""
 
 #. Author of the plugin
@@ -75,37 +34,72 @@ msgstr ""
 msgid "https://dineshinaublog.wordpress.com"
 msgstr ""
 
-#. URI of the plugin
-msgid "https://dineshinaublog.wordpress.com/quick-plugin-switcher"
-msgstr ""
-
-#. Name of the plugin
-msgid "Quick Plugin Switcher"
-msgstr ""
-
-#: admin/class-dkqps-admin.php:134
+#: admin/class-dkqps-admin.php:153
 msgid "Switch"
 msgstr ""
 
-#: admin/class-dkqps-admin.php:305
-msgid ""
-"The <strong>only</strong> selected <strong>active</strong> plugin is now "
-"<strong>deactivated</strong> and the <strong>only</strong> selected <strong>"
-"inactive</strong> plugin is now <strong>activated</strong> successfully."
+#: admin/class-dkqps-admin.php:307
+#: admin/class-dkqps-admin.php:395
+msgid "Deactivate it again!"
 msgstr ""
 
+#. translators: 1: Plugin name, 2: Plugin version.
+#: admin/class-dkqps-admin.php:309
+msgid "%1$s (v%2$s) is activated."
+msgstr ""
+
+#. translators: 1: Strong opening tag and plugin name, 2: Plugin version and strong closing tag.
 #: admin/class-dkqps-admin.php:311
-#, php-format
-msgid ""
-"The <strong>only</strong> selected <strong>inactive</strong> plugin is "
-"<strong>activated</strong> and all selected <strong>%d active</strong> "
-"plugins are <strong>deactivated</strong> now successfully."
+#: admin/class-dkqps-admin.php:404
+msgid "Activate it again!"
 msgstr ""
 
-#. Description of the plugin
-msgid ""
-"This simplifies plugin handling operations by adding a new bulk action "
-"\"Switch\" on this page and also adds easy \"Activate Again\" & \"Deactivate "
-"Again\" links on plugin notices. You can delete a plugin directly from "
-"deactivated notice too."
+#. translators: 1: Plugin name, 2: Plugin version.
+#: admin/class-dkqps-admin.php:312
+msgid "%1$s (v%2$s) is deactivated."
+msgstr ""
+
+#: admin/class-dkqps-admin.php:319
+#: admin/class-dkqps-admin.php:407
+msgid "Delete"
+msgstr ""
+
+#. translators: 1: Strong opening tag, 2: Strong closing tag, 3: Strong opening tag, 4: Strong closing tag, 5: Strong opening tag, 6: Strong closing tag, 7: Strong opening tag, 8: Strong closing tag, 9: Strong opening tag, 10: Strong closing tag, 11: Strong opening tag, 12: Strong closing tag, 13: Strong opening tag, 14: Strong closing tag.
+#: admin/class-dkqps-admin.php:333
+msgid "The %1$s only %2$s selected %3$s active %4$s plugin is now %5$s deactivated %6$s and the %7$s only %8$s selected %9$s inactive %10$s plugin is now %11$s activated %12$s successfully."
+msgstr ""
+
+#. translators: 1: Strong opening tag and activated plugins count, 2: Strong closing tag, 3: Strong opening tag, 4: Strong closing tag.
+#: admin/class-dkqps-admin.php:335
+msgid "All selected %1$s inactive %2$s plugins are %3$s activated %4$s now successfully."
+msgstr ""
+
+#. translators: 1: Strong opening tag and deactivated plugins count, 2: Strong closing tag, 3: Strong opening tag, 4: Strong closing tag.
+#: admin/class-dkqps-admin.php:337
+msgid "All selected %1$s active %2$s plugins are %3$s deactivated %4$s now successfully."
+msgstr ""
+
+#. translators: 1: Strong opening tag, 2: Strong closing tag, 3: Strong opening tag, 4: Strong closing tag, 5: Strong opening tag, 6: Strong closing tag, 7: Strong opening tag and deactivated plugins count, 8: Strong closing tag, 9: Strong opening tag, 10: Strong closing tag.
+#: admin/class-dkqps-admin.php:339
+msgid "The %1$s only %2$s selected %3$s inactive %4$s plugin is %5$s activated %6$s and all selected %7$s active %8$s plugins are %9$s deactivated %10$s now successfully."
+msgstr ""
+
+#. translators: 1: Strong opening tag and activated plugins count, 2: Strong closing tag, 3: Strong opening tag, 4: Strong closing tag, 5: Strong opening tag, 6: Strong closing tag, 7: Strong opening tag, 8: Strong closing tag, 9: Strong opening tag, 10: Strong closing tag.
+#: admin/class-dkqps-admin.php:341
+msgid "All selected %1$s inactive %2$s plugins are %3$s activated %4$s and the %5$s only %6$s selected %7$s active %8$s plugin is %9$s deactivated %10$s now successfully."
+msgstr ""
+
+#. translators: 1: Strong opening tag and activated plugins count, 2: Strong closing tag, 3: Strong opening tag , 4: Strong closing tag, 5: Strong opening tag and deactivated plugins count, 6: Strong closing tag, 7: Strong opening tag, 8: Strong closing tag.
+#: admin/class-dkqps-admin.php:343
+msgid "All selected %1$s inactive %2$s plugins are %3$s activated %4$s and all selected %5$s active %6$s plugins are %7$s deactivated %8$s now successfully."
+msgstr ""
+
+#. translators: 1: Strong opening tag and plugin name, 2: Plugin version and strong closing tag.
+#: admin/class-dkqps-admin.php:392
+msgid "%1$s (v%2$s)\" is activated."
+msgstr ""
+
+#. translators: 1: Strong opening tag and plugin name, 2: Plugin version and strong closing tag.
+#: admin/class-dkqps-admin.php:403
+msgid "%1$s (v%2$s)\" is deactivated."
 msgstr ""
