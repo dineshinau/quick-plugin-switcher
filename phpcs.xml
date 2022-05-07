@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress WooCommerce Coding Standards">
+	<description>Apply WordPress and WooCommerce Coding Standards to all Core files</description>
+
+	<!-- Exclude paths -->
+	<exclude-pattern>tests/</exclude-pattern>
+	<exclude-pattern>woo-includes/woo-functions.php</exclude-pattern>
+	<exclude-pattern>woo-includes/class-wc-dependencies.php</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
+	<!-- Configs -->
+	<config name="minimum_supported_wp_version" value="4.7" />
+	<config name="testVersion" value="5.8-" />
+	<config name="text_domain" value="quick-plugin-switcher"/>
+
+	<!-- WordPress Rules -->
+	<rule ref="WordPress-Core"/>
+	<rule ref="WordPress.CodeAnalysis.EmptyStatement"/>
+
+	<rule ref="WordPress-Docs"/>
+	<rule ref="WordPress-Extra">
+		<exclude name="WordPress.WP.TimezoneChange.timezone_change_date_default_timezone_set"/>
+		<exclude name="Squiz.Commenting.FileComment.SpacingAfterComment" />
+	</rule>
+
+	<rule ref="WordPressVIPMinimum"/>
+	<rule ref="WordPress-VIP-Go"/>
+	<rule ref="WordPress.WP.I18n"/>
+
+	<!-- WooCommerce Rules -->
+	<rule ref="WooCommerce"/>
+	<rule ref="WooCommerce-Core"/>
+
+	<!-- Covers rule: Use single and double quotes when appropriate.
+		 If you're not evaluating anything in the string, use single quotes. -->
+	<rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired"/>
+
+	<!--
+	#############################################################################
+	Handbook: PHP - Indentation.
+	Ref: https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/#indentation
+	#############################################################################-->
+	<!-- Covers rule: Your indentation should always reflect logical structure. -->
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="exact" value="false"/>
+			<property name="indent" value="4"/>
+			<property name="tabIndent" value="true"/>
+			<property name="ignoreIndentationTokens" type="array">
+				<element value="T_HEREDOC"/>
+				<element value="T_NOWDOC"/>
+				<element value="T_INLINE_HTML"/>
+			</property>
+		</properties>
+	</rule>
+	<rule ref="WordPress.Arrays.ArrayIndentation"/>
+
+	<!-- PHPCompatibility Rules. -->
+	<rule ref="PHPCompatibility">
+		<exclude-pattern>tests/</exclude-pattern>
+	</rule>
+
+	<!-- Exclude invalid class file name. -->
+	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
+		<exclude-pattern>quick-plugin-switcher.php</exclude-pattern>
+	</rule>
+
+	<!--Exclude WooCommerce sanitization function -->
+	<rule ref="WordPress.Security.ValidatedSanitizedInput">
+		<properties>
+			<property name="customSanitizingFunctions" type="array">
+				<element value="wc_clean"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Allow Restricted function dbDelta -->
+	<rule ref="WordPressVIPMinimum.Functions.RestrictedFunctions">
+		<properties>
+			<property name="exclude" type="array">
+				<element value="dbDelta"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Allow meta queries -->
+	<rule ref="WordPress.DB">
+		<exclude name="WordPress.DB.DirectDatabaseQuery"/>
+		<exclude name="WordPress.DB.SlowDBQuery"/>
+	</rule>
+
+</ruleset>
+

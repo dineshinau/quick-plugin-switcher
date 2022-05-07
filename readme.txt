@@ -2,9 +2,9 @@
 Contributors: dineshinau
 Donate link: https://dineshinaublog.wordpress.com/donate-me
 Tags: qps, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
-Requires at least: 4.7.0
-Tested up to: 5.7.1
-Stable tag: 1.5.1
+Requires at least: 5.0.0
+Tested up to: 6.0
+Stable tag: 1.5.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -97,11 +97,20 @@ screenshot-3.png
 
 == Changelog ==
 
+= 1.5.3 (07-05-2022) =
+* Updated: Tested upto WordPress 6.0
+* Added: WC Log link on admin bar if woocommerce is active.
+
+= 1.5.2 (24-07-2021) =
+* Updated: Tested upto WordPress 5.8
+* Updated: Code standards as per WP Coding standards.
+
 = 1.5.1 (09-05-2021) =
 * Improved: Plugin data delete on uninstall.
 * Added: Tested upto WP version 5.7.1
 * Changed: Minimum PHP requires 7.0.
 * Fixed: Phpcs issues.
+
 = 1.5.0 (13-12-2020) =
 * Improved: Plugin code structure
 * Added: Tested upto WP version 5.6
