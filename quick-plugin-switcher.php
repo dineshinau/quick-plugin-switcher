@@ -3,7 +3,7 @@
  * Plugin Name:       Quick Plugin Switcher
  * Plugin URI:        https://dineshinaublog.wordpress.com/quick-plugin-switcher
  * Description:       This simplifies plugin handling operations by adding a new bulk action "Switch" on this page and also adds easy "Activate Again" & "Deactivate Again" links on plugin notices. You can delete a plugin directly from deactivated notice too.
- * Version:           1.5.3
+ * Version:           1.5.4
  * Author:            Dinesh Yadav
  * Author URI:        https://dineshinaublog.wordpress.com
  * License:           GPL-2.0+
@@ -11,9 +11,9 @@
  * Text Domain:       quick-plugin-switcher
  * Domain Path:       /languages
  *
- * Requires at least: 5.0.0
- * Tested up to: 6.0.0
- * Requires PHP: 7.0
+ * Requires at least: 5.0
+ * Tested up to: 6.3
+ * Requires PHP: 7.3
  *
  * @package quick-plugin-switcher
  */
@@ -60,7 +60,7 @@ if ( ! class_exists( 'DKQPS_Core' ) ) {
 		 * Defining constants.
 		 */
 		public function define_plugin_properties() {
-			define( 'DKQPS_VERSION', '1.5.3' );
+			define( 'DKQPS_VERSION', '1.5.4' );
 			define( 'DKQPS_PLUGIN_FILE', __FILE__ );
 			define( 'DKQPS_PLUGIN_DIR', __DIR__ );
 			define( 'DKQPS_PLUGIN_SLUG', 'quick-plugin-switcher' );
