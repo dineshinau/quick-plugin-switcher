@@ -1,11 +1,12 @@
 <?php
 /**
- * WooCommerce Uninstall
+ * QPS Uninstall
  *
- * Uninstalling WooCommerce deletes user roles, pages, tables, and options.
+ * Uninstalling QPS deletes its own options.
  *
- * @package WooCommerce\Uninstaller
- * @version 2.3.0
+ * @package quick-plugin-switcher
+ * 
+ * @version 1.6.0
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;

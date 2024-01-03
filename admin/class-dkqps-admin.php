@@ -17,7 +17,6 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * @subpackage quick-plugin-switcher/admin
  */
 class DKQPS_Admin {
-
 	/**
 	 * Instance variable.
 	 *
@@ -81,10 +80,15 @@ class DKQPS_Admin {
 		 */
 		if ( is_plugin_active_for_network( DKQPS_PLUGIN_BASENAME ) ) {
 			add_filter( 'bulk_actions-plugins-network', array( $this, 'dkqps_add_switch_bulk_action' ), 999, 1 );
-			add_filter( 'handle_bulk_actions-plugins-network', array(
-				$this,
-				'dkqps_handle_switch_bulk_network_action'
-			), 10, 3 );
+			add_filter(
+				'handle_bulk_actions-plugins-network',
+				array(
+					$this,
+					'dkqps_handle_switch_bulk_network_action',
+				),
+				10,
+				3
+			);
 		}
 
 		/**
@@ -93,7 +97,7 @@ class DKQPS_Admin {
 		 * @since 1.0
 		 */
 		if ( is_admin() ) {
-			$dk_act = filter_input( INPUT_GET, 'dk_act', FILTER_SANITIZE_STRING );
+			$dk_act = filter_input( INPUT_GET, 'dk_act', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			if ( ! is_null( $dk_act ) ) {
 				if ( is_network_admin() ) {
 					add_action( 'network_admin_notices', array( $this, 'switch_success_admin_notice' ), 10 );
@@ -117,7 +121,7 @@ class DKQPS_Admin {
 		 * @since 1.3
 		 */
 		if ( is_admin() ) {
-			$plugin_status = filter_input( INPUT_GET, 'plugin_status', FILTER_SANITIZE_STRING );
+			$plugin_status = filter_input( INPUT_GET, 'plugin_status', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			if ( ! empty( $plugin_status ) ) {
 				add_filter( 'gettext', array( $this, 'dkqps_add_switching_link' ), 99, 3 );
 			}
@@ -165,7 +169,7 @@ class DKQPS_Admin {
 	 *
 	 * @param string $redirect_to Redirect URL.
 	 * @param string $action Bulk action name.
-	 * @param array $post_ids Selected plugin ids.
+	 * @param array  $post_ids Selected plugin ids.
 	 *
 	 * @return string
 	 */
@@ -185,10 +189,10 @@ class DKQPS_Admin {
 		foreach ( ( is_array( $post_ids ) || is_object( $post_ids ) ) ? $post_ids : array() as $post_id ) {
 			if ( is_array( $active_plugins ) && in_array( $post_id, $active_plugins, true ) ) {
 				unset( $active_plugins[ array_search( $post_id, $active_plugins, true ) ] );
-				$de_act ++;
+				++$de_act;
 			} else {
 				array_push( $active_plugins, $post_id );
-				$act ++;
+				++$act;
 			}
 		}
 
@@ -214,7 +218,7 @@ class DKQPS_Admin {
 	 *
 	 * @param string $redirect_to URL where to redirect after performing action.
 	 * @param string $action containing the switch action.
-	 * @param array $post_ids array of all selected plugins.
+	 * @param array  $post_ids array of all selected plugins.
 	 *
 	 * @return string    redirect_to        redirect link with query strings
 	 * @since  1.0
@@ -233,10 +237,10 @@ class DKQPS_Admin {
 		foreach ( ( is_array( $post_ids ) || is_object( $post_ids ) ) ? $post_ids : array() as $post_id ) {
 			if ( is_array( $active_plugins ) && count( $active_plugins ) && array_key_exists( $post_id, $active_plugins ) ) {
 				unset( $active_plugins[ $post_id ] );
-				$de_act ++;
+				++$de_act;
 			} else {
 				$active_plugins[ $post_id ] = time();
-				$act ++;
+				++$act;
 			}
 		}
 
@@ -261,7 +265,7 @@ class DKQPS_Admin {
 	/**
 	 * Updating natively activated/deactivated plugin in option table to add switch link to native success notice.
 	 *
-	 * @param string $plugin Plugin name.
+	 * @param string  $plugin Plugin name.
 	 * @param boolean $network_wide Network wide plugin.
 	 *
 	 * @since  1.3
@@ -315,15 +319,15 @@ class DKQPS_Admin {
 			$plugin_version = $switched_plugin['version'];
 			$plugin         = $switched_plugin['plugin'];
 
-			$plugin_section = filter_input( INPUT_GET, 'plugin_status', FILTER_SANITIZE_STRING );
+			$plugin_section = filter_input( INPUT_GET, 'plugin_status', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 			$activated  = ( 1 === $dk_act ) ? true : false;
 			$action_url = $this->dkqps_get_action_url( $plugin, $activated );
 			?>
-            <div class="notice notice-success is-dismissible">
-                <p class="dkqps-notice">
+			<div class="notice notice-success is-dismissible">
+				<p class="dkqps-notice">
 					<span data-dkqps-blog_id="<?php echo esc_attr( get_current_blog_id() ); ?>"
-                          data-plugin="<?php echo esc_attr( $plugin ); ?>">
+							data-plugin="<?php echo esc_attr( $plugin ); ?>">
 						<?php
 						$switch_btn_text = esc_html__( 'Deactivate it again!', 'quick-plugin-switcher' );
 						if ( $activated ) {
@@ -334,23 +338,23 @@ class DKQPS_Admin {
 						}
 						?>
 						<a class="dkqps-success-notice button-primary"
-                           href="<?php echo esc_url( $action_url ); ?>"><?php echo esc_html( $switch_btn_text ); ?></a>
+							href="<?php echo esc_url( $action_url ); ?>"><?php echo esc_html( $switch_btn_text ); ?></a>
 						<?php
 						if ( ( 'active' !== $plugin_section ) && ! $activated && ( ! is_multisite() || ( is_multisite() && is_network_admin() ) ) ) {
 							?>
-                            <a href="javascript:void(0);"
-                               class="dkqps-delete"><?php esc_html_e( 'Delete', 'quick-plugin-switcher' ); ?></a>
+							<a href="#"
+								class="dkqps-delete"><?php esc_html_e( 'Delete', 'quick-plugin-switcher' ); ?></a>
 							<?php
 						}
 						?>
 					</span>
-                </p>
-            </div>
+				</p>
+			</div>
 			<?php
 		} else {
 			?>
-            <div class="notice notice-success is-dismissible">
-                <p>
+			<div class="notice notice-success is-dismissible">
+				<p>
 					<?php
 					if ( 1 === $dk_act && 1 === $dk_deact ) {
 						printf( /* translators: 1: Strong opening tag, 2: Strong closing tag, 3: Strong opening tag, 4: Strong closing tag, 5: Strong opening tag, 6: Strong closing tag, 7: Strong opening tag, 8: Strong closing tag, 9: Strong opening tag, 10: Strong closing tag, 11: Strong opening tag, 12: Strong closing tag, 13: Strong opening tag, 14: Strong closing tag. */ esc_html__( 'The %1$s only %2$s selected %3$s active %4$s plugin is now %5$s deactivated %6$s and the %7$s only %8$s selected %9$s inactive %10$s plugin is now %11$s activated %12$s successfully.', 'quick-plugin-switcher' ), '<strong>', '</strong>', '<strong>', '</strong>', '<strong>', '</strong>', '<strong>', '</strong>', '<strong>', '</strong>', '<strong>', '</strong>' );
@@ -366,8 +370,8 @@ class DKQPS_Admin {
 						printf( /* translators: 1: Strong opening tag and activated plugins count, 2: Strong closing tag, 3: Strong opening tag , 4: Strong closing tag, 5: Strong opening tag and deactivated plugins count, 6: Strong closing tag, 7: Strong opening tag, 8: Strong closing tag. */ esc_html__( 'All selected %1$s inactive %2$s plugins are %3$s activated %4$s and all selected %5$s active %6$s plugins are %7$s deactivated %8$s now successfully.', 'quick-plugin-switcher' ), '<strong>' . esc_html( $dk_act ), '</strong>', '<strong>', '</strong>', '<strong>' . esc_html( $dk_deact ), '</strong>', '<strong>', '</strong>' );
 					}
 					?>
-                </p>
-            </div>
+				</p>
+			</div>
 			<?php
 		}
 	}
@@ -407,7 +411,7 @@ class DKQPS_Admin {
 		$plugin         = $switched_plugin['plugin'];
 		$plugin_version = $switched_plugin['version'];
 
-		$plugin_section = filter_input( INPUT_GET, 'plugin_status', FILTER_SANITIZE_STRING );
+		$plugin_section = filter_input( INPUT_GET, 'plugin_status', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		if ( $activated_notice === $untranslated_text ) {
 			$action_url = $this->dkqps_get_action_url( $plugin, true );
@@ -426,7 +430,7 @@ class DKQPS_Admin {
 			$translated_text .= '<a class="button-primary dkqps-success-notice" href="' . esc_url( $action_url ) . '"> ' . esc_html__( 'Activate it again!', 'quick-plugin-switcher' ) . '</a>';
 
 			if ( 'active' !== $plugin_section && ! is_multisite() || ( is_multisite() && is_network_admin() ) ) {
-				$translated_text .= '<a href="javascript:void(0);" class="dkqps-delete dkqps-delete">' . esc_html__( 'Delete', 'quick-plugin-switcher' ) . '</a>';
+				$translated_text .= '<a href="#" class="dkqps-delete dkqps-delete">' . esc_html__( 'Delete', 'quick-plugin-switcher' ) . '</a>';
 			}
 
 			$translated_text .= '</span>';
@@ -438,7 +442,7 @@ class DKQPS_Admin {
 	/**
 	 * Creating activate/deactivate action links
 	 *
-	 * @param string $plugin Plugin URL.
+	 * @param string  $plugin Plugin URL.
 	 * @param boolean $activated Activated.
 	 *
 	 * @return string
@@ -452,9 +456,9 @@ class DKQPS_Admin {
 			return $action_url;
 		}
 		if ( $activated ) {
-			$action_url = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin ); //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
+			$action_url = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . rawurlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin );
 		} else {
-			$action_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin ); //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
+			$action_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . rawurlencode( $plugin ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin );
 		}
 
 		return $action_url;
