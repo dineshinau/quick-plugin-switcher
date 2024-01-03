@@ -96,7 +96,7 @@ screenshot-3.png
 
 == Changelog ==
 
-= 1.6.0 =
+= 1.6.0 (2024-01-04) =
 * Fixed: Notices on instance having php 8.
 * Fixed: Delete link on notice showing redirection before deleting.
 
