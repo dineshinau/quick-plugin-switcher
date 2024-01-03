@@ -67,7 +67,7 @@ if ( ! class_exists( 'DKQPS_Core' ) ) {
 		 * Define wp dependent properties.
 		 */
 		public function load_wp_dependent_properties() {
-			define( 'DKQPS_PLUGIN_URL', untrailingslashit( plugin_dir_url( DKQPS_PLUGIN_FILE ) ) . '/quick-plugin-switcher' );
+			define( 'DKQPS_PLUGIN_URL', untrailingslashit( plugin_dir_url( DKQPS_PLUGIN_FILE ) ) );
 			define( 'DKQPS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 		}
 
