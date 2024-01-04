@@ -100,54 +100,54 @@ screenshot-3.png
 * Fixed: Notices on instance having php 8.
 * Fixed: Delete link on notice showing redirection before deleting.
 
-= 1.5.4 (11-08-2023) =
+= 1.5.4 (2023-08-11) =
 * Updated: Tested upto WordPress 6.3
 
-= 1.5.3 (07-05-2022) =
+= 1.5.3 (2022-05-07) =
 * Updated: Tested upto WordPress 6.0
 * Added: WC Log link on admin bar if woocommerce is active.
 
-= 1.5.2 (24-07-2021) =
+= 1.5.2 (2021-07-24) =
 * Updated: Tested upto WordPress 5.8
 * Updated: Code standards as per WP Coding standards.
 
-= 1.5.1 (09-05-2021) =
+= 1.5.1 (2021-05-09) =
 * Improved: Plugin data delete on uninstall.
 * Added: Tested upto WP version 5.7.1
 * Changed: Minimum PHP requires 7.0.
 * Fixed: Phpcs issues.
 
-= 1.5.0 (13-12-2020) =
+= 1.5.0 (2020-12-13) =
 * Improved: Plugin code structure
 * Added: Tested upto WP version 5.6
 
-= 1.4.2 (20-11-2019) =
+= 1.4.2 (2019-11-20) =
 * Fixed: Compatibility with WP 5.3
 * Fixed: Removed the 'Delete' link on deactivate notice when on 'active' plugin status page as the plugin can not be deleted from this page.
 * Fixed: js code optimization, now available only on plugins page.
 
-= 1.4.1 (14-08-2019) = 
+= 1.4.1 (2019-08-14) = 
 * Fixed: Removed tracking code without opt-in message.
 
-= 1.4 (13-08-2019) = 
+= 1.4 (2019-08-13) = 
 * Added: Delete link on successfully deactivated notice
 
-= 1.3 (17-03-2019) =
+= 1.3 (2019-03-17) =
 * Added: Compatible with WordPress 5.1
 * Added: Switch again button on successful notices if a single plugin is switched.
 
 * Added: Added switch links on native activate/deactivate success notices
 * Improved: Text domain strings and translations
 
-= 1.2 (28-11-2017) =
+= 1.2 (2017-11-28) =
 * Tested with WordPress 4.9
 * Updated "Tested up to" value to 4.9
 * Added Requires PHP version
 
-= 1.0.1 (02-06-2017) =
+= 1.0.1 (2017-06-02) =
 * Fixed the issue with multisite
 * Added successful notice on multisite
 * Fixed conflict with other plugins
 
-= 1.0 (10-04-2017) =
+= 1.0 (2017-04-10) =
 This is Initial Release of the plugin
