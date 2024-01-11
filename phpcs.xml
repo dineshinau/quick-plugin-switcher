@@ -1,18 +1,57 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress WooCommerce Coding Standards" lwdt="2023-12-22-1210">
+<ruleset name="WordPress WooCommerce Coding Standards" lwdt="202401112300">
 	<description>PHP_CodeSniffer version 3.8.0 (stable) by Squiz and PHPCSStandards</description>
 
 	<!-- Exclude paths -->
 	<exclude-pattern>tests/</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern>*/wk_caching/*</exclude-pattern>
-
-
+	
 	<!-- Configs -->
-	<config name="minimum_supported_wp_version" value="5.0" />
-	<config name="testVersion" value="6.4" />
-	<config name="text_domain" value="quick-plugin-switcher"/>
+	<config name="minimum_wp_version" value="6.0"/>
+	<config name="minimum_supported_wp_version" value="6.4" />
+
+	<!-- Check code for cross-version PHP compatibility. -->
+	<config name="testVersion" value="7.4-"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="quick-plugin-switcher"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Only check PHP files. -->
+	<arg name="extensions" value="php"/>
+
+	<!-- Show progress, show the error codes for each message (source). -->
+	<arg value="ps"/>
+
+	<!-- Check up to 8 files simultaneously. -->
+	<arg name="parallel" value="8"/>
+
+	<rule ref="WordPress">
+		<!-- This project needs to comply with naming standards from PHPCS, not WP. -->
+		<exclude name="WordPress.Files.FileName"/>
+		<exclude name="WordPress.NamingConventions.ValidVariableName"/>
+
+		<!-- While conditions with assignments are a typical way to walk the token stream. -->
+		<exclude name="Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
+	</rule>
+
+	<!--
+	#############################################################################
+	SNIFF SPECIFIC CONFIGURATION
+	#############################################################################
+	-->
+	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
+		<properties>
+			<property name="alignMultilineItems" value="!=100"/>
+			<property name="exact" value="false" phpcs-only="true"/>
+		</properties>
+	</rule>
+	<rule ref="WordPress.Arrays.ArrayIndentation"/>
 
 	<!-- WordPress Rules -->
 	<rule ref="WordPress-Core"/>
@@ -22,7 +61,11 @@
 		<exclude name="Squiz.Commenting.FileComment.SpacingAfterComment" />
 	</rule>
 
-	<rule ref="WordPressVIPMinimum"/>
+	<rule ref="WordPressVIPMinimum">
+		<exclude name="WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant"/>
+		<exclude name="WordPressVIPMinimum.Files.IncludingFile.UsingVariable"/>
+		<exclude name="WordPressVIPMinimum.Functions.RestrictedFunctions"/>
+	</rule>
 	<rule ref="WordPress-VIP-Go"/>
 	<rule ref="WordPress.WP.I18n"/>
 
@@ -54,7 +97,6 @@
 			</property>
 		</properties>
 	</rule>
-	<rule ref="WordPress.Arrays.ArrayIndentation"/>
 
 	<!-- PHPCompatibility Rules. -->
 	<rule ref="PHPCompatibility">
@@ -70,35 +112,14 @@
 		</properties>
 	</rule>
 
-	<!-- Allow meta queries -->
-	<rule ref="WordPress.DB">
-		<exclude name="WordPress.DB.DirectDatabaseQuery"/>
-		<exclude name="WordPress.DB.SlowDBQuery"/>
-	</rule>
-
-	<!-- Tabs must be used for indentation. -->
-	<arg name="tab-width" value="4"/>
-	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
-
-	<!-- The use of PHP short tags is not allowed. -->
-	<rule ref="Generic.PHP.DisallowShortOpenTag"/>
-	<rule ref="Generic.PHP.DisallowAlternativePHPTags"/>
-
 	<!-- WordPress theme files and directories must be named using lowercase letters. Words must be separated by hyphens, not camelCase or underscores. -->
 	<rule ref="WordPress.Files.FileName"/>
 
-	<!-- Validate, sanitize, and escape everything. -->
-	<rule ref="WordPress.Security"/>
-	<rule ref="WordPress.WP.Capabilities">
-		<properties>
-			<property name="custom_capabilities" type="array">
-				<element value="wk_marketplace_seller"/>
-			</property>
-		</properties>
+	<!-- The eval() function must not be used. -->
+	<rule ref="Squiz.PHP.Eval.Discouraged">
+		<type>error</type>
+		<message>eval() is a security risk so not allowed.</message>
 	</rule>
-
-	<!-- Direct database access is prohibited. Instead, make use of the WordPress Database API.. -->
-	<rule ref="WordPress.DB"/>
 
 	<!-- Single-statement inline control structures are prohibited. Either curly braces should be used (even where they are optional) or where appropriate the alternative syntax for control structures may be used. -->
 	<rule ref="Squiz.ControlStructures.ControlSignature"/>
@@ -112,12 +133,16 @@
 		<type>error</type>
 		<message>The "goto" language construct should not be used.</message>
 	</rule>
+	<!-- A few rules not mentioned in the official documentation. -->
+	<rule ref="Generic.Files.ByteOrderMark"/>
 
-	<!-- The eval() function must not be used. -->
-	<rule ref="Squiz.PHP.Eval.Discouraged">
-		<type>error</type>
-		<message>eval() is a security risk so not allowed.</message>
-	</rule>
+		<!-- Tabs must be used for indentation. -->
+	<arg name="tab-width" value="4"/>
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+
+	<!-- The use of PHP short tags is not allowed. -->
+	<rule ref="Generic.PHP.DisallowShortOpenTag"/>
+	<rule ref="Generic.PHP.DisallowAlternativePHPTags"/>
 
 	<!-- The create_function() function has been deprecated as of PHP 7.2.0 and must no longer be used. -->
 	<rule ref="WordPress.PHP.RestrictedPHPFunctions"/>
@@ -128,8 +153,4 @@
 	<!-- Using the POSIX Regex functions ereg_* aren’t allowed. -->
 	<rule ref="WordPress.PHP.POSIXFunctions"/>
 
-	<!-- A few rules not mentioned in the official documentation. -->
-	<rule ref="Generic.Files.ByteOrderMark"/>
-
 </ruleset>
-

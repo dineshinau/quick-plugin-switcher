@@ -8,8 +8,8 @@
  * Author URI:  https://dineshinaublog.wordpress.com
  * Text Domain: quick-plugin-switcher
  * Domain Path: /languages
- * Requires at least: 5.0
  * Requires PHP: 7.4
+ * Requires at least: 5.0
  *
  * @package quick-plugin-switcher
  */
