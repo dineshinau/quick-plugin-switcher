@@ -13,7 +13,7 @@
 	 */
 	$(document).ready(
 		function () {
-			$("tr[data-slug='quick-plugin-switcher'] th input").prop('disabled', true);
+			$("tr[data-slug='quick-plugin-switcher'] td input").prop('disabled', true);
 			let data_plugin = $('span.dkqps-plugin-data').attr('data-plugin');
 			if (undefined !== data_plugin) {
 				let delete_exist = $('tr[data-plugin="' + data_plugin + '"]').find('a.delete').length > 0;
