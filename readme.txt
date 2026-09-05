@@ -96,7 +96,7 @@ Quick Plugin Switcher is open-source software and is made to be extended. Develo
 
 == Changelog ==
 
-= 1.6.0 (2026-09-05) =
+= 1.6.0 (2026-09-06) =
 * Fixed: PHP 8.0+ notices.
 * Fixed: Redirect before deleting a plugin.
 * Updated: Tested upto WordPress 7.1.
