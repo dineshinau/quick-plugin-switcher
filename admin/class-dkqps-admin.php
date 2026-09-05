@@ -147,8 +147,9 @@ class DKQPS_Admin {
 	 * @since 1.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/assets/js/dkqps-admin.js', array( 'jquery' ), DKQPS_VERSION, false );
-		wp_enqueue_style( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/assets/css/dkqps-admin.css', array(), DKQPS_VERSION, false );
+		wp_enqueue_script( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/assets/dkqps-admin.js', array( 'jquery' ), DKQPS_VERSION, true );
+		wp_enqueue_style( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/assets/dkqps-admin.css', array(), DKQPS_VERSION, false );
+		wp_style_add_data( DKQPS_PLUGIN_SLUG, 'rtl', 'replace' );
 	}
 
 	/**

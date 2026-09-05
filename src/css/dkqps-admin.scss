@@ -1,7 +1,13 @@
 /** Admin related styles. */
-.dkqps-success-notice{
-	position: relative; left: 5px;
-}
-.dkqps-delete{
-	position: relative; left: 1%; color: #a00; text-decoration: none;
+
+.wrap .notice {
+	.dkqps-delete{
+		color: #a00;
+		text-decoration: none;
+		padding-left: 10px;
+	}
+	.dkqps-success-notice{
+		padding-left: 15px;
+		margin-left: 5px;
+	}
 }

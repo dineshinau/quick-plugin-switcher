@@ -60,7 +60,7 @@ if ( ! class_exists( 'DKQPS_Core' ) ) {
 		 * Defining constants.
 		 */
 		public function define_plugin_properties() {
-			define( 'DKQPS_VERSION', '1.6.0' );
+			define( 'DKQPS_VERSION', '1.6.13' );
 			define( 'DKQPS_PLUGIN_FILE', __FILE__ );
 			define( 'DKQPS_PLUGIN_DIR', __DIR__ );
 			define( 'DKQPS_PLUGIN_SLUG', 'quick-plugin-switcher' );
