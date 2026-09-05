@@ -14,5 +14,4 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 /**
  * Deletion option key used by this plugin on deletion of this plugin
  */
-$option_name = 'dkqps_ssp_plugin';
-delete_option( $option_name );
+delete_option( 'dkqps_ssp_plugin' );
