@@ -3,7 +3,7 @@ Contributors: dineshinau
 Donate link: https://dineshinaublog.wordpress.com/donate-me
 Tags: qps, switcher, switch, change, quick, quick switcher, plugin switcher, quick plugin, change plugin status, plugin status switcher
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.6.0
 License: GPLv3
@@ -35,7 +35,7 @@ QPS is fully compatible in the multisite environment (Screenshot 3)
 
 * **Website** - https://dineshinaublog.wordpress.com/
 * **Facebook** - https://www.facebook.com/dineshinau/
-* **Twitter** - https://twitter.com/dineshinau/
+* **X** - https://x.com/dineshinau/
 * **LinkedIn** - https://www.linkedin.com/in/dineshinau/
 
 == Installation ==
@@ -47,7 +47,6 @@ QPS is fully compatible in the multisite environment (Screenshot 3)
 3. Select one or more plugin(s) and choose the option "Switch" from bulk actions dropdown to change the state of the selected plugin(s).
 
 4. Easily activate or delete the deactivated plugin from the plugin deactivated admin notice. Remove the need for scrolling up to the plugin and searching the plugin on-page.
-
 
 == Frequently Asked Questions ==
 
@@ -70,7 +69,6 @@ Activate, Deactivate and Delete links are shown on plugin page notices when a si
 = Where can give feedback =
 If you have any suggestion regarding the improvement of its feature, please leave a [Review](https://dineshinaublog.wordpress.com/quick-plugin-switcher/).
 
-
 == Use Cases of QPS ==
 
 Here are just a few use cases of QPS
@@ -80,7 +78,6 @@ Here are just a few use cases of QPS
 * **Avoid Scrolling** Its allows activate/deactivate just deactivated/activated plugin without scrolling down and going up to that plugin. (Screenshot-1,3)
 
 * **No Searching** Now you don't need of search a plugin which you have just deactivated to delete it. You can directly delete the plugin from deactivated notice. (Screenshot-1,3)
-
 
 == Screenshots ==
 
@@ -92,13 +89,13 @@ screenshot-2.png
 
 3. **Multi-Site Plugin Actions** - It shows the "Switch" option created inside bulk actions drop-down menu, 'Activate it Again' link and 'Delete' link in the Multi-Site environment. Also shows plugin name and version.
 screenshot-3.png
-   
 
 == Changelog ==
 
-= 1.6.0 (2024-01-04) =
-* Fixed: Notices on instance having php 8.
-* Fixed: Delete link on notice showing redirection before deleting.
+= 1.6.0 (2026-09-05) =
+* Fixed: PHP 8.0+ notices.
+* Fixed: Redirect before deleting a plugin.
+* Updated: Tested upto WordPress 7.1.
 
 = 1.5.4 (2023-08-11) =
 * Updated: Tested upto WordPress 6.3
@@ -126,10 +123,10 @@ screenshot-3.png
 * Fixed: Removed the 'Delete' link on deactivate notice when on 'active' plugin status page as the plugin can not be deleted from this page.
 * Fixed: js code optimization, now available only on plugins page.
 
-= 1.4.1 (2019-08-14) = 
+= 1.4.1 (2019-08-14) =
 * Fixed: Removed tracking code without opt-in message.
 
-= 1.4 (2019-08-13) = 
+= 1.4 (2019-08-13) =
 * Added: Delete link on successfully deactivated notice
 
 = 1.3 (2019-03-17) =

@@ -5,7 +5,7 @@
  * Uninstalling QPS deletes its own options.
  *
  * @package quick-plugin-switcher
- * 
+ *
  * @version 1.6.0
  */
 

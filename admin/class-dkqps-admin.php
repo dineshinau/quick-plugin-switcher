@@ -27,7 +27,6 @@ class DKQPS_Admin {
 	 * The new version of wp having new plugin activation/deactivation notice text.
 	 * To provide backward compatibility.
 	 *
-	 * @since 1.4
 	 * @var   string $dkqps_new_wp the new WP version 5.3.
 	 */
 	private $dkqps_wp_53;
@@ -46,7 +45,7 @@ class DKQPS_Admin {
 		$is_plugins_page = false;
 
 		if ( empty( $pagenow ) ) {
-			$current_url     = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( $_SERVER['REQUEST_URI'] ) : '';
+			$current_url     = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 			$is_plugins_page = ( strpos( $current_url, '/wp-admin/plugins.php' ) > 0 ) ? true : $is_plugins_page;
 			$is_plugins_page = ( $is_plugins_page ) ? $is_plugins_page : ( strpos( $current_url, '/wp-admin/network/plugins.php' ) > 0 );
 		}
@@ -148,8 +147,8 @@ class DKQPS_Admin {
 	 * @since 1.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/admin/js/dkqps-admin.js', array( 'jquery' ), DKQPS_VERSION . wp_rand( 1, 1000 ), false );
-		wp_enqueue_style( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/admin/css/dkqps-admin.css', array(), DKQPS_VERSION . wp_rand( 1, 1000 ), false );
+		wp_enqueue_script( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/assets/js/dkqps-admin.js', array( 'jquery' ), DKQPS_VERSION, false );
+		wp_enqueue_style( DKQPS_PLUGIN_SLUG, DKQPS_PLUGIN_URL . '/assets/css/dkqps-admin.css', array(), DKQPS_VERSION, false );
 	}
 
 	/**
@@ -429,7 +428,7 @@ class DKQPS_Admin {
 			$translated_text .= sprintf( /* translators: 1: Strong opening tag and plugin name, 2: Plugin version and strong closing tag. */ esc_html__( '%1$s (v%2$s is deactivated.', 'quick-plugin-switcher' ), '<strong>' . esc_html( $plugin_name ), esc_html( $plugin_version ) . ')</strong>' );
 			$translated_text .= '<a class="button-primary dkqps-success-notice" href="' . esc_url( $action_url ) . '"> ' . esc_html__( 'Activate it again!', 'quick-plugin-switcher' ) . '</a>';
 
-			if ( 'active' !== $plugin_section && ! is_multisite() || ( is_multisite() && is_network_admin() ) ) {
+			if ( ( 'active' !== $plugin_section && ! is_multisite() ) || ( is_multisite() && is_network_admin() ) ) {
 				$translated_text .= '<a href="#" class="dkqps-delete dkqps-delete">' . esc_html__( 'Delete', 'quick-plugin-switcher' ) . '</a>';
 			}
 

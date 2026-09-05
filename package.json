@@ -1,0 +1,22 @@
+   {
+      "name": "quick-plugin-switcher",
+      "version": "1.6.0",
+      "main": "src/js/dkqps-admin.js",
+      "scripts": {
+         "update": "npx npm-check-updates -u",
+         "npm_install": "rm -rf package-lock.json && npm i --force",
+         "start": "wp-scripts start",
+         "build": "wp-scripts build",
+         "check-engines": "wp-scripts check-engines",
+         "packages-update": "wp-scripts packages-update",
+         "phpcbf": "cd $VAR && $PWD/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=$INIT_CWD/phpcs.xml --severity=1 --ignore-annotations --extensions=php,html $INIT_CWD/",
+         "phpcs": "mkdir -p phpcs-results && cd $VAR && $PWD/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcs --standard=$INIT_CWD/phpcs.xml --severity=1 --report-source --report-xml=$INIT_CWD/phpcs-results/report-$(date \"+%Y-%m-%dT%H:%M:%S\").xml --ignore-annotations --extensions=php,html $INIT_CWD/",
+         "make-pot": "php -d xdebug.max_nesting_level=512 $(which wp) i18n make-pot --exclude=\"node_modules/,languages/,.gitignore,.gitmodules,.gulpfile.js,.git,.webpack.config.js,package,json,package-lock.json,phpcs.xml,phpmd.xml,license.txt,readme.txt,assets/\" --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/dineshinau/quick-plugin-switcher/issues/\", \"language-team\":\"LANGUAGE <EMAIL@ADDRESS>\"}' . languages/quick-plugin-switcher.pot",
+         "prepare-zip": "rm -rf $npm_package_name.zip && wp-scripts plugin-zip --output-path=/",
+         "zip": "npm run make-pot && npm run prepare-zip"
+      },
+      "dependencies": {
+         "@woocommerce/dependency-extraction-webpack-plugin": "^5.1.0",
+		   "@wordpress/scripts": "^34.2.0"
+      }
+   }
