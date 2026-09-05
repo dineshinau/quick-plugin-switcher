@@ -1,6 +1,6 @@
 === Quick Plugin Switcher ===
 Contributors: dineshinau
-Donate link: https://dineshinaublog.wordpress.com/donate-me
+Donate link: https://dineshinaublog.wordpress.com/
 Tags: qps, quick switcher, plugin switcher, change plugin status, plugin status switcher
 Requires at least: 5.0
 Tested up to: 7.1
@@ -89,6 +89,10 @@ screenshot-2.png
 
 3. **Multi-Site Plugin Actions** - It shows the "Switch" option created inside bulk actions drop-down menu, 'Activate it Again' link and 'Delete' link in the Multi-Site environment. Also shows plugin name and version.
 screenshot-3.png
+
+= Developer Resources =
+
+Quick Plugin Switcher is open-source software and is made to be extended. Developers can find sources at our public ([github repository](https://github.com/dineshinau/quick-plugin-switcher)) here.
 
 == Changelog ==
 
