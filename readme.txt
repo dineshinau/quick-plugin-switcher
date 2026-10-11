@@ -5,7 +5,7 @@ Tags: qps, quick switcher, plugin switcher, change plugin status, plugin status 
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -95,6 +95,10 @@ screenshot-3.png
 Quick Plugin Switcher is open-source software and is made to be extended. Developers can find sources at our public ([github repository](https://github.com/dineshinau/quick-plugin-switcher)) here.
 
 == Changelog ==
+
+= 1.6.1 (2026-10-12) =
+Minor changes regarding keeping zip on git in master branch.
+
 
 = 1.6.0 (2026-09-06) =
 * Fixed: PHP 8.0+ notices.

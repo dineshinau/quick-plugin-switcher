@@ -1,6 +1,6 @@
    {
       "name": "quick-plugin-switcher",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "scripts": {
          "update": "npx npm-check-updates -u",
          "npm_install": "rm -rf package-lock.json && npm i --force",
@@ -15,6 +15,6 @@
       },
       "dependencies": {
          "@woocommerce/dependency-extraction-webpack-plugin": "^5.1.0",
-		   "@wordpress/scripts": "^34.2.0"
+		   "@wordpress/scripts": "^36.1.0"
       }
    }

@@ -13,7 +13,6 @@ phpcs-results/
 
 # Package files
 *.jar
-*.zip
 
 # JetBrains IDE
 .idea/
