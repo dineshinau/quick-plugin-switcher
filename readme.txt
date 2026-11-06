@@ -1,11 +1,11 @@
 === Quick Plugin Switcher ===
 Contributors: dineshinau
-Donate link: https://dineshinaublog.wordpress.com/
+Donate link: https://wpbydinesh.wordpress.com/
 Tags: qps, quick switcher, plugin switcher, change plugin status, plugin status switcher
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,7 +33,7 @@ QPS is fully compatible in the multisite environment (Screenshot 3)
 
 = Connect with me =
 
-* **Website** - https://dineshinaublog.wordpress.com/
+* **Website** - https://wpbydinesh.wordpress.com/
 * **Facebook** - https://www.facebook.com/dineshinau/
 * **X** - https://x.com/dineshinau/
 * **LinkedIn** - https://www.linkedin.com/in/dineshinau/
@@ -67,7 +67,7 @@ Its need arose when I was troubleshooting a site for finding the culprit plugin 
 Activate, Deactivate and Delete links are shown on plugin page notices when a single plugin is activated/deactivated.
 
 = Where can give feedback =
-If you have any suggestion regarding the improvement of its feature, please leave a [Review](https://dineshinaublog.wordpress.com/quick-plugin-switcher/).
+If you have any suggestion regarding the improvement of its feature, please leave a [Review](https://wpbydinesh.wordpress.com/quick-plugin-switcher/).
 
 == Use Cases of QPS ==
 
@@ -99,6 +99,9 @@ Quick Plugin Switcher is open-source software and is made to be extended. Develo
 = 1.6.1 (2026-10-12) =
 Minor changes regarding keeping zip on git in master branch.
 
+
+= 1.6.0 (2026-11-06) =
+* Minor: Updated the blog link in readme.txt and plugin header.
 
 = 1.6.0 (2026-09-06) =
 * Fixed: PHP 8.0+ notices.

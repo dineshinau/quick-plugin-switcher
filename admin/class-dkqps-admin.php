@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 /**
  * The admin functionality of the QPS.
  *
- * @link  https://dineshinaublog.wordpress.com
+ * @link  https://wpbydinesh.wordpress.com
  * @since 1.0
  *
  * @package    quick-plugin-switcher

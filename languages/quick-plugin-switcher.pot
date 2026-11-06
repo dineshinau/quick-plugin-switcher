@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Quick Plugin Switcher 1.6.1\n"
+"Project-Id-Version: Quick Plugin Switcher 1.6.2\n"
 "Report-Msgid-Bugs-To: https://github.com/dineshinau/quick-plugin-switcher/issues/\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-11T18:51:43+00:00\n"
+"POT-Creation-Date: 2026-11-06T12:00:35+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "language-team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #. Plugin URI of the plugin
 #: quick-plugin-switcher.php
-msgid "https://dineshinaublog.wordpress.com/quick-plugin-switcher"
+msgid "https://wpbydinesh.wordpress.com/quick-plugin-switcher"
 msgstr ""
 
 #. Description of the plugin
@@ -37,7 +37,7 @@ msgstr ""
 
 #. Author URI of the plugin
 #: quick-plugin-switcher.php
-msgid "https://dineshinaublog.wordpress.com"
+msgid "https://wpbydinesh.wordpress.com"
 msgstr ""
 
 #: admin/class-dkqps-admin.php:164
