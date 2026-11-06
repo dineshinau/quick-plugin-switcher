@@ -5,7 +5,7 @@
 	 * this plugin "Quick Plugin Switcher" can be avoided from bulk actions.
 	 * So no bulk action can be applied on this plugin until this plugin is activated.
 	 *
-	 * @link    https://dineshinaublog.wordpress.com
+	 * @link    https://wpbydinesh.wordpress.com
 	 * @since   1.0
 	 * @package quick-plugin-switcher
 	 *
